@@ -119,4 +119,11 @@ describe('CreateUserUsecase', () => {
     const result = await sut.create(makeFakeUserData())
     expect(result).toEqual(makeFakeUser())
   })
+
+  test('Should return null if IGetOneUserByEmailRepository returns an user', async () => {
+    const { sut, getOneUserByEmailRepositoryStub } = makeSut()
+    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockReturnValueOnce(new Promise((resolve) => resolve(makeFakeUser())))
+    const result = await sut.create(makeFakeUserData())
+    expect(result).toBeFalsy()
+  })
 })
