@@ -11,9 +11,12 @@ export class CreateUserUsecase implements ICreateUserUsecase {
   ) {}
 
   async create (data: CreateUserModel): Promise<UserModel> {
-    await this.getOneUserByEmailRepository.getOne(data.email)
-    const hashedPassword = await this.hasher.hash(data.password)
-    const result = await this.createUserRepository.create(Object.assign({}, data, { password: hashedPassword }))
-    return result
+    const user = await this.getOneUserByEmailRepository.getOne(data.email)
+    if (!user) {
+      const hashedPassword = await this.hasher.hash(data.password)
+      const result = await this.createUserRepository.create(Object.assign({}, data, { password: hashedPassword }))
+      return result
+    }
+    return null
   }
 }
