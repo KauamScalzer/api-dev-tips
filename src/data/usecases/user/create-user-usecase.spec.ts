@@ -107,6 +107,13 @@ describe('CreateUserUsecase', () => {
     expect(getOneSpy).toHaveBeenCalledWith('valid_email')
   })
 
+  test('Should throw if IGetOneUserByEmailRepository throw', async () => {
+    const { sut, getOneUserByEmailRepositoryStub } = makeSut()
+    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.create(makeFakeUserData())
+    await expect(promise).rejects.toThrow()
+  })
+
   test('Should return an user on sucess', async () => {
     const { sut } = makeSut()
     const result = await sut.create(makeFakeUserData())
