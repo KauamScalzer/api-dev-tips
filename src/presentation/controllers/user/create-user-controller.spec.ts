@@ -1,9 +1,9 @@
 import { CreateUserController } from './create-user-controller'
-import { MissingParamError, ServerError } from '@/presentation/errors'
+import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 import { ICreateUserUsecase, CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
-import { ok, serverError, badRequest } from '@/presentation/helpers/http'
+import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http'
 
 const makeCreateUserUsecase = (): ICreateUserUsecase => {
   class CreateUserUsecaseStub implements ICreateUserUsecase {
@@ -43,25 +43,25 @@ const makeValidation = (): Validation => {
 
 interface SutTypes {
   sut: CreateUserController
-  createUserUsecase: ICreateUserUsecase
+  createUserUsecaseStub: ICreateUserUsecase
   validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
-  const createUserUsecase = makeCreateUserUsecase()
+  const createUserUsecaseStub = makeCreateUserUsecase()
   const validationStub = makeValidation()
-  const sut = new CreateUserController(createUserUsecase, validationStub)
+  const sut = new CreateUserController(createUserUsecaseStub, validationStub)
   return {
     sut,
-    createUserUsecase,
+    createUserUsecaseStub,
     validationStub
   }
 }
 
 describe('SignUp Controller', () => {
   test('Should call ICreateUserUsecase with correct values', async () => {
-    const { sut, createUserUsecase } = makeSut()
-    const createSpy = jest.spyOn(createUserUsecase, 'create')
+    const { sut, createUserUsecaseStub } = makeSut()
+    const createSpy = jest.spyOn(createUserUsecaseStub, 'create')
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith({
       name: 'any_name',
@@ -80,8 +80,8 @@ describe('SignUp Controller', () => {
   })
 
   test('Should return 500 if ICreateUserUsecase throws', async () => {
-    const { sut, createUserUsecase } = makeSut()
-    jest.spyOn(createUserUsecase, 'create').mockImplementationOnce(async () => {
+    const { sut, createUserUsecaseStub } = makeSut()
+    jest.spyOn(createUserUsecaseStub, 'create').mockImplementationOnce(async () => {
       return await Promise.reject(new Error())
     })
     const httpResponse = await sut.handle(makeFakeRequest())
@@ -99,5 +99,12 @@ describe('SignUp Controller', () => {
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should return 403 if ICreateUserUsecase returns false', async () => {
+    const { sut, createUserUsecaseStub } = makeSut()
+    jest.spyOn(createUserUsecaseStub, 'create').mockReturnValueOnce(null)
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 })
