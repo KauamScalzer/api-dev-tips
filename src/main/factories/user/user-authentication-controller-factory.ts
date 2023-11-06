@@ -5,7 +5,7 @@ import { HashComparerBcryptAdapter } from '@/infra/criptography/bcrypt'
 import { EncrypterJwtAdapter } from '@/infra/criptography/jwt'
 import { CreateLogErrorRepository } from '@/infra/db/repositories/log-error'
 import { Controller } from '@/presentation/protocols'
-import { LogControllerDecorator } from '../../decorators'
+import { LogControllerDecorator } from '@/main/decorators'
 import { makeUserAuthenticationValidation } from './validations'
 
 export const makeUserAuthenticationController = (): Controller => {

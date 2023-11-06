@@ -11,7 +11,8 @@
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "build:watch": "rimraf dist && tsc -w"
   },
   "repository": {
     "type": "git",

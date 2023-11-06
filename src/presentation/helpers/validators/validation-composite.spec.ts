@@ -4,8 +4,8 @@ import { ValidationComposite } from './validation-composite'
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
-    validate (data: any): Error | undefined {
-      return undefined
+    validate (data: any): Error {
+      return null
     }
   }
   return new ValidationStub()

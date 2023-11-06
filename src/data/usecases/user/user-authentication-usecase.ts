@@ -10,7 +10,7 @@ export class UserAuthenticationUsecase implements IUserAuthenticationUsecase {
     private readonly updateUserRepository: IUpdateUserRepository
   ) {}
 
-  async auth (data: UserAuthenticationModel): Promise<string | null> {
+  async auth (data: UserAuthenticationModel): Promise<string> {
     const user = await this.getOneUserByEmailRepository.getOne(data.email)
     if (user) {
       const isValid = await this.hashComparer.compare(data.password, user.password)

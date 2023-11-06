@@ -6,7 +6,7 @@ export class RequiredFieldValidation implements Validation {
     private readonly fieldName: string
   ) {}
 
-  validate (data: any): Error | undefined {
+  validate (data: any): Error {
     if (!data[this.fieldName]) {
       return new MissingParamError(this.fieldName)
     }

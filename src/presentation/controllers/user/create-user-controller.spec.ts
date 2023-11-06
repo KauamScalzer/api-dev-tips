@@ -34,8 +34,8 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
-    validate (data: any): Error | undefined {
-      return undefined
+    validate (data: any): Error {
+      return null
     }
   }
   return new ValidationStub()
@@ -85,7 +85,7 @@ describe('SignUp Controller', () => {
       return await Promise.reject(new Error())
     })
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(serverError(new ServerError('')))
+    expect(httpResponse).toEqual(serverError(new ServerError('any_error')))
   })
 
   test('Should return 200 if valid data is provided', async () => {

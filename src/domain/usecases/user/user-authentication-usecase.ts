@@ -4,5 +4,5 @@ export interface UserAuthenticationModel {
 }
 
 export interface IUserAuthenticationUsecase {
-  auth (data: UserAuthenticationModel): Promise<string | null>
+  auth (data: UserAuthenticationModel): Promise<string>
 }

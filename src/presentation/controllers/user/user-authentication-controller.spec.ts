@@ -6,7 +6,7 @@ import { IUserAuthenticationUsecase, UserAuthenticationModel } from '@/domain/us
 
 const makeUserAuthenticationUsecase = (): IUserAuthenticationUsecase => {
   class UserAuthenticationUsecaseStub implements IUserAuthenticationUsecase {
-    async auth (data: UserAuthenticationModel): Promise<string | null> {
+    async auth (data: UserAuthenticationModel): Promise<string> {
       return await new Promise(resolve => resolve('any_token'))
     }
   }
@@ -15,8 +15,8 @@ const makeUserAuthenticationUsecase = (): IUserAuthenticationUsecase => {
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
-    validate (data: any): Error | undefined {
-      return undefined
+    validate (data: any): Error {
+      return null
     }
   }
   return new ValidationStub()
@@ -63,7 +63,7 @@ describe('UserAuthenticationController', () => {
       throw new Error()
     })
     const httpRequest = await sut.handle(makeFakeRequest())
-    expect(httpRequest).toEqual(serverError(new Error()))
+    expect(httpRequest).toEqual(serverError(new Error('any_error')))
   })
 
   test('Should return 401 if invalid credentials are provided', async () => {

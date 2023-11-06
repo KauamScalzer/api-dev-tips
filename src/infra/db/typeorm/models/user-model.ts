@@ -25,5 +25,5 @@ export class User extends BaseEntity {
     name: 'access_token',
     nullable: true
     })
-  accessToken: string
+  accessToken?: string
 }

@@ -2,7 +2,7 @@ import env from '@/main/config/env'
 import { Connection, ConnectionOptions, createConnection, getConnection, getRepository } from 'typeorm'
 
 export const TypeormHelper = {
-  connection: null as Connection | null,
+  connection: null as Connection,
 
   async connect () {
     const connectionOptions: ConnectionOptions = {

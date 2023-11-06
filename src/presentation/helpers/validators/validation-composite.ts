@@ -5,7 +5,7 @@ export class ValidationComposite implements Validation {
     private readonly validations: Validation[]
   ) {}
 
-  validate (data: any): Error | undefined {
+  validate (data: any): Error {
     for (const validation of this.validations) {
       const error = validation.validate(data)
       if (error) {

@@ -6,7 +6,7 @@ import { HashComparer, Encrypter } from '@/data/protocols/criptography'
 
 const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
   class GetOneUserByEmailRepositoryStub implements IGetOneUserByEmailRepository {
-    async getOne (data: string): Promise<UserModel | undefined> {
+    async getOne (data: string): Promise<UserModel> {
       const fakeUser: UserModel = {
         id: 1,
         name: 'any_name',
@@ -132,14 +132,14 @@ describe('UserAuthenticationUsecase', () => {
 
   test('Should return null if GetOneUserByEmailRepository returns null', async () => {
     const { sut, getOneUserByEmailRepositoryStub } = makeSut()
-    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockResolvedValueOnce(undefined)
+    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockResolvedValueOnce(null)
     const result = await sut.auth(makeFakeAuthenticationData())
     expect(result).toBeFalsy()
   })
 
   test('Should return null if HashComparer returns null', async () => {
     const { sut, hashComparerStub } = makeSut()
-    jest.spyOn(hashComparerStub, 'compare').mockResolvedValueOnce(false)
+    jest.spyOn(hashComparerStub, 'compare').mockResolvedValueOnce(null)
     const result = await sut.auth(makeFakeAuthenticationData())
     expect(result).toBeFalsy()
   })
