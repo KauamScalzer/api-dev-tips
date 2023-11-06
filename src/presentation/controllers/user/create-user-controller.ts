@@ -1,6 +1,7 @@
 import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, serverError, ok } from '@/presentation/helpers/http'
+import { badRequest, serverError, ok, forbidden } from '@/presentation/helpers/http'
 import { ICreateUserUsecase } from '@/domain/usecases/user'
+import { EmailInUseError } from '@/presentation/errors'
 
 export class CreateUserController implements Controller {
   constructor (
@@ -21,6 +22,9 @@ export class CreateUserController implements Controller {
         password,
         urlImage
       })
+      if (!result) {
+        return forbidden(new EmailInUseError())
+      }
       return ok(result)
     } catch (error: any) {
       console.log(error)
