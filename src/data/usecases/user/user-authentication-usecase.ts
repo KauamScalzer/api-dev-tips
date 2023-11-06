@@ -1,6 +1,6 @@
-import { HashComparer, Encrypter } from 'data/protocols/criptography'
-import { IGetOneUserByEmailRepository, IUpdateUserRepository } from 'data/protocols/user'
-import { IUserAuthenticationUsecase, UserAuthenticationModel } from 'domain/usecases/user'
+import { HashComparer, Encrypter } from '@/data/protocols/criptography'
+import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/user'
+import { IUserAuthenticationUsecase, UserAuthenticationModel } from '@/domain/usecases/user'
 
 export class UserAuthenticationUsecase implements IUserAuthenticationUsecase {
   constructor (

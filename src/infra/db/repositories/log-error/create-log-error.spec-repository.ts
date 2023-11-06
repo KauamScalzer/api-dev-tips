@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm'
-import { TypeormHelper } from '../../helpers'
+import { TypeormHelper } from '@/infra/db/helpers'
 import { CreateLogErrorRepository } from './create-log-error-repository'
 
 const makeSut = (): CreateLogErrorRepository => {

@@ -1,4 +1,4 @@
-import { TypeormHelper } from '../../helpers'
+import { TypeormHelper } from '@/infra/db/helpers'
 import { CreateUserRepository } from './create-user-repository'
 
 const makeSut = (): CreateUserRepository => {

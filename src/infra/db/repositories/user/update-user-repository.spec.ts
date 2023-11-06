@@ -1,6 +1,6 @@
-import { TypeormHelper } from '../../helpers'
+import { TypeormHelper } from '@/infra/db/helpers'
 import { UpdateUserRepository } from './update-user-repository'
-import { User } from '../../typeorm/models'
+import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 const makeSut = (): UpdateUserRepository => {

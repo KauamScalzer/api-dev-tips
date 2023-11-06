@@ -1,5 +1,5 @@
-import { IUpdateUserRepository, UpdateUserRepositoryParams } from '../../../../data/protocols/user'
-import { User } from '../../typeorm/models'
+import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
+import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class UpdateUserRepository implements IUpdateUserRepository {

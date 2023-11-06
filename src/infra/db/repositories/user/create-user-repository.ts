@@ -1,7 +1,7 @@
-import { ICreateUserRepository } from '../../../../data/protocols/user'
-import { UserModel } from '../../../../domain/models'
-import { CreateUserModel } from '../../../../domain/usecases/user'
-import { User } from '../../typeorm/models'
+import { ICreateUserRepository } from '@/data/protocols/user'
+import { UserModel } from '@/domain/models'
+import { CreateUserModel } from '@/domain/usecases/user'
+import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class CreateUserRepository implements ICreateUserRepository {

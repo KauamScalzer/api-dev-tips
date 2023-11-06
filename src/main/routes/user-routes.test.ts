@@ -1,6 +1,6 @@
 import request from 'supertest'
 import app from '../config/app'
-import { TypeormHelper } from '../../infra/db/helpers/typeorm-helper'
+import { TypeormHelper } from '@/infra/db/helpers/typeorm-helper'
 import { getRepository } from 'typeorm'
 import { hash } from 'bcrypt'
 

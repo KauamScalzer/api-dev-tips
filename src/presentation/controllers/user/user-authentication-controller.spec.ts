@@ -1,9 +1,8 @@
 import { UserAuthenticationController } from './user-authentication-controller'
-import { badRequest, serverError, unauthorized, ok } from '../../helpers/http'
-import { MissingParamError } from '../../errors'
-import { HttpRequest } from '../../protocols'
-import { IUserAuthenticationUsecase, UserAuthenticationModel } from '../../../domain/usecases/user'
-import { Validation } from '../../helpers/validators'
+import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers/http'
+import { MissingParamError } from '@/presentation/errors'
+import { HttpRequest, Validation } from '@/presentation/protocols'
+import { IUserAuthenticationUsecase, UserAuthenticationModel } from '@/domain/usecases/user'
 
 const makeUserAuthenticationUsecase = (): IUserAuthenticationUsecase => {
   class UserAuthenticationUsecaseStub implements IUserAuthenticationUsecase {

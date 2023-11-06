@@ -1,10 +1,9 @@
 import { CreateUserController } from './create-user-controller'
-import { MissingParamError, ServerError } from '../../errors'
-import { HttpRequest } from '../../protocols'
-import { ICreateUserUsecase, CreateUserModel } from '../../../domain/usecases/user'
-import { UserModel } from '../../../domain/models'
-import { ok, serverError, badRequest } from '../../helpers/http'
-import { Validation } from '../../helpers/validators'
+import { MissingParamError, ServerError } from '@/presentation/errors'
+import { HttpRequest, Validation } from '@/presentation/protocols'
+import { ICreateUserUsecase, CreateUserModel } from '@/domain/usecases/user'
+import { UserModel } from '@/domain/models'
+import { ok, serverError, badRequest } from '@/presentation/helpers/http'
 
 const makeCreateUserUsecase = (): ICreateUserUsecase => {
   class CreateUserUsecaseStub implements ICreateUserUsecase {

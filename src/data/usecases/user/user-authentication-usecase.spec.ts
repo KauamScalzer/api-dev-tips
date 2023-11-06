@@ -1,8 +1,8 @@
-import { UserModel } from 'domain/models'
+import { UserModel } from '@/domain/models'
 import { UserAuthenticationUsecase } from './user-authentication-usecase'
-import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from 'data/protocols/user'
-import { UserAuthenticationModel } from 'domain/usecases/user'
-import { HashComparer, Encrypter } from 'data/protocols/criptography'
+import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
+import { UserAuthenticationModel } from '@/domain/usecases/user'
+import { HashComparer, Encrypter } from '@/data/protocols/criptography'
 
 const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
   class GetOneUserByEmailRepositoryStub implements IGetOneUserByEmailRepository {

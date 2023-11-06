@@ -1,10 +1,10 @@
-import { CreateUserController } from '../../../presentation/controllers/user'
-import { CreateUserUsecase } from '../../../data/usecases/user'
-import { HashBcryptAdapter } from '../../../infra/criptography/bcrypt'
-import { CreateUserRepository } from '../../../infra/db/repositories/user'
-import { CreateLogErrorRepository } from '../../../infra/db/repositories/log-error'
-import { Controller } from '../../../presentation/protocols'
-import { LogControllerDecorator } from '../../decorators'
+import { CreateUserController } from '@/presentation/controllers/user'
+import { CreateUserUsecase } from '@/data/usecases/user'
+import { HashBcryptAdapter } from '@/infra/criptography/bcrypt'
+import { CreateUserRepository } from '@/infra/db/repositories/user'
+import { CreateLogErrorRepository } from '@/infra/db/repositories/log-error'
+import { Controller } from '@/presentation/protocols'
+import { LogControllerDecorator } from '@/main/decorators'
 import { makeCreateUserValidation } from './validations'
 
 export const makeCreateUserController = (): Controller => {

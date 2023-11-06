@@ -1,4 +1,4 @@
-import { TypeormHelper } from '../../helpers'
+import { TypeormHelper } from '@/infra/db/helpers'
 import { GetOneUserByEmailRepository } from './get-one-user-by-email-repository'
 import { getRepository } from 'typeorm'
 

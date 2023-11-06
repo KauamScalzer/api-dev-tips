@@ -1,8 +1,8 @@
-import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
+import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
-import { serverError, ok } from '../../presentation/helpers/http'
-import { ICreateLogErrorRepository } from '../../data/protocols/log-error'
-import { UserModel } from '../../domain/models'
+import { serverError, ok } from '@/presentation/helpers/http'
+import { ICreateLogErrorRepository } from '@/data/protocols/log-error'
+import { UserModel } from '@/domain/models'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {

@@ -1,4 +1,4 @@
-import env from '../../../main/config/env'
+import env from '@/main/config/env'
 import { Connection, ConnectionOptions, createConnection, getConnection, getRepository } from 'typeorm'
 
 export const TypeormHelper = {

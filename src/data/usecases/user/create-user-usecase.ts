@@ -1,7 +1,7 @@
-import { ICreateUserUsecase, CreateUserModel } from '../../../domain/usecases/user'
-import { UserModel } from '../../../domain/models'
-import { Hasher } from '../../protocols/criptography'
-import { ICreateUserRepository } from '../../../data/protocols/user'
+import { ICreateUserUsecase, CreateUserModel } from '@/domain/usecases/user'
+import { UserModel } from '@/domain/models'
+import { Hasher } from '@/data/protocols/criptography'
+import { ICreateUserRepository } from '@/data/protocols/user'
 
 export class CreateUserUsecase implements ICreateUserUsecase {
   constructor (

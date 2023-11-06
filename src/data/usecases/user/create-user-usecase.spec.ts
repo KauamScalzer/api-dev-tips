@@ -1,8 +1,8 @@
-import { Hasher } from '../../protocols/criptography'
+import { Hasher } from '@/data/protocols/criptography'
 import { CreateUserUsecase } from './create-user-usecase'
-import { CreateUserModel } from '../../../domain/usecases/user'
-import { UserModel } from '../../../domain/models'
-import { ICreateUserRepository } from '../../protocols/user'
+import { CreateUserModel } from '@/domain/usecases/user'
+import { UserModel } from '@/domain/models'
+import { ICreateUserRepository } from '@/data/protocols/user'
 
 interface SutTypes {
   sut: CreateUserUsecase

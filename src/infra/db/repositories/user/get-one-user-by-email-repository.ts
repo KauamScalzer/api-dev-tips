@@ -1,6 +1,6 @@
-import { UserModel } from 'domain/models'
-import { IGetOneUserByEmailRepository } from '../../../../data/protocols/user'
-import { User } from '../../typeorm/models'
+import { UserModel } from '@/domain/models'
+import { IGetOneUserByEmailRepository } from '@/data/protocols/user'
+import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class GetOneUserByEmailRepository implements IGetOneUserByEmailRepository {

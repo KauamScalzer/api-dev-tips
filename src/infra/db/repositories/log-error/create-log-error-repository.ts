@@ -1,5 +1,5 @@
-import { ICreateLogErrorRepository } from '../../../../data/protocols/log-error'
-import { LogError } from '../../typeorm/models'
+import { ICreateLogErrorRepository } from '@/data/protocols/log-error'
+import { LogError } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class CreateLogErrorRepository implements ICreateLogErrorRepository {

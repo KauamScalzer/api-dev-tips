@@ -1,7 +1,6 @@
-import { HttpRequest, HttpResponse, Controller } from '../../protocols'
-import { badRequest, serverError, ok } from '../../helpers/http'
-import { ICreateUserUsecase } from '../../../domain/usecases/user'
-import { Validation } from '../../helpers/validators'
+import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { badRequest, serverError, ok } from '@/presentation/helpers/http'
+import { ICreateUserUsecase } from '@/domain/usecases/user'
 
 export class CreateUserController implements Controller {
   constructor (
