@@ -11,7 +11,8 @@ const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
         id: 1,
         name: 'any_name',
         email: 'any_email',
-        password: 'hashed_password'
+        password: 'hashed_password',
+        urlImage: 'any_url_image'
       }
       return await new Promise(resolve => resolve(fakeUser))
     }

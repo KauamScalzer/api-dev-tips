@@ -19,7 +19,7 @@ describe('CreateUserValidation factory', () => {
   test('Should call ValidationComposite with all validations', () => {
     makeCreateUserValidation()
     const validations: Validation[] = []
-    for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
+    for (const field of ['name', 'email', 'password', 'passwordConfirmation', 'urlImage']) {
       validations.push(new RequiredFieldValidation(field))
     }
     validations.push(new CompareFieldValidation('password', 'passwordConfirmation'))

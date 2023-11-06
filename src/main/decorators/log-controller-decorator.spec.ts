@@ -49,7 +49,8 @@ const makeFakeUser = (): UserModel => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email@mail.com',
-  password: 'valid_password'
+  password: 'valid_password',
+  urlImage: 'valid_url_image'
 })
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -57,7 +58,8 @@ const makeFakeRequest = (): HttpRequest => ({
     name: 'any_name',
     email: 'any_email@mail.com',
     password: 'any_password',
-    passwordConfirmation: 'any_password'
+    passwordConfirmation: 'any_password',
+    urlImage: 'any_url_image'
   }
 })
 

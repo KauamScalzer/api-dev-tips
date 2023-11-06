@@ -15,6 +15,12 @@ export class User extends BaseEntity {
   password: string
 
   @Column({
+    type: 'varchar',
+    name: 'url_image'
+    })
+  urlImage: string
+
+  @Column({
     type: 'text',
     name: 'access_token',
     nullable: true

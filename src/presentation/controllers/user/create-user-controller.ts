@@ -15,11 +15,12 @@ export class CreateUserController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { name, email, password } = httpRequest.body
+      const { name, email, password, urlImage } = httpRequest.body
       const result = await this.createUser.create({
         name,
         email,
-        password
+        password,
+        urlImage
       })
       return ok(result)
     } catch (error: any) {

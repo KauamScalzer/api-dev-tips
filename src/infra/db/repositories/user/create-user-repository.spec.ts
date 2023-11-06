@@ -23,7 +23,8 @@ describe('CreateUserRepository', () => {
     const result = await sut.create({
       name: 'any_name',
       email: 'any_email@gmail.com',
-      password: 'any_password'
+      password: 'any_password',
+      urlImage: 'any_url_image'
     })
     expect(result).toBeTruthy()
     expect(result.id).toBeTruthy()

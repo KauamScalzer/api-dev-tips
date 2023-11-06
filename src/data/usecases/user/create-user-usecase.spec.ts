@@ -32,13 +32,15 @@ const makeFakeUser = (): UserModel => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email',
-  password: 'hashed_password'
+  password: 'hashed_password',
+  urlImage: 'valid_url_image'
 })
 
 const makeFakeUserData = (): CreateUserModel => ({
   name: 'valid_name',
   email: 'valid_email',
-  password: 'valid_password'
+  password: 'valid_password',
+  urlImage: 'valid_url_image'
 })
 
 const makeSut = (): SutTypes => {
@@ -74,7 +76,8 @@ describe('CreateUserUsecase', () => {
     expect(createSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password'
+      password: 'hashed_password',
+      urlImage: 'valid_url_image'
     })
   })
 

@@ -24,7 +24,8 @@ describe('User Routes', () => {
           name: 'Kauam',
           email: 'kauam@gmail.com',
           password: '123',
-          passwordConfirmation: '123'
+          passwordConfirmation: '123',
+          urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
         })
         .expect(200)
     })
@@ -36,7 +37,8 @@ describe('User Routes', () => {
       await getRepository('user').save({
         name: 'kauam',
         password,
-        email: 'kauam@gmail.com'
+        email: 'kauam@gmail.com',
+        urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
       })
       await request(app).post('/api/user/authentication')
         .send({
