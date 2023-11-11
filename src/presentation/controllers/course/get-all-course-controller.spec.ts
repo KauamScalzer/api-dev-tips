@@ -3,13 +3,15 @@ import { GetAllCourseController } from './get-all-course-controller'
 import { ok, serverError } from '@/presentation/helpers/http'
 import { IGetAllCourse, GetAllCourseResult } from '@/domain/usecases/course'
 
-const makeFakeCourse = (): GetAllCourseResult => ({
-  id: 1,
-  name: 'any_name',
-  description: 'any_description',
-  author: 'any_author',
-  thumb: 'any_thumb'
-})
+const makeFakeCourse = (): GetAllCourseResult => {
+  return [{
+    id: 1,
+    name: 'any_name',
+    description: 'any_description',
+    author: 'any_author',
+    thumb: 'any_thumb'
+  }]
+}
 
 const makeGetAllCourse = (): IGetAllCourse => {
   class GetAllCourseStub implements IGetAllCourse {

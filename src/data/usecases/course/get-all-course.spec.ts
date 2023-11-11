@@ -25,13 +25,15 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeCourse = (): GetAllCourseResult => ({
-  id: 1,
-  name: 'any_name',
-  description: 'any_description',
-  thumb: 'any_thumb',
-  author: 'any_author'
-})
+const makeFakeCourse = (): GetAllCourseResult => {
+  return [{
+    id: 1,
+    name: 'any_name',
+    description: 'any_description',
+    author: 'any_author',
+    thumb: 'any_thumb'
+  }]
+}
 
 describe('GetAllCourse usecase', () => {
   test('Should call IGetAllCourseRepository with correct values', async () => {
