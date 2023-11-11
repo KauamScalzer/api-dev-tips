@@ -2,6 +2,8 @@ import { MissingParamError } from '@/presentation/errors'
 import { CreateCourseController } from './create-course-controller'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 import { badRequest } from '@/presentation/helpers/http'
+import { ICreateCourse } from '@/domain/usecases/course'
+import { ICreateCourseParams } from '@/domain/usecases/course/create-course'
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
@@ -21,17 +23,27 @@ const makeValidation = (): Validation => {
   return new ValidationStub()
 }
 
+const makeCreateCourse = (): ICreateCourse => {
+  class CreateCourseStub implements ICreateCourse {
+    async create (data: ICreateCourseParams): Promise<void> {}
+  }
+  return new CreateCourseStub()
+}
+
 interface SutTypes {
   sut: CreateCourseController
   validationStub: Validation
+  createCourseStub: ICreateCourse
 }
 
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
-  const sut = new CreateCourseController(validationStub)
+  const createCourseStub = makeCreateCourse()
+  const sut = new CreateCourseController(validationStub, createCourseStub)
   return {
     sut,
-    validationStub
+    validationStub,
+    createCourseStub
   }
 }
 
@@ -53,5 +65,13 @@ describe('CreateCourseController', () => {
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should call ICreateCourse with correct values', async () => {
+    const { sut, createCourseStub } = makeSut()
+    const createSpy = jest.spyOn(createCourseStub, 'create')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(makeFakeRequest())
+    expect(createSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 })
