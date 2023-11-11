@@ -1,2 +1,2 @@
 export { CreateUser } from './create-user'
-export { UserAuthenticationUsecase } from './user-authentication-usecase'
+export { UserAuthentication } from './user-authentication'

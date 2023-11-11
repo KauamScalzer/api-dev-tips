@@ -2,15 +2,15 @@ import { UserAuthenticationController } from './user-authentication-controller'
 import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers/http'
 import { MissingParamError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { IUserAuthenticationUsecase, UserAuthenticationModel } from '@/domain/usecases/user'
+import { IUserAuthentication, UserAuthenticationModel } from '@/domain/usecases/user'
 
-const makeUserAuthenticationUsecase = (): IUserAuthenticationUsecase => {
-  class UserAuthenticationUsecaseStub implements IUserAuthenticationUsecase {
+const makeUserAuthentication = (): IUserAuthentication => {
+  class UserAuthenticationStub implements IUserAuthentication {
     async auth (data: UserAuthenticationModel): Promise<string> {
       return await new Promise(resolve => resolve('any_token'))
     }
   }
-  return new UserAuthenticationUsecaseStub()
+  return new UserAuthenticationStub()
 }
 
 const makeValidation = (): Validation => {
@@ -24,17 +24,17 @@ const makeValidation = (): Validation => {
 
 interface SutTypes {
   sut: UserAuthenticationController
-  userAuthenticationUsecaseStub: IUserAuthenticationUsecase
+  userAuthenticationStub: IUserAuthentication
   validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
-  const userAuthenticationUsecaseStub = makeUserAuthenticationUsecase()
+  const userAuthenticationStub = makeUserAuthentication()
   const validationStub = makeValidation()
-  const sut = new UserAuthenticationController(userAuthenticationUsecaseStub, validationStub)
+  const sut = new UserAuthenticationController(userAuthenticationStub, validationStub)
   return {
     sut,
-    userAuthenticationUsecaseStub,
+    userAuthenticationStub,
     validationStub
   }
 }
@@ -47,9 +47,9 @@ const makeFakeRequest = (): HttpRequest => ({
 })
 
 describe('UserAuthenticationController', () => {
-  test('Should call IUserAuthenticationUsecase with correct values', async () => {
-    const { sut, userAuthenticationUsecaseStub } = makeSut()
-    const authSpy = jest.spyOn(userAuthenticationUsecaseStub, 'auth')
+  test('Should call IUserAuthentication with correct values', async () => {
+    const { sut, userAuthenticationStub } = makeSut()
+    const authSpy = jest.spyOn(userAuthenticationStub, 'auth')
     await sut.handle(makeFakeRequest())
     expect(authSpy).toHaveBeenCalledWith({
       email: 'any_mail@mail.com',
@@ -57,9 +57,9 @@ describe('UserAuthenticationController', () => {
     })
   })
 
-  test('Should return 500 if IUserAuthenticationUsecase throws', async () => {
-    const { sut, userAuthenticationUsecaseStub } = makeSut()
-    jest.spyOn(userAuthenticationUsecaseStub, 'auth').mockImplementationOnce(() => {
+  test('Should return 500 if IUserAuthentication throws', async () => {
+    const { sut, userAuthenticationStub } = makeSut()
+    jest.spyOn(userAuthenticationStub, 'auth').mockImplementationOnce(() => {
       throw new Error()
     })
     const httpRequest = await sut.handle(makeFakeRequest())
@@ -67,8 +67,8 @@ describe('UserAuthenticationController', () => {
   })
 
   test('Should return 401 if invalid credentials are provided', async () => {
-    const { sut, userAuthenticationUsecaseStub } = makeSut()
-    jest.spyOn(userAuthenticationUsecaseStub, 'auth').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const { sut, userAuthenticationStub } = makeSut()
+    jest.spyOn(userAuthenticationStub, 'auth').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     const httpRequest = await sut.handle(makeFakeRequest())
     expect(httpRequest).toEqual(unauthorized())
   })

@@ -1,5 +1,5 @@
 import { UserModel } from '@/domain/models'
-import { UserAuthenticationUsecase } from './user-authentication-usecase'
+import { UserAuthentication } from './user-authentication'
 import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
 import { UserAuthenticationModel } from '@/domain/usecases/user'
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
@@ -46,7 +46,7 @@ const makeUpdateUserRepository = (): IUpdateUserRepository => {
 }
 
 interface SutTypes {
-  sut: UserAuthenticationUsecase
+  sut: UserAuthentication
   getOneUserByEmailRepositoryStub: IGetOneUserByEmailRepository
   hashComparerStub: HashComparer
   encrypterStub: Encrypter
@@ -58,7 +58,7 @@ const makeSut = (): SutTypes => {
   const hashComparerStub = makeHashComparer()
   const encrypterStub = makeEncrypter()
   const updateUserRepositoryStub = makeUpdateUserRepository()
-  const sut = new UserAuthenticationUsecase(getOneUserByEmailRepositoryStub, hashComparerStub, encrypterStub, updateUserRepositoryStub)
+  const sut = new UserAuthentication(getOneUserByEmailRepositoryStub, hashComparerStub, encrypterStub, updateUserRepositoryStub)
   return {
     sut,
     getOneUserByEmailRepositoryStub,
@@ -73,7 +73,7 @@ const makeFakeAuthenticationData = (): UserAuthenticationModel => ({
   password: 'valid_password'
 })
 
-describe('UserAuthenticationUsecase', () => {
+describe('UserAuthentication usecase', () => {
   test('Should call IGetOneUserByEmailRepository with correct email', async () => {
     const { sut, getOneUserByEmailRepositoryStub } = makeSut()
     const getOneSpy = jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne')

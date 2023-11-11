@@ -1,10 +1,10 @@
 import { Controller, HttpRequest, HttpResponse, Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { IUserAuthenticationUsecase } from '@/domain/usecases/user'
+import { IUserAuthentication } from '@/domain/usecases/user'
 
 export class UserAuthenticationController implements Controller {
   constructor (
-    private readonly userAuthenticationUsecase: IUserAuthenticationUsecase,
+    private readonly userAuthentication: IUserAuthentication,
     private readonly validation: Validation
   ) {}
 
@@ -15,7 +15,7 @@ export class UserAuthenticationController implements Controller {
         return badRequest(error)
       }
       const { email, password } = httpRequest.body
-      const accessToken = await this.userAuthenticationUsecase.auth({
+      const accessToken = await this.userAuthentication.auth({
         email,
         password
       })
