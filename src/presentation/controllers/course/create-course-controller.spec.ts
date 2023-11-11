@@ -1,7 +1,7 @@
-import { MissingParamError } from '@/presentation/errors'
+import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateCourseController } from './create-course-controller'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { badRequest } from '@/presentation/helpers/http'
+import { badRequest, serverError } from '@/presentation/helpers/http'
 import { ICreateCourse } from '@/domain/usecases/course'
 import { ICreateCourseParams } from '@/domain/usecases/course/create-course'
 
@@ -73,5 +73,14 @@ describe('CreateCourseController', () => {
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
+
+  test('Should return 500 if ICreateCourse throws', async () => {
+    const { sut, createCourseStub } = makeSut()
+    jest.spyOn(createCourseStub, 'create').mockImplementationOnce(async () => {
+      return await Promise.reject(new Error())
+    })
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new ServerError('any_error')))
   })
 })
