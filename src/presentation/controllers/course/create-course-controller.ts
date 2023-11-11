@@ -1,5 +1,5 @@
 import { ICreateCourse } from '@/domain/usecases/course'
-import { badRequest, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class CreateCourseController implements Controller {
@@ -21,7 +21,7 @@ export class CreateCourseController implements Controller {
         thumb,
         author
       })
-      return null
+      return noContent()
     } catch (error: any) {
       return serverError(error)
     }
