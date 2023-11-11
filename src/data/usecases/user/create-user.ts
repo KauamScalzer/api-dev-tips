@@ -1,9 +1,9 @@
-import { ICreateUserUsecase, CreateUserModel } from '@/domain/usecases/user'
+import { ICreateUser, CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { Hasher } from '@/data/protocols/criptography'
 import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/user'
 
-export class CreateUserUsecase implements ICreateUserUsecase {
+export class CreateUser implements ICreateUser {
   constructor (
     private readonly hasher: Hasher,
     private readonly createUserRepository: ICreateUserRepository,

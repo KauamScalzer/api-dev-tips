@@ -7,6 +7,6 @@ export interface CreateUserModel {
   urlImage: string
 }
 
-export interface ICreateUserUsecase {
+export interface ICreateUser {
   create (data: CreateUserModel): Promise<UserModel>
 }

@@ -1,17 +1,17 @@
 import { CreateUserController } from './create-user-controller'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { ICreateUserUsecase, CreateUserModel } from '@/domain/usecases/user'
+import { ICreateUser, CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http'
 
-const makeCreateUserUsecase = (): ICreateUserUsecase => {
-  class CreateUserUsecaseStub implements ICreateUserUsecase {
+const makeCreateUser = (): ICreateUser => {
+  class CreateUserStub implements ICreateUser {
     async create (data: CreateUserModel): Promise<UserModel> {
       return await new Promise(resolve => resolve(makeFakeUser()))
     }
   }
-  return new CreateUserUsecaseStub()
+  return new CreateUserStub()
 }
 
 const makeFakeUser = (): UserModel => ({
@@ -43,25 +43,25 @@ const makeValidation = (): Validation => {
 
 interface SutTypes {
   sut: CreateUserController
-  createUserUsecaseStub: ICreateUserUsecase
+  createUserStub: ICreateUser
   validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
-  const createUserUsecaseStub = makeCreateUserUsecase()
+  const createUserStub = makeCreateUser()
   const validationStub = makeValidation()
-  const sut = new CreateUserController(createUserUsecaseStub, validationStub)
+  const sut = new CreateUserController(createUserStub, validationStub)
   return {
     sut,
-    createUserUsecaseStub,
+    createUserStub,
     validationStub
   }
 }
 
 describe('SignUp Controller', () => {
-  test('Should call ICreateUserUsecase with correct values', async () => {
-    const { sut, createUserUsecaseStub } = makeSut()
-    const createSpy = jest.spyOn(createUserUsecaseStub, 'create')
+  test('Should call ICreateUser with correct values', async () => {
+    const { sut, createUserStub } = makeSut()
+    const createSpy = jest.spyOn(createUserStub, 'create')
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith({
       name: 'any_name',
@@ -79,9 +79,9 @@ describe('SignUp Controller', () => {
     expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 
-  test('Should return 500 if ICreateUserUsecase throws', async () => {
-    const { sut, createUserUsecaseStub } = makeSut()
-    jest.spyOn(createUserUsecaseStub, 'create').mockImplementationOnce(async () => {
+  test('Should return 500 if ICreateUser throws', async () => {
+    const { sut, createUserStub } = makeSut()
+    jest.spyOn(createUserStub, 'create').mockImplementationOnce(async () => {
       return await Promise.reject(new Error())
     })
     const httpResponse = await sut.handle(makeFakeRequest())
@@ -101,9 +101,9 @@ describe('SignUp Controller', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 
-  test('Should return 403 if ICreateUserUsecase returns false', async () => {
-    const { sut, createUserUsecaseStub } = makeSut()
-    jest.spyOn(createUserUsecaseStub, 'create').mockReturnValueOnce(null)
+  test('Should return 403 if ICreateUser returns false', async () => {
+    const { sut, createUserStub } = makeSut()
+    jest.spyOn(createUserStub, 'create').mockReturnValueOnce(null)
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })

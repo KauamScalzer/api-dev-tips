@@ -1,11 +1,11 @@
 import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, ok, forbidden } from '@/presentation/helpers/http'
-import { ICreateUserUsecase } from '@/domain/usecases/user'
+import { ICreateUser } from '@/domain/usecases/user'
 import { EmailInUseError } from '@/presentation/errors'
 
 export class CreateUserController implements Controller {
   constructor (
-    private readonly createUser: ICreateUserUsecase,
+    private readonly createUser: ICreateUser,
     private readonly validation: Validation
   ) {}
 

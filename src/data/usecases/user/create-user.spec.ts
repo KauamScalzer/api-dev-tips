@@ -1,11 +1,11 @@
 import { Hasher } from '@/data/protocols/criptography'
-import { CreateUserUsecase } from './create-user-usecase'
+import { CreateUser } from './create-user'
 import { CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/user'
 
 interface SutTypes {
-  sut: CreateUserUsecase
+  sut: CreateUser
   hasherStub: Hasher
   createUserRepositoryStub: ICreateUserRepository
   getOneUserByEmailRepositoryStub: IGetOneUserByEmailRepository
@@ -57,7 +57,7 @@ const makeSut = (): SutTypes => {
   const hasherStub = makeHasher()
   const createUserRepositoryStub = makeCreateUserRepository()
   const getOneUserByEmailRepositoryStub = makeGetOneUserByEmailRepository()
-  const sut = new CreateUserUsecase(hasherStub, createUserRepositoryStub, getOneUserByEmailRepositoryStub)
+  const sut = new CreateUser(hasherStub, createUserRepositoryStub, getOneUserByEmailRepositoryStub)
   return {
     sut,
     hasherStub,
@@ -66,7 +66,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('CreateUserUsecase', () => {
+describe('CreateUser usecase', () => {
   test('Should call Hasher with correct password', async () => {
     const { sut, hasherStub } = makeSut()
     const encryptSpy = jest.spyOn(hasherStub, 'hash')
