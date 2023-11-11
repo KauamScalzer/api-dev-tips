@@ -1,5 +1,7 @@
+import { MissingParamError } from '@/presentation/errors'
 import { CreateCourseController } from './create-course-controller'
 import { HttpRequest, Validation } from '@/presentation/protocols'
+import { badRequest } from '@/presentation/helpers/http'
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
@@ -44,5 +46,12 @@ describe('CreateCourseController', () => {
       thumb: 'any_thumb',
       author: 'any_author'
     })
+  })
+
+  test('Should return 400 if Validation returns an Error', async () => {
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 })
