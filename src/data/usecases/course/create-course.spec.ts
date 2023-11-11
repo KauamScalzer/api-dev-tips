@@ -37,4 +37,11 @@ describe('CreateCourse usecase', () => {
     await sut.create(makeFakeCourseData())
     expect(encryptSpy).toHaveBeenCalledWith(makeFakeCourseData())
   })
+
+  test('Should throw if ICreateCourseRepository throws', async () => {
+    const { sut, createCourseRepositoryStub } = makeSut()
+    jest.spyOn(createCourseRepositoryStub, 'create').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.create(makeFakeCourseData())
+    await expect(promise).rejects.toThrow()
+  })
 })
