@@ -1,1 +1,1 @@
-export { ICreateCourse } from './create-course'
+export { ICreateCourse, CreateCourseParams } from './create-course'

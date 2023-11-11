@@ -1,4 +1,4 @@
-export interface ICreateCourseParams {
+export interface CreateCourseParams {
   name: string
   description: string
   thumb: string
@@ -6,5 +6,5 @@ export interface ICreateCourseParams {
 }
 
 export interface ICreateCourse {
-  create (data: ICreateCourseParams): Promise<void>
+  create (data: CreateCourseParams): Promise<void>
 }
