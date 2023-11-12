@@ -1,5 +1,5 @@
 import env from '@/main/config/env'
-import { Connection, ConnectionOptions, createConnection, getConnection, getRepository } from 'typeorm'
+import { Connection, ConnectionOptions, createConnection, getRepository } from 'typeorm'
 
 export const TypeormHelper = {
   connection: null as Connection,
@@ -30,7 +30,7 @@ export const TypeormHelper = {
   },
 
   async clear (entity: string) {
-    const repository = await getRepository(entity)
+    const repository = getRepository(entity)
     await repository.query(`DELETE FROM ${entity}`)
   }
 }
