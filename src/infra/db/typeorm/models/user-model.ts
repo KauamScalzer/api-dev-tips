@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm'
+import { UserCourse } from './user-course-model'
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -26,4 +27,7 @@ export class User extends BaseEntity {
     nullable: true
     })
   accessToken?: string
+
+  @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
+  userCourses?: UserCourse[]
 }

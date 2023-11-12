@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm'
+import { UserCourse } from './user-course-model'
 
 @Entity('course')
 export class Course extends BaseEntity {
@@ -24,4 +25,7 @@ export class Course extends BaseEntity {
     type: 'varchar'
     })
   thumb: string
+
+  @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
+  userCourses?: UserCourse[]
 }
