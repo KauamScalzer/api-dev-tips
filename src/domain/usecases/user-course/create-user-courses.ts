@@ -1,7 +1,9 @@
 export interface CreateUserCoursesParams {
   userId: number
   courseIds: [
-    id: number
+    {
+      id: number
+    }
   ]
 }
 
