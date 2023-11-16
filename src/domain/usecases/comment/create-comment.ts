@@ -1,6 +1,6 @@
 export interface CreateCommentModel {
   lessonId: number
-  userId: string
+  userId: number
   comment: string
 }
 
