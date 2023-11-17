@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm'
 import { UserCourse } from './user-course-model'
+import { Comment } from './comment-model'
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -30,4 +31,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
   userCourses?: UserCourse[]
+
+  @OneToMany(() => Comment, comment => comment.user)
+  comments?: Comment[]
 }

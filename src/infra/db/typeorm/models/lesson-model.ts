@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
 import { Course } from './course-model'
+import { Comment } from './comment-model'
 
 @Entity('lesson')
 export class Lesson extends BaseEntity {
@@ -27,4 +28,7 @@ export class Lesson extends BaseEntity {
   @ManyToOne(() => Course, course => course.lessons)
   @JoinColumn({ name: 'course_id' })
   course: Course
+
+  @OneToMany(() => Comment, comment => comment.lesson)
+  comments: Comment[]
 }

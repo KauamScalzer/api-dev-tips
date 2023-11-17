@@ -1,4 +1,4 @@
-import { CreateLessonParams, ICreateLessonRepository } from '@/data/protocols/lesson/create-lesson-repository'
+import { CreateLessonParams, ICreateLessonRepository } from '@/data/protocols/lesson'
 import { Lesson } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
