@@ -1,12 +1,18 @@
 import { GetAllCourseResult } from '@/domain/usecases/course'
-import { IGetAllCourseRepository } from '@/data/protocols/course'
+import { GetAllCourseRepositoryParams, IGetAllCourseRepository } from '@/data/protocols/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class GetAllCourseRepository implements IGetAllCourseRepository {
-  async getAll (): Promise<GetAllCourseResult> {
+  async getAll (params: GetAllCourseRepositoryParams): Promise<GetAllCourseResult> {
     const repository = getRepository(Course)
-    const result = await repository.find()
-    return result
+    const [data, count] = await repository.findAndCount({
+      order: {
+        id: 'ASC'
+      },
+      take: params.take,
+      skip: params.skip
+    })
+    return { data, count }
   }
 }

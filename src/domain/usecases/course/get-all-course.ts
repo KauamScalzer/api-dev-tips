@@ -1,5 +1,15 @@
 export interface IGetAllCourse {
-  getAll (): Promise<GetAllCourseResult>
+  getAll (data: GetAllCourseParams): Promise<GetAllCourseResult>
+}
+
+export interface GetAllCourseParams {
+  skip: number
+  take: number
+}
+
+export interface GetAllCourseResult {
+  count: number
+  data: Courses
 }
 
 export interface Course {
@@ -10,4 +20,4 @@ export interface Course {
   thumb: string
 }
 
-export interface GetAllCourseResult extends Array<Course> {}
+export interface Courses extends Array<Course> {}

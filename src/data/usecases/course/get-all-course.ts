@@ -1,4 +1,4 @@
-import { IGetAllCourse, GetAllCourseResult } from '@/domain/usecases/course'
+import { IGetAllCourse, GetAllCourseResult, GetAllCourseParams } from '@/domain/usecases/course'
 import { IGetAllCourseRepository } from '@/data/protocols/course'
 
 export class GetAllCourse implements IGetAllCourse {
@@ -6,7 +6,8 @@ export class GetAllCourse implements IGetAllCourse {
     private readonly getAllCourseRepository: IGetAllCourseRepository
   ) {}
 
-  async getAll (): Promise<GetAllCourseResult> {
-    return await this.getAllCourseRepository.getAll()
+  async getAll (data: GetAllCourseParams): Promise<GetAllCourseResult> {
+    data.skip = (data.skip - 1) * data.take
+    return await this.getAllCourseRepository.getAll(data)
   }
 }

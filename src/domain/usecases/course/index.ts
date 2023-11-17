@@ -1,2 +1,2 @@
 export { ICreateCourse, CreateCourseParams } from './create-course'
-export { IGetAllCourse, GetAllCourseResult } from './get-all-course'
+export { IGetAllCourse, GetAllCourseResult, GetAllCourseParams } from './get-all-course'

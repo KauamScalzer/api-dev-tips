@@ -1,15 +1,24 @@
 import { IGetAllCourse } from '@/domain/usecases/course'
-import { ok, serverError } from '@/presentation/helpers/http'
-import { HttpResponse, Controller } from '@/presentation/protocols'
+import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { HttpResponse, Controller, HttpRequest, Validation } from '@/presentation/protocols'
 
 export class GetAllCourseController implements Controller {
   constructor (
-    private readonly getAllCourse: IGetAllCourse
+    private readonly getAllCourse: IGetAllCourse,
+    private readonly validation: Validation
   ) {}
 
-  async handle (): Promise<HttpResponse> {
+  async handle (request: HttpRequest): Promise<HttpResponse> {
     try {
-      const courses = await this.getAllCourse.getAll()
+      const error = this.validation.validate(request.query)
+      if (error) {
+        return badRequest(error)
+      }
+      const { take, skip } = request.query
+      const courses = await this.getAllCourse.getAll({
+        take,
+        skip
+      })
       return ok(courses)
     } catch (error: any) {
       return serverError(error)

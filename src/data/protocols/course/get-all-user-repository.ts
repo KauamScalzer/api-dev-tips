@@ -1,5 +1,10 @@
 import { GetAllCourseResult } from '@/domain/usecases/course'
 
 export interface IGetAllCourseRepository {
-  getAll (): Promise<GetAllCourseResult>
+  getAll (data: GetAllCourseRepositoryParams): Promise<GetAllCourseResult>
+}
+
+export interface GetAllCourseRepositoryParams {
+  skip: number
+  take: number
 }

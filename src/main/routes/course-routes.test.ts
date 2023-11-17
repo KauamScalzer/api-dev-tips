@@ -37,7 +37,7 @@ describe('Course Routes', () => {
         author: 'Kauam Scalzer',
         thumb: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUdrOIue5OnpMcJgKPLOUppxTBMWsuCGeu5w&usqp=CAU'
       })
-      await request(app).get('/api/course')
+      await request(app).get('/api/course?take=1&skip=1')
         .expect(200)
     })
   })
