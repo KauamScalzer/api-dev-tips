@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { makeCreateCommentController } from '../factories/comment'
+import { makeCreateCommentController } from '../factories/controllers/comment'
 import { adaptRoute } from '../adapters/express'
 
 export default (router: Router): void => {

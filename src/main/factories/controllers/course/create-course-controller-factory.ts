@@ -4,7 +4,7 @@ import { CreateCourseRepository } from '@/infra/db/repositories/course'
 import { CreateLogErrorRepository } from '@/infra/db/repositories/log-error'
 import { Controller } from '@/presentation/protocols'
 import { LogControllerDecorator } from '@/main/decorators'
-import { makeCreateCourseValidation } from './validations'
+import { makeCreateCourseValidation } from '@/main/factories/validations/course'
 
 export const makeCreateCourseController = (): Controller => {
   const createCourseRepository = new CreateCourseRepository()

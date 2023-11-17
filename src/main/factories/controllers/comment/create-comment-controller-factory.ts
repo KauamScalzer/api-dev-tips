@@ -4,7 +4,7 @@ import { CreateCommentRepository } from '@/infra/db/repositories/comment'
 import { CreateLogErrorRepository } from '@/infra/db/repositories/log-error'
 import { Controller } from '@/presentation/protocols'
 import { LogControllerDecorator } from '@/main/decorators'
-import { makeCreateCommentValidation } from './validations'
+import { makeCreateCommentValidation } from '@/main/factories/validations/comment'
 
 export const makeCreateCommentController = (): Controller => {
   const createCommentRepository = new CreateCommentRepository()

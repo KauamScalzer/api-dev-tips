@@ -6,7 +6,7 @@ import { EncrypterJwtAdapter } from '@/infra/criptography/jwt'
 import { CreateLogErrorRepository } from '@/infra/db/repositories/log-error'
 import { Controller } from '@/presentation/protocols'
 import { LogControllerDecorator } from '@/main/decorators'
-import { makeUserAuthenticationValidation } from './validations'
+import { makeUserAuthenticationValidation } from '@/main/factories/validations/user'
 
 export const makeUserAuthenticationController = (): Controller => {
   const getOneUserByEmailRepository = new GetOneUserByEmailRepository()
