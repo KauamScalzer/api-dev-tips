@@ -10,7 +10,7 @@ export class GetAllCourseByUserController implements Controller {
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(request.query)
+      const error = this.validation.validate({ ...request.query, ...request.params })
       if (error) {
         return badRequest(error)
       }
@@ -23,6 +23,7 @@ export class GetAllCourseByUserController implements Controller {
       })
       return ok(courses)
     } catch (error: any) {
+      console.log(error)
       return serverError(error)
     }
   }
