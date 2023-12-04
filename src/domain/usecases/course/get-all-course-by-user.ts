@@ -4,7 +4,7 @@ export interface IGetAllCourseByUser {
 
 export namespace IGetAllCourseByUser {
   export type Params = {
-    id: number
+    userId: number
     skip: number
     take: number
   }

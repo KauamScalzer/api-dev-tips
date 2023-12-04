@@ -7,7 +7,7 @@ export class GetAllCourseByUserRepository implements IGetAllCourseByUserReposito
     const repository = getRepository(Course)
     const [data, count] = await repository.findAndCount({
       where: {
-        id: params.id
+        id: params.userId
       },
       order: {
         id: 'ASC'

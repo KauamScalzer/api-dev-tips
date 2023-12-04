@@ -14,10 +14,10 @@ export class GetAllCourseByUserController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { id } = request.params
+      const { userId } = request.params
       const { take, skip } = request.query
       const courses = await this.getAllCourseByUser.getAll({
-        id,
+        userId,
         take,
         skip
       })
