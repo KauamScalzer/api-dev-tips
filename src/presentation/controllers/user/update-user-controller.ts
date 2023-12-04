@@ -15,7 +15,9 @@ export class UpdateUserController implements Controller {
         return badRequest(error)
       }
       const { name, email, urlImage } = httpRequest.body
+      const { id } = httpRequest.params
       await this.updateUser.update({
+        id,
         name,
         email,
         urlImage
