@@ -1,8 +1,8 @@
 export interface IUpdateCourseRepository {
-  update (id: number, data: UpdateCourseRepository): Promise<void>
+  update (id: number, data: UpdateCourseParams): Promise<void>
 }
 
-export interface UpdateCourseRepository {
+export interface UpdateCourseParams {
   id: number
   name: string
   description: string
