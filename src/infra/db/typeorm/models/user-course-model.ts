@@ -1,4 +1,13 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, BaseEntity, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm'
 import { User } from './user-model'
 import { Course } from './course-model'
 
@@ -9,33 +18,33 @@ export class UserCourse extends BaseEntity {
 
   @Column({
     type: 'integer',
-    name: 'user_id'
+    name: 'user_id',
     })
   userId: number
 
   @Column({
     type: 'integer',
-    name: 'course_id'
+    name: 'course_id',
     })
   courseId: number
 
   @CreateDateColumn({
     type: 'timestamp',
-    name: 'created_at'
+    name: 'created_at',
     })
   createdAt: Date
 
   @UpdateDateColumn({
     type: 'timestamp',
-    name: 'updated_at'
+    name: 'updated_at',
     })
   updatedAt: Date
 
-  @ManyToOne(() => Course, course => course.userCourses)
+  @ManyToOne(() => Course, course => course.userCourses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'course_id' })
-  courses: Course
+  course: Course
 
   @ManyToOne(() => User, user => user.userCourses)
   @JoinColumn({ name: 'user_id' })
-  users: User
+  user: User
 }

@@ -41,7 +41,7 @@ export class User extends BaseEntity {
     })
   updatedAt: Date
 
-  @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
+  @OneToMany(() => UserCourse, UserCourse => UserCourse.course)
   userCourses?: UserCourse[]
 
   @OneToMany(() => Comment, comment => comment.user)

@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm'
 import { UserCourse } from './user-course-model'
 import { Lesson } from './lesson-model'
 
@@ -8,22 +16,22 @@ export class Course extends BaseEntity {
   id: number
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
     })
   name: string
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
     })
   description: string
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
     })
   author: string
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
     })
   thumb: string
 
@@ -39,9 +47,9 @@ export class Course extends BaseEntity {
     })
   updatedAt: Date
 
-  @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
+  @OneToMany(() => UserCourse, userCourse => userCourse.course, { cascade: true })
   userCourses?: UserCourse[]
 
-  @OneToMany(() => Lesson, lesson => lesson.course)
+  @OneToMany(() => Lesson, lesson => lesson.course, { cascade: true })
   lessons?: Lesson[]
 }

@@ -14,7 +14,7 @@ export class DeleteCourseController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const { params } = httpRequest.params
+      const params = httpRequest.params
       await this.deleteCourse.delete(params.id)
       return noContent()
     } catch (error: any) {
