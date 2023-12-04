@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 import { UserCourse } from './user-course-model'
 import { Lesson } from './lesson-model'
 
@@ -26,6 +26,18 @@ export class Course extends BaseEntity {
     type: 'varchar'
     })
   thumb: string
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at'
+    })
+  createdAt: Date
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at'
+    })
+  updatedAt: Date
 
   @OneToMany(() => UserCourse, UserCourse => UserCourse.courses)
   userCourses?: UserCourse[]

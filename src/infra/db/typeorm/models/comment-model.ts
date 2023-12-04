@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 import { Lesson } from './lesson-model'
 import { User } from './user-model'
 
@@ -23,6 +23,18 @@ export class Comment extends BaseEntity {
     type: 'varchar'
     })
   comment: string
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at'
+    })
+  createdAt: Date
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at'
+    })
+  updatedAt: Date
 
   @ManyToOne(() => Lesson, lesson => lesson.comments)
   @JoinColumn({ name: 'lesson_id' })

@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, BaseEntity, Column } from 'typeorm'
+import { Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, BaseEntity, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 import { User } from './user-model'
 import { Course } from './course-model'
 
@@ -18,6 +18,18 @@ export class UserCourse extends BaseEntity {
     name: 'course_id'
     })
   courseId: number
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at'
+    })
+  createdAt: Date
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at'
+    })
+  updatedAt: Date
 
   @ManyToOne(() => Course, course => course.userCourses)
   @JoinColumn({ name: 'course_id' })
