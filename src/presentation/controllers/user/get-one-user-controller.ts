@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
+import { badRequest, serverError, ok } from '@/presentation/helpers/http'
 import { IGetOneUser } from '@/domain/usecases/user'
 
 export class GetOneUserController implements Controller {
@@ -15,8 +15,8 @@ export class GetOneUserController implements Controller {
         return badRequest(error)
       }
       const params = httpRequest.params
-      await this.getOneUser.getOne(params.id)
-      return noContent()
+      const result = await this.getOneUser.getOne(params.id)
+      return ok(result)
     } catch (error: any) {
       console.log(error)
       return serverError(error)
