@@ -9,7 +9,7 @@ import { makeUpdateUserValidation } from '@/main/factories/validations/user'
 export const makeUpdateUserController = (): Controller => {
   const updateUserRepository = new UpdateUserRepository()
   const updateUser = new UpdateUser(updateUserRepository)
-  const createUserController = new UpdateUserController(updateUser, makeUpdateUserValidation())
+  const createUserController = new UpdateUserController(makeUpdateUserValidation(), updateUser)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(createUserController, createLogErrorRepository)
 }

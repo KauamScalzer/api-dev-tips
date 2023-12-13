@@ -9,7 +9,7 @@ import { makeDeleteUserValidation } from '@/main/factories/validations/user'
 export const makeDeleteUserController = (): Controller => {
   const deleteUserRepository = new DeleteUserRepository()
   const deleteUser = new DeleteUser(deleteUserRepository)
-  const createUserController = new DeleteUserController(deleteUser, makeDeleteUserValidation())
+  const createUserController = new DeleteUserController(makeDeleteUserValidation(), deleteUser)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(createUserController, createLogErrorRepository)
 }

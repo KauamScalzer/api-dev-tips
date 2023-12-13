@@ -9,7 +9,7 @@ import { makeGetOneUserValidation } from '@/main/factories/validations/user'
 export const makeGetOneUserController = (): Controller => {
   const getOneUserRepository = new GetOneUserRepository()
   const getOneUser = new GetOneUser(getOneUserRepository)
-  const getOneUserController = new GetOneUserController(getOneUser, makeGetOneUserValidation())
+  const getOneUserController = new GetOneUserController(makeGetOneUserValidation(), getOneUser)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(getOneUserController, createLogErrorRepository)
 }
