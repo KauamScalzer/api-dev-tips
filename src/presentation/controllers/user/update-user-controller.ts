@@ -4,8 +4,8 @@ import { IUpdateUser } from '@/domain/usecases/user'
 
 export class UpdateUserController implements Controller {
   constructor (
-    private readonly updateUser: IUpdateUser,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly updateUser: IUpdateUser
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
