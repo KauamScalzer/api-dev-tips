@@ -4,8 +4,8 @@ import { IGetOneUser } from '@/domain/usecases/user'
 
 export class GetOneUserController implements Controller {
   constructor (
-    private readonly getOneUser: IGetOneUser,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly getOneUser: IGetOneUser
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
