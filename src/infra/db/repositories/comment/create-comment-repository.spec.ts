@@ -19,7 +19,7 @@ describe('CreateCommentRepository', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   test('Should create a comment on sucess', async () => {

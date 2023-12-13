@@ -23,7 +23,7 @@ export const TypeormHelper = {
     this.connection = await createConnection(connectionOptions)
   },
 
-  async desconnect () {
+  async disconnect () {
     if (this.connection) {
       await this.connection.close()
     }

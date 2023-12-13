@@ -24,7 +24,7 @@ describe('UpdateUserRepository', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   test('Should update an user on sucess', async () => {

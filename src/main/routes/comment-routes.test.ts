@@ -16,7 +16,7 @@ describe('Comment Routes', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   describe('POST /comment', () => {

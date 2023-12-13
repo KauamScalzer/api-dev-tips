@@ -15,7 +15,7 @@ describe('UserCourse Routes', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   describe('POST /user-course', () => {

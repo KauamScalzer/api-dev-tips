@@ -13,7 +13,7 @@ describe('Course Routes', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   describe('POST /course', () => {

@@ -16,7 +16,7 @@ describe('GetOneUserByEmailRepository Repository', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   test('Should return an user on sucess', async () => {

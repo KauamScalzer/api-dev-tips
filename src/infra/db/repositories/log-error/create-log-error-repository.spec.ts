@@ -16,7 +16,7 @@ describe('CreateLogErrorRepository', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   test('Should create an error log on sucess', async () => {

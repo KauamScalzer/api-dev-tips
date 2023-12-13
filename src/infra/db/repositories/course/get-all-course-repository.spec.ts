@@ -16,7 +16,7 @@ describe('GetAllCourseRepository', () => {
   })
 
   afterAll(async () => {
-    await TypeormHelper.desconnect()
+    await TypeormHelper.disconnect()
   })
 
   test('Should return an course on sucess', async () => {
