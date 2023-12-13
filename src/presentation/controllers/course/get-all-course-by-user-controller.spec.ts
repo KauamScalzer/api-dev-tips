@@ -73,7 +73,6 @@ describe('GetAllCourseByUserController', () => {
   test('Should call IGetAllCourseByUser with correct values', async () => {
     const { sut, getAllCourseByUserStub } = makeSut()
     const createSpy = jest.spyOn(getAllCourseByUserStub, 'getAll')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith({
       skip: 'any_skip',

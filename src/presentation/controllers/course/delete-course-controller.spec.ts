@@ -63,7 +63,6 @@ describe('DeleteCourseController', () => {
   test('Should call IDeleteCourse with correct values', async () => {
     const { sut, deleteCourseStub } = makeSut()
     const createSpy = jest.spyOn(deleteCourseStub, 'delete')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith('any_id')
   })

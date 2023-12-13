@@ -53,7 +53,6 @@ describe('UpdateCourseController', () => {
   test('Should call IUpdateCourse with no value', async () => {
     const { sut, updateCourseStub } = makeSut()
     const createSpy = jest.spyOn(updateCourseStub, 'update')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith({
       author: 'any_author',
@@ -67,7 +66,6 @@ describe('UpdateCourseController', () => {
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const createSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
     expect(createSpy).toHaveBeenCalledWith({
       author: 'any_author',

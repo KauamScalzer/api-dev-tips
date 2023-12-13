@@ -1,4 +1,3 @@
-import { UserModel } from '@/domain/models'
 import { IGetOneCourseRepository } from '@/data/protocols/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
