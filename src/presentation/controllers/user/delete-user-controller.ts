@@ -4,8 +4,8 @@ import { IDeleteUser } from '@/domain/usecases/user'
 
 export class DeleteUserController implements Controller {
   constructor (
-    private readonly deleteUser: IDeleteUser,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly deleteUser: IDeleteUser
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
