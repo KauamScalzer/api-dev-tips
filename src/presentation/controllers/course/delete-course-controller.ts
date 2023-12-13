@@ -4,8 +4,8 @@ import { IDeleteCourse } from '@/domain/usecases/course'
 
 export class DeleteCourseController implements Controller {
   constructor (
-    private readonly deleteCourse: IDeleteCourse,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly deleteCourse: IDeleteCourse
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
