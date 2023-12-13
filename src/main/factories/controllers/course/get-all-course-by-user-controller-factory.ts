@@ -11,7 +11,7 @@ export const makeGetAllCourseByUserController = (): Controller => {
   const getOneCourseRepository = new GetOneCourseRepository()
   const getAllUserCourseByUserRepository = new GetAllUserCourseByUserRepository()
   const getAllCourseByUser = new GetAllCourseByUser(getAllUserCourseByUserRepository, getOneCourseRepository)
-  const getAllCourseByUserController = new GetAllCourseByUserController(getAllCourseByUser, makeGetAllCourseByUserValidation())
+  const getAllCourseByUserController = new GetAllCourseByUserController(makeGetAllCourseByUserValidation(), getAllCourseByUser)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(getAllCourseByUserController, createLogErrorRepository)
 }

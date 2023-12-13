@@ -9,7 +9,7 @@ import { makeDeleteCourseValidation } from '@/main/factories/validations/course'
 export const makeDeleteCourseController = (): Controller => {
   const deleteCourseRepository = new DeleteCourseRepository()
   const deleteCourse = new DeleteCourse(deleteCourseRepository)
-  const deleteCourseController = new DeleteCourseController(deleteCourse, makeDeleteCourseValidation())
+  const deleteCourseController = new DeleteCourseController(makeDeleteCourseValidation(), deleteCourse)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(deleteCourseController, createLogErrorRepository)
 }

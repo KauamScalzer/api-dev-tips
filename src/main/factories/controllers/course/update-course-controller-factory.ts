@@ -9,7 +9,7 @@ import { makeUpdateCourseValidation } from '@/main/factories/validations/course'
 export const makeUpdateCourseController = (): Controller => {
   const updateCourseRepository = new UpdateCourseRepository()
   const updateCourse = new UpdateCourse(updateCourseRepository)
-  const updateCourseController = new UpdateCourseController(updateCourse, makeUpdateCourseValidation())
+  const updateCourseController = new UpdateCourseController(makeUpdateCourseValidation(), updateCourse)
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(updateCourseController, createLogErrorRepository)
 }
