@@ -4,8 +4,8 @@ import { IUpdateCourse } from '@/domain/usecases/course'
 
 export class UpdateCourseController implements Controller {
   constructor (
-    private readonly updateCourse: IUpdateCourse,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly updateCourse: IUpdateCourse
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
