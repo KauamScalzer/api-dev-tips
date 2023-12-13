@@ -1,5 +1,5 @@
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
-import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/user'
+import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/db/user'
 import { IUserAuthentication, UserAuthenticationModel } from '@/domain/usecases/user'
 
 export class UserAuthentication implements IUserAuthentication {

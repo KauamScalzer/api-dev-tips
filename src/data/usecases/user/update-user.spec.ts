@@ -1,6 +1,6 @@
 import { UpdateUserModel } from '@/domain/usecases/user'
 import { UpdateUser } from './update-user'
-import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
+import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/db/user'
 
 interface SutTypes {
   sut: UpdateUser

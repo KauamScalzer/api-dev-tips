@@ -1,6 +1,6 @@
-import { IGetAllUserCourseByUserRepository } from '@/data/protocols/user-course'
+import { IGetAllUserCourseByUserRepository } from '@/data/protocols/db/user-course'
 import { GetAllCourseByUser } from './get-all-course-by-user'
-import { IGetOneCourseRepository } from '@/data/protocols/course'
+import { IGetOneCourseRepository } from '@/data/protocols/db/course'
 
 const makeGetAllUserCourseByUserRepository = (): IGetAllUserCourseByUserRepository => {
   class GetAllUserCourseByUserRepositoryStub implements IGetAllUserCourseByUserRepository {

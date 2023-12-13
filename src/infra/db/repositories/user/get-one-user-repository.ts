@@ -1,5 +1,5 @@
 import { UserModel } from '@/domain/models'
-import { IGetOneUserRepository } from '@/data/protocols/user'
+import { IGetOneUserRepository } from '@/data/protocols/db/user'
 import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

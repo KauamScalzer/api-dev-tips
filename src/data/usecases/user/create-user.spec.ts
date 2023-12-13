@@ -2,7 +2,7 @@ import { Hasher } from '@/data/protocols/criptography'
 import { CreateUser } from './create-user'
 import { CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
-import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/user'
+import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/db/user'
 
 interface SutTypes {
   sut: CreateUser

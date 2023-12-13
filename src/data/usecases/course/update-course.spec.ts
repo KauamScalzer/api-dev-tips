@@ -1,4 +1,4 @@
-import { IUpdateCourseRepository, UpdateCourseParams } from '@/data/protocols/course'
+import { IUpdateCourseRepository, UpdateCourseParams } from '@/data/protocols/db/course'
 import { UpdateCourse } from './update-course'
 
 const makeIUpdateCourseRepository = (): IUpdateCourseRepository => {

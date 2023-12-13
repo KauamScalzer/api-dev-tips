@@ -1,4 +1,4 @@
-import { ICreateUserCourseRepository, CreateUserCourseParams } from '@/data/protocols/user-course'
+import { ICreateUserCourseRepository, CreateUserCourseParams } from '@/data/protocols/db/user-course'
 import { CreateUserCourses } from './create-user-courses'
 import { CreateUserCoursesParams } from '@/domain/usecases/user-course'
 

@@ -1,5 +1,5 @@
 import { IGetOneUser } from '@/domain/usecases/user'
-import { IGetOneUserRepository } from '@/data/protocols/user'
+import { IGetOneUserRepository } from '@/data/protocols/db/user'
 
 export class GetOneUser implements IGetOneUser {
   constructor (

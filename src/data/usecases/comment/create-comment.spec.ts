@@ -1,4 +1,4 @@
-import { ICreateCommentRepository, CreateCommentParams } from '@/data/protocols/comment'
+import { ICreateCommentRepository, CreateCommentParams } from '@/data/protocols/db/comment'
 import { CreateComment } from './create-comment'
 
 const makeCreateCommentRepository = (): ICreateCommentRepository => {

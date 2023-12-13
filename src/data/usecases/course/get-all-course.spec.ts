@@ -1,4 +1,4 @@
-import { IGetAllCourseRepository } from '@/data/protocols/course'
+import { IGetAllCourseRepository } from '@/data/protocols/db/course'
 import { GetAllCourse } from './get-all-course'
 import { GetAllCourseParams, GetAllCourseResult } from '@/domain/usecases/course'
 

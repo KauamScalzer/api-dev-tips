@@ -1,5 +1,5 @@
 import { IDeleteUser } from '@/domain/usecases/user'
-import { IDeleteUserRepository } from '@/data/protocols/user'
+import { IDeleteUserRepository } from '@/data/protocols/db/user'
 
 export class DeleteUser implements IDeleteUser {
   constructor (

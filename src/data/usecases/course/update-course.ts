@@ -1,5 +1,5 @@
 import { UpdateCourseModel, IUpdateCourse } from '@/domain/usecases/course'
-import { IUpdateCourseRepository } from '@/data/protocols/course'
+import { IUpdateCourseRepository } from '@/data/protocols/db/course'
 
 export class UpdateCourse implements IUpdateCourse {
   constructor (

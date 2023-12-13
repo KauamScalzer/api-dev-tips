@@ -1,4 +1,4 @@
-import { IDeleteCourseRepository } from '@/data/protocols/course'
+import { IDeleteCourseRepository } from '@/data/protocols/db/course'
 import { DeleteCourse } from './delete-course'
 
 const makeDeleteCourseRepository = (): IDeleteCourseRepository => {

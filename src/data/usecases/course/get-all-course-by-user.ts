@@ -1,6 +1,6 @@
 import { IGetAllCourseByUser } from '@/domain/usecases/course'
-import { IGetAllUserCourseByUserRepository } from '@/data/protocols/user-course'
-import { IGetOneCourseRepository } from '@/data/protocols/course'
+import { IGetAllUserCourseByUserRepository } from '@/data/protocols/db/user-course'
+import { IGetOneCourseRepository } from '@/data/protocols/db/course'
 
 export class GetAllCourseByUser implements IGetAllCourseByUser {
   constructor (

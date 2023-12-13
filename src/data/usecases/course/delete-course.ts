@@ -1,5 +1,5 @@
 import { IDeleteCourse } from '@/domain/usecases/course'
-import { IDeleteCourseRepository } from '@/data/protocols/course'
+import { IDeleteCourseRepository } from '@/data/protocols/db/course'
 
 export class DeleteCourse implements IDeleteCourse {
   constructor (

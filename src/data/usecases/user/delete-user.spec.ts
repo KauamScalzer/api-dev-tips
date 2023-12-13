@@ -1,5 +1,5 @@
 import { DeleteUser } from './delete-user'
-import { IDeleteUserRepository } from '@/data/protocols/user'
+import { IDeleteUserRepository } from '@/data/protocols/db/user'
 
 interface SutTypes {
   sut: DeleteUser

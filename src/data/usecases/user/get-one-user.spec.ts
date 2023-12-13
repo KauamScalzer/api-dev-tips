@@ -1,6 +1,6 @@
 import { UserModel } from '@/domain/models'
 import { GetOneUser } from './get-one-user'
-import { IGetOneUserRepository } from '@/data/protocols/user'
+import { IGetOneUserRepository } from '@/data/protocols/db/user'
 
 interface SutTypes {
   sut: GetOneUser

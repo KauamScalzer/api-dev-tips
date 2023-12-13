@@ -1,6 +1,6 @@
 import { UserModel } from '@/domain/models'
 import { UserAuthentication } from './user-authentication'
-import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
+import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/db/user'
 import { UserAuthenticationModel } from '@/domain/usecases/user'
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
 

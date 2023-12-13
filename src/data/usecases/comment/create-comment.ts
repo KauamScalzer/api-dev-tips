@@ -1,5 +1,5 @@
 import { ICreateComment, CreateCommentModel } from '@/domain/usecases/comment'
-import { ICreateCommentRepository } from '@/data/protocols/comment'
+import { ICreateCommentRepository } from '@/data/protocols/db/comment'
 
 export class CreateComment implements ICreateComment {
   constructor (

@@ -1,4 +1,4 @@
-import { ICreateLessonRepository, CreateLessonParams } from '@/data/protocols/lesson'
+import { ICreateLessonRepository, CreateLessonParams } from '@/data/protocols/db/lesson'
 import { CreateLesson } from './create-lesson'
 
 const makeCreateLessonRepository = (): ICreateLessonRepository => {

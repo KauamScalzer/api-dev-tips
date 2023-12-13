@@ -1,4 +1,4 @@
-import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/user'
+import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/db/user'
 import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

@@ -1,4 +1,4 @@
-import { IDeleteCourseRepository } from '@/data/protocols/course'
+import { IDeleteCourseRepository } from '@/data/protocols/db/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

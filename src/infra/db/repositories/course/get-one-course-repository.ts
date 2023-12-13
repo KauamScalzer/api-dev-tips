@@ -1,4 +1,4 @@
-import { IGetOneCourseRepository } from '@/data/protocols/course'
+import { IGetOneCourseRepository } from '@/data/protocols/db/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

@@ -1,5 +1,5 @@
 import { ICreateUserCourses, CreateUserCoursesParams } from '@/domain/usecases/user-course'
-import { ICreateUserCourseRepository } from '@/data/protocols/user-course'
+import { ICreateUserCourseRepository } from '@/data/protocols/db/user-course'
 
 export class CreateUserCourses implements ICreateUserCourses {
   constructor (

@@ -1,4 +1,4 @@
-import { IUpdateCourseRepository, UpdateCourseParams } from '@/data/protocols/course'
+import { IUpdateCourseRepository, UpdateCourseParams } from '@/data/protocols/db/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

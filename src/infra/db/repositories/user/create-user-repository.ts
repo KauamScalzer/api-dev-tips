@@ -1,4 +1,4 @@
-import { ICreateUserRepository } from '@/data/protocols/user'
+import { ICreateUserRepository } from '@/data/protocols/db/user'
 import { UserModel } from '@/domain/models'
 import { CreateUserModel } from '@/domain/usecases/user'
 import { User } from '@/infra/db/typeorm/models'

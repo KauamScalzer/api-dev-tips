@@ -1,7 +1,7 @@
 import { ICreateUser, CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { Hasher } from '@/data/protocols/criptography'
-import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/user'
+import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/db/user'
 
 export class CreateUser implements ICreateUser {
   constructor (

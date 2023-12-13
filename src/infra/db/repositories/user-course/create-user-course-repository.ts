@@ -1,4 +1,4 @@
-import { ICreateUserCourseRepository, CreateUserCourseParams } from '@/data/protocols/user-course'
+import { ICreateUserCourseRepository, CreateUserCourseParams } from '@/data/protocols/db/user-course'
 import { UserCourse } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

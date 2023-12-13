@@ -1,5 +1,5 @@
 import { GetAllCourseResult } from '@/domain/usecases/course'
-import { GetAllCourseRepositoryParams, IGetAllCourseRepository } from '@/data/protocols/course'
+import { GetAllCourseRepositoryParams, IGetAllCourseRepository } from '@/data/protocols/db/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

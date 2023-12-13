@@ -1,4 +1,4 @@
-import { ICreateCourseRepository } from '@/data/protocols/course'
+import { ICreateCourseRepository } from '@/data/protocols/db/course'
 import { CreateCourseParams } from '@/domain/usecases/course'
 import { Course } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'

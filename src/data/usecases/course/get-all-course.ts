@@ -1,5 +1,5 @@
 import { IGetAllCourse, GetAllCourseResult, GetAllCourseParams } from '@/domain/usecases/course'
-import { IGetAllCourseRepository } from '@/data/protocols/course'
+import { IGetAllCourseRepository } from '@/data/protocols/db/course'
 
 export class GetAllCourse implements IGetAllCourse {
   constructor (

@@ -1,4 +1,4 @@
-import { IDeleteUserRepository } from '@/data/protocols/user'
+import { IDeleteUserRepository } from '@/data/protocols/db/user'
 import { User } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 

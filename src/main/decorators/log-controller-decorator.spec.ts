@@ -1,7 +1,7 @@
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { serverError, ok } from '@/presentation/helpers/http'
-import { ICreateLogErrorRepository } from '@/data/protocols/log-error'
+import { ICreateLogErrorRepository } from '@/data/protocols/db/log-error'
 import { UserModel } from '@/domain/models'
 
 const makeController = (): Controller => {

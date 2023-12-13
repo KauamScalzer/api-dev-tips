@@ -1,5 +1,5 @@
 import { ICreateLesson, CreateLessonModel } from '@/domain/usecases/lesson'
-import { ICreateLessonRepository } from '@/data/protocols/lesson'
+import { ICreateLessonRepository } from '@/data/protocols/db/lesson'
 
 export class CreateLesson implements ICreateLesson {
   constructor (
