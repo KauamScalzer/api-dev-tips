@@ -2,11 +2,11 @@ import { CreateLessonController } from './create-lesson-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
-import { CreateLessonModel, ICreateLesson } from '@/domain/usecases/lesson'
+import { ICreateLesson } from '@/domain/usecases/lesson'
 
 const makeCreateLesson = (): ICreateLesson => {
   class CreateLessonStub implements ICreateLesson {
-    async create (data: CreateLessonModel): Promise<void> {}
+    async create (data: ICreateLesson.Params): Promise<void> {}
   }
   return new CreateLessonStub()
 }

@@ -1,5 +1,5 @@
-export { ICreateUser, CreateUserModel } from './create-user'
-export { IUserAuthentication, UserAuthenticationModel } from './user-authentication'
-export { IUpdateUser, UpdateUserModel } from './update-user'
+export { ICreateUser } from './create-user'
+export { IUserAuthentication } from './user-authentication'
+export { IUpdateUser } from './update-user'
 export { IDeleteUser } from './delete-user'
 export { IGetOneUser } from './get-one-user'

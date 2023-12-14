@@ -1,10 +1,10 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCourseController } from './get-all-course-controller'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http'
-import { IGetAllCourse, GetAllCourseResult } from '@/domain/usecases/course'
+import { IGetAllCourse } from '@/domain/usecases/course'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 
-const makeFakeCourse = (): GetAllCourseResult => {
+const makeFakeCourse = (): IGetAllCourse.Result => {
   return {
     count: 1,
     data: [{
@@ -26,7 +26,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeGetAllCourse = (): IGetAllCourse => {
   class GetAllCourseStub implements IGetAllCourse {
-    async getAll (): Promise<GetAllCourseResult> {
+    async getAll (): Promise<IGetAllCourse.Result> {
       return makeFakeCourse()
     }
   }

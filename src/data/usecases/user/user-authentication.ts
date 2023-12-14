@@ -1,6 +1,6 @@
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
 import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/db/user'
-import { IUserAuthentication, UserAuthenticationModel } from '@/domain/usecases/user'
+import { IUserAuthentication } from '@/domain/usecases/user'
 
 export class UserAuthentication implements IUserAuthentication {
   constructor (
@@ -10,7 +10,7 @@ export class UserAuthentication implements IUserAuthentication {
     private readonly updateUserRepository: IUpdateUserRepository
   ) {}
 
-  async auth (data: UserAuthenticationModel): Promise<string> {
+  async auth (data: IUserAuthentication.Params): Promise<string> {
     const user = await this.getOneUserByEmailRepository.getOne(data.email)
     if (user) {
       const isValid = await this.hashComparer.compare(data.password, user.password)

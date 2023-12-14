@@ -1,13 +1,13 @@
 import { CreateUserController } from './create-user-controller'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { ICreateUser, CreateUserModel } from '@/domain/usecases/user'
+import { ICreateUser } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http'
 
 const makeCreateUser = (): ICreateUser => {
   class CreateUserStub implements ICreateUser {
-    async create (data: CreateUserModel): Promise<UserModel> {
+    async create (data: ICreateUser.Params): Promise<UserModel> {
       return await new Promise(resolve => resolve(makeFakeUser()))
     }
   }

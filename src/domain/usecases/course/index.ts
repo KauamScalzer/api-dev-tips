@@ -1,5 +1,5 @@
-export { ICreateCourse, CreateCourseParams } from './create-course'
-export { IGetAllCourse, GetAllCourseResult, GetAllCourseParams } from './get-all-course'
-export { UpdateCourseModel, IUpdateCourse } from './update-course'
+export { ICreateCourse } from './create-course'
+export { IGetAllCourse } from './get-all-course'
+export { IUpdateCourse } from './update-course'
 export { IDeleteCourse } from './delete-course'
 export { IGetAllCourseByUser } from './get-all-course-by-user'

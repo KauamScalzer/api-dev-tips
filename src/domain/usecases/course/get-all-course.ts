@@ -1,23 +1,20 @@
 export interface IGetAllCourse {
-  getAll (data: GetAllCourseParams): Promise<GetAllCourseResult>
+  getAll (data: IGetAllCourse.Params): Promise<IGetAllCourse.Result>
 }
 
-export interface GetAllCourseParams {
-  skip: number
-  take: number
+export namespace IGetAllCourse {
+  export type Params = {
+    skip: number
+    take: number
+  }
+  export type Result = {
+    count: number
+    data: [{
+      id: number
+      name: string
+      description: string
+      author: string
+      thumb: string
+    }]
+  }
 }
-
-export interface GetAllCourseResult {
-  count: number
-  data: Courses
-}
-
-export interface Course {
-  id: number
-  name: string
-  description: string
-  author: string
-  thumb: string
-}
-
-export interface Courses extends Array<Course> {}

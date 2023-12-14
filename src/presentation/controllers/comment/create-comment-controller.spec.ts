@@ -2,11 +2,11 @@ import { CreateCommentController } from './create-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
-import { ICreateComment, CreateCommentModel } from '@/domain/usecases/comment'
+import { ICreateComment } from '@/domain/usecases/comment'
 
 const makeCreateComment = (): ICreateComment => {
   class CreateCommentStub implements ICreateComment {
-    async create (data: CreateCommentModel): Promise<void> {}
+    async create (data: ICreateComment.Params): Promise<void> {}
   }
   return new CreateCommentStub()
 }

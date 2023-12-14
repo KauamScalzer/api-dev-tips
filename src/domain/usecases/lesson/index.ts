@@ -1,1 +1,1 @@
-export { ICreateLesson, CreateLessonModel } from './create-lesson'
+export { ICreateLesson } from './create-lesson'

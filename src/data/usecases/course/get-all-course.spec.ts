@@ -1,10 +1,10 @@
 import { IGetAllCourseRepository } from '@/data/protocols/db/course'
 import { GetAllCourse } from './get-all-course'
-import { GetAllCourseParams, GetAllCourseResult } from '@/domain/usecases/course'
+import { IGetAllCourse } from '@/domain/usecases/course'
 
 const makeGetAllCourseRepository = (): IGetAllCourseRepository => {
   class GetAllCourseRepositoryStub implements IGetAllCourseRepository {
-    async getAll (): Promise<GetAllCourseResult> {
+    async getAll (): Promise<IGetAllCourse.Result> {
       return makeFakeCourse()
     }
   }
@@ -25,7 +25,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeCourse = (): GetAllCourseResult => {
+const makeFakeCourse = (): IGetAllCourse.Result => {
   return {
     count: 1,
     data: [{
@@ -38,7 +38,7 @@ const makeFakeCourse = (): GetAllCourseResult => {
   }
 }
 
-const makeFakeRequest = (): GetAllCourseParams => ({
+const makeFakeRequest = (): IGetAllCourse.Params => ({
   take: 2,
   skip: 1
 })

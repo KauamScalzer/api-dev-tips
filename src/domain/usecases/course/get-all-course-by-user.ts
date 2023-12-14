@@ -1,5 +1,5 @@
 export interface IGetAllCourseByUser {
-  getAll (data: IGetAllCourseByUser.Params): Promise<any>
+  getAll (data: IGetAllCourseByUser.Params): Promise<IGetAllCourseByUser.Result>
 }
 
 export namespace IGetAllCourseByUser {
@@ -8,4 +8,5 @@ export namespace IGetAllCourseByUser {
     skip: number
     take: number
   }
+  export type Result = any
 }

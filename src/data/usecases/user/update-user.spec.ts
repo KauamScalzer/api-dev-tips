@@ -1,4 +1,4 @@
-import { UpdateUserModel } from '@/domain/usecases/user'
+import { IUpdateUser } from '@/domain/usecases/user'
 import { UpdateUser } from './update-user'
 import { IUpdateUserRepository } from '@/data/protocols/db/user'
 
@@ -14,7 +14,7 @@ const makeUpdateUserRepositoryStub = (): IUpdateUserRepository => {
   return new UpdateUserRepositoryStub()
 }
 
-const makeFakeUserData = (): UpdateUserModel => ({
+const makeFakeUserData = (): IUpdateUser.Params => ({
   id: 1,
   name: 'any_name',
   email: 'any_email',

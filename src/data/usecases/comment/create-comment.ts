@@ -1,4 +1,4 @@
-import { ICreateComment, CreateCommentModel } from '@/domain/usecases/comment'
+import { ICreateComment } from '@/domain/usecases/comment'
 import { ICreateCommentRepository } from '@/data/protocols/db/comment'
 
 export class CreateComment implements ICreateComment {
@@ -6,7 +6,7 @@ export class CreateComment implements ICreateComment {
     private readonly createCommentRepository: ICreateCommentRepository
   ) {}
 
-  async create (data: CreateCommentModel): Promise<void> {
+  async create (data: ICreateComment.Params): Promise<void> {
     await this.createCommentRepository.create(data)
   }
 }

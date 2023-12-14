@@ -1,10 +1,12 @@
-export interface UpdateUserModel {
-  id: number
-  name: string
-  email: string
-  urlImage: string
+export interface IUpdateUser {
+  update (data: IUpdateUser.Params): Promise<void>
 }
 
-export interface IUpdateUser {
-  update (data: UpdateUserModel): Promise<void>
+export namespace IUpdateUser {
+  export type Params = {
+    id: number
+    name?: string
+    email?: string
+    urlImage?: string
+  }
 }

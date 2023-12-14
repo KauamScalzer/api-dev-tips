@@ -1,4 +1,4 @@
-import { UpdateCourseModel, IUpdateCourse } from '@/domain/usecases/course'
+import { IUpdateCourse } from '@/domain/usecases/course'
 import { IUpdateCourseRepository } from '@/data/protocols/db/course'
 
 export class UpdateCourse implements IUpdateCourse {
@@ -6,7 +6,7 @@ export class UpdateCourse implements IUpdateCourse {
     private readonly updateCourseRepository: IUpdateCourseRepository
   ) {}
 
-  async update (data: UpdateCourseModel): Promise<void> {
+  async update (data: IUpdateCourse.Params): Promise<void> {
     await this.updateCourseRepository.update(data.id, data)
   }
 }

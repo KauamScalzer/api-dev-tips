@@ -2,11 +2,11 @@ import { UserAuthenticationController } from './user-authentication-controller'
 import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers/http'
 import { MissingParamError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { IUserAuthentication, UserAuthenticationModel } from '@/domain/usecases/user'
+import { IUserAuthentication } from '@/domain/usecases/user'
 
 const makeUserAuthentication = (): IUserAuthentication => {
   class UserAuthenticationStub implements IUserAuthentication {
-    async auth (data: UserAuthenticationModel): Promise<string> {
+    async auth (data: IUserAuthentication.Params): Promise<string> {
       return await new Promise(resolve => resolve('any_token'))
     }
   }

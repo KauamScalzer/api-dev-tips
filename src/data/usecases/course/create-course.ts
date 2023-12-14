@@ -1,4 +1,4 @@
-import { ICreateCourse, CreateCourseParams } from '@/domain/usecases/course'
+import { ICreateCourse } from '@/domain/usecases/course'
 import { ICreateCourseRepository } from '@/data/protocols/db/course'
 
 export class CreateCourse implements ICreateCourse {
@@ -6,7 +6,7 @@ export class CreateCourse implements ICreateCourse {
     private readonly createCourseRepository: ICreateCourseRepository
   ) {}
 
-  async create (data: CreateCourseParams): Promise<void> {
+  async create (data: ICreateCourseRepository.Params): Promise<void> {
     await this.createCourseRepository.create(data)
   }
 }

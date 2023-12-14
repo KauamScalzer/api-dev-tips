@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { UpdateCourseController } from './update-course-controller'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
-import { IUpdateCourse, UpdateCourseModel } from '@/domain/usecases/course'
+import { IUpdateCourse } from '@/domain/usecases/course'
 import { HttpRequest, Validation } from '@/presentation/protocols'
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -18,7 +18,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeUpdateCourse = (): IUpdateCourse => {
   class UpdateCourseStub implements IUpdateCourse {
-    async update (data: UpdateCourseModel): Promise<void> {}
+    async update (data: IUpdateCourse.Params): Promise<void> {}
   }
   return new UpdateCourseStub()
 }

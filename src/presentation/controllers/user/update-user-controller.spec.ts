@@ -1,12 +1,12 @@
 import { UpdateUserController } from './update-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { HttpRequest, Validation } from '@/presentation/protocols'
-import { IUpdateUser, UpdateUserModel } from '@/domain/usecases/user'
+import { IUpdateUser } from '@/domain/usecases/user'
 import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
 
 const makeUpdateUser = (): IUpdateUser => {
   class UpdateUserStub implements IUpdateUser {
-    async update (data: UpdateUserModel): Promise<void> {}
+    async update (data: IUpdateUser.Params): Promise<void> {}
   }
   return new UpdateUserStub()
 }

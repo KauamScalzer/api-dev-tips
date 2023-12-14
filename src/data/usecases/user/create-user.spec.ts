@@ -1,8 +1,8 @@
 import { Hasher } from '@/data/protocols/criptography'
 import { CreateUser } from './create-user'
-import { CreateUserModel } from '@/domain/usecases/user'
 import { UserModel } from '@/domain/models'
 import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/db/user'
+import { ICreateUser } from '@/domain/usecases/user'
 
 interface SutTypes {
   sut: CreateUser
@@ -22,7 +22,7 @@ const makeHasher = (): Hasher => {
 
 const makeCreateUserRepository = (): ICreateUserRepository => {
   class CreateUserRepositoryStub implements ICreateUserRepository {
-    async create (data: CreateUserModel): Promise<UserModel> {
+    async create (data: ICreateUserRepository.Params): Promise<UserModel> {
       return makeFakeUser()
     }
   }
@@ -46,7 +46,7 @@ const makeFakeUser = (): UserModel => ({
   urlImage: 'valid_url_image'
 })
 
-const makeFakeUserData = (): CreateUserModel => ({
+const makeFakeUserData = (): ICreateUser.Params => ({
   name: 'valid_name',
   email: 'valid_email',
   password: 'valid_password',

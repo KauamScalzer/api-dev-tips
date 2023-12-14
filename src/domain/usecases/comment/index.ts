@@ -1,1 +1,1 @@
-export { ICreateComment, CreateCommentModel } from './create-comment'
+export { ICreateComment } from './create-comment'

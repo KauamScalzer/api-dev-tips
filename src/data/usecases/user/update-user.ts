@@ -1,4 +1,4 @@
-import { IUpdateUser, UpdateUserModel } from '@/domain/usecases/user'
+import { IUpdateUser } from '@/domain/usecases/user'
 import { IUpdateUserRepository } from '@/data/protocols/db/user'
 
 export class UpdateUser implements IUpdateUser {
@@ -6,7 +6,7 @@ export class UpdateUser implements IUpdateUser {
     private readonly updateUserRepository: IUpdateUserRepository
   ) {}
 
-  async update (data: UpdateUserModel): Promise<void> {
+  async update (data: IUpdateUser.Params): Promise<void> {
     await this.updateUserRepository.update(data.id, data)
   }
 }
