@@ -1,6 +1,5 @@
 import { Hasher } from '@/data/protocols/criptography'
 import { CreateUser } from './create-user'
-import { UserModel } from '@/domain/models'
 import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/db/user'
 import { ICreateUser } from '@/domain/usecases/user'
 
@@ -22,7 +21,7 @@ const makeHasher = (): Hasher => {
 
 const makeCreateUserRepository = (): ICreateUserRepository => {
   class CreateUserRepositoryStub implements ICreateUserRepository {
-    async create (data: ICreateUserRepository.Params): Promise<UserModel> {
+    async create (data: ICreateUserRepository.Params): Promise<ICreateUserRepository.Result> {
       return makeFakeUser()
     }
   }
@@ -31,14 +30,14 @@ const makeCreateUserRepository = (): ICreateUserRepository => {
 
 const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
   class GetOneUserByEmailRepositoryStub implements IGetOneUserByEmailRepository {
-    async getOne (email: string): Promise<UserModel> {
+    async getOne (email: string): Promise<IGetOneUserByEmailRepository.Result> {
       return null
     }
   }
   return new GetOneUserByEmailRepositoryStub()
 }
 
-const makeFakeUser = (): UserModel => ({
+const makeFakeUser = (): IGetOneUserByEmailRepository.Result => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email',

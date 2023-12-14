@@ -2,7 +2,7 @@ import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { serverError, ok } from '@/presentation/helpers/http'
 import { ICreateLogErrorRepository } from '@/data/protocols/db/log-error'
-import { UserModel } from '@/domain/models'
+import { ICreateUser } from '@/domain/usecases/user'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
@@ -45,7 +45,7 @@ const makeFakeServerError = (): HttpResponse => {
   return serverError(fakeError)
 }
 
-const makeFakeUser = (): UserModel => ({
+const makeFakeUser = (): ICreateUser.Result => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email@mail.com',

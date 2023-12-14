@@ -1,4 +1,3 @@
-import { UserModel } from '@/domain/models'
 import { UserAuthentication } from './user-authentication'
 import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/db/user'
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
@@ -6,8 +5,8 @@ import { IUserAuthentication } from '@/domain/usecases/user'
 
 const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
   class GetOneUserByEmailRepositoryStub implements IGetOneUserByEmailRepository {
-    async getOne (data: string): Promise<UserModel> {
-      const fakeUser: UserModel = {
+    async getOne (data: string): Promise<IGetOneUserByEmailRepository.Result> {
+      const fakeUser: IGetOneUserByEmailRepository.Result = {
         id: 1,
         name: 'any_name',
         email: 'any_email',

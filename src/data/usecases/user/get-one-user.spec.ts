@@ -1,4 +1,3 @@
-import { UserModel } from '@/domain/models'
 import { GetOneUser } from './get-one-user'
 import { IGetOneUserRepository } from '@/data/protocols/db/user'
 
@@ -9,7 +8,7 @@ interface SutTypes {
 
 const GetOneUserRepositoryStub = (): IGetOneUserRepository => {
   class GetOneUserRepositoryStub implements IGetOneUserRepository {
-    async getOne (id: number): Promise<UserModel> {
+    async getOne (id: number): Promise<IGetOneUserRepository.Result> {
       return {
         id: 1,
         name: 'any_name',
