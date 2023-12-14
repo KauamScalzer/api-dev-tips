@@ -1,9 +1,9 @@
-import { RequiredFieldValidation } from '@/validators'
+import { RequiredFieldValidation } from '@/main/validators'
 import { Validation } from '@/presentation/protocols'
 import { makeCreateCourseValidation } from './create-course-validation-factory'
-import { ValidationComposite } from '@/validators/validation-composite'
+import { ValidationComposite } from '@/main/validators/validation-composite'
 
-jest.mock('@/validators/validation-composite')
+jest.mock('@/main/validators/validation-composite')
 
 describe('CreateCourseValidation factory', () => {
   test('Should call ValidationComposite with all validations', () => {

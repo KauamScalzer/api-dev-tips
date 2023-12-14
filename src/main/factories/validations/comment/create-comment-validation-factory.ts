@@ -1,4 +1,4 @@
-import { ValidationComposite, RequiredFieldValidation } from '@/validators'
+import { ValidationComposite, RequiredFieldValidation } from '@/main/validators'
 import { Validation } from '@/presentation/protocols'
 
 export const makeCreateCommentValidation = (): ValidationComposite => {
