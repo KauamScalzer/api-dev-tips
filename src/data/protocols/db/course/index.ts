@@ -1,5 +1,5 @@
 export { ICreateCourseRepository } from './create-course-repository'
-export { IGetAllCourseRepository, GetAllCourseRepositoryParams } from './get-all-course-repository'
-export { IUpdateCourseRepository, UpdateCourseParams } from './update-course-repository'
+export { IGetAllCourseRepository } from './get-all-course-repository'
+export { IUpdateCourseRepository } from './update-course-repository'
 export { IDeleteCourseRepository } from './delete-course-repository'
 export { IGetOneCourseRepository } from './get-one-course-repository'

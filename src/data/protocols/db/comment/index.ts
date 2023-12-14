@@ -1,1 +1,1 @@
-export { ICreateCommentRepository, CreateCommentParams } from './create-comment-repository'
+export { ICreateCommentRepository } from './create-comment-repository'

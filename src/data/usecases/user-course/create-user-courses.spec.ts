@@ -1,10 +1,10 @@
-import { ICreateUserCourseRepository, CreateUserCourseParams } from '@/data/protocols/db/user-course'
+import { ICreateUserCourseRepository } from '@/data/protocols/db/user-course'
 import { CreateUserCourses } from './create-user-courses'
 import { CreateUserCoursesParams } from '@/domain/usecases/user-course'
 
 const makeCreateUserCourseRepository = (): ICreateUserCourseRepository => {
   class CreateUserCourseRepositoryStub implements ICreateUserCourseRepository {
-    async create (data: CreateUserCourseParams): Promise<void> {}
+    async create (data: ICreateUserCourseRepository.Params): Promise<void> {}
   }
   return new CreateUserCourseRepositoryStub()
 }

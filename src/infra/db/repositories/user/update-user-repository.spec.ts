@@ -32,7 +32,6 @@ describe('UpdateUserRepository', () => {
     await sut.update(1, {
       name: 'updated_name',
       email: 'updated_email@gmail.com',
-      password: 'updated_password',
       accessToken: 'updated_token',
       urlImage: 'updated_url_image'
     })
@@ -41,7 +40,6 @@ describe('UpdateUserRepository', () => {
     expect(user?.id).toBe(1)
     expect(user?.name).toBe('updated_name')
     expect(user?.email).toBe('updated_email@gmail.com')
-    expect(user?.password).toBe('updated_password')
     expect(user?.accessToken).toBe('updated_token')
     expect(user?.urlImage).toBe('updated_url_image')
   })

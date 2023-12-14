@@ -1,8 +1,10 @@
 export interface ICreateUserCourseRepository {
-  create (data: CreateUserCourseParams): Promise<void>
+  create (data: ICreateUserCourseRepository.Params): Promise<void>
 }
 
-export interface CreateUserCourseParams {
-  userId: number
-  courseId: number
+export namespace ICreateUserCourseRepository {
+  export type Params = {
+    userId: number
+    courseId: number
+  }
 }

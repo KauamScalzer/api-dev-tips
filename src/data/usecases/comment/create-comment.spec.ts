@@ -1,9 +1,9 @@
-import { ICreateCommentRepository, CreateCommentParams } from '@/data/protocols/db/comment'
+import { ICreateCommentRepository } from '@/data/protocols/db/comment'
 import { CreateComment } from './create-comment'
 
 const makeCreateCommentRepository = (): ICreateCommentRepository => {
   class CreateCommentRepositoryStub implements ICreateCommentRepository {
-    async create (data: CreateCommentParams): Promise<void> {}
+    async create (data: ICreateCommentRepository.Params): Promise<void> {}
   }
   return new CreateCommentRepositoryStub()
 }
@@ -22,7 +22,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeData = (): CreateCommentParams => ({
+const makeFakeData = (): ICreateCommentRepository.Params => ({
   lessonId: 1,
   userId: 1,
   comment: 'any_comment'

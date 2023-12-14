@@ -1,6 +1,19 @@
-import { UserModel } from '@/domain/models'
-import { CreateUserModel } from '@/domain/usecases/user'
-
 export interface ICreateUserRepository {
-  create (data: CreateUserModel): Promise<UserModel>
+  create (data: ICreateUserRepository.Params): Promise<ICreateUserRepository.Result>
+}
+
+export namespace ICreateUserRepository {
+  export type Params = {
+    name: string
+    email: string
+    password: string
+    urlImage: string
+  }
+  export type Result = {
+    id: number
+    name: string
+    email: string
+    password: string
+    urlImage: string
+  }
 }

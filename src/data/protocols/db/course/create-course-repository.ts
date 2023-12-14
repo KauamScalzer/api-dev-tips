@@ -1,5 +1,12 @@
-import { CreateCourseParams } from '@/domain/usecases/course'
-
 export interface ICreateCourseRepository {
-  create (data: CreateCourseParams): Promise<void>
+  create (data: ICreateCourseRepository.Params): Promise<void>
+}
+
+export namespace ICreateCourseRepository {
+  export type Params = {
+    name: string
+    description: string
+    author: string
+    thumb: string
+  }
 }

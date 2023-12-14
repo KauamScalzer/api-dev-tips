@@ -1,6 +1,6 @@
 import { UserModel } from '@/domain/models'
 import { UserAuthentication } from './user-authentication'
-import { IGetOneUserByEmailRepository, IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/db/user'
+import { IGetOneUserByEmailRepository, IUpdateUserRepository } from '@/data/protocols/db/user'
 import { UserAuthenticationModel } from '@/domain/usecases/user'
 import { HashComparer, Encrypter } from '@/data/protocols/criptography'
 
@@ -40,7 +40,7 @@ const makeEncrypter = (): Encrypter => {
 
 const makeUpdateUserRepository = (): IUpdateUserRepository => {
   class UpdateUserRepositoryStub implements IUpdateUserRepository {
-    async update (id: number, data: UpdateUserRepositoryParams): Promise<void> {}
+    async update (id: number, data: IUpdateUserRepository.Params): Promise<void> {}
   }
   return new UpdateUserRepositoryStub()
 }

@@ -1,9 +1,9 @@
-import { ICreateLessonRepository, CreateLessonParams } from '@/data/protocols/db/lesson'
+import { ICreateLessonRepository } from '@/data/protocols/db/lesson'
 import { CreateLesson } from './create-lesson'
 
 const makeCreateLessonRepository = (): ICreateLessonRepository => {
   class CreateLessonRepositoryStub implements ICreateLessonRepository {
-    async create (data: CreateLessonParams): Promise<void> {}
+    async create (data: ICreateLessonRepository.Params): Promise<void> {}
   }
   return new CreateLessonRepositoryStub()
 }
@@ -22,7 +22,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeData = (): CreateLessonParams => ({
+const makeFakeData = (): ICreateLessonRepository.Params => ({
   courseId: 1,
   name: 'any_name',
   description: 'any_description',

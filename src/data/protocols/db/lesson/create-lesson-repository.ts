@@ -1,10 +1,12 @@
 export interface ICreateLessonRepository {
-  create (data: CreateLessonParams): Promise<void>
+  create (data: ICreateLessonRepository.Params): Promise<void>
 }
 
-export interface CreateLessonParams {
-  courseId: number
-  name: string
-  description: string
-  urlVideo: string
+export namespace ICreateLessonRepository {
+  export type Params = {
+    courseId: number
+    name: string
+    description: string
+    urlVideo: string
+  }
 }

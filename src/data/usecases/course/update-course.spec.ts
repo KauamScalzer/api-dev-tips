@@ -1,9 +1,9 @@
-import { IUpdateCourseRepository, UpdateCourseParams } from '@/data/protocols/db/course'
+import { IUpdateCourseRepository } from '@/data/protocols/db/course'
 import { UpdateCourse } from './update-course'
 
 const makeIUpdateCourseRepository = (): IUpdateCourseRepository => {
   class IUpdateCourseRepositoryStub implements IUpdateCourseRepository {
-    async update (id: number, data: UpdateCourseParams): Promise<void> {}
+    async update (id: number, data: IUpdateCourseRepository.Params): Promise<void> {}
   }
   return new IUpdateCourseRepositoryStub()
 }
@@ -22,7 +22,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeRequest = (): UpdateCourseParams => ({
+const makeFakeRequest = (): any => ({
   id: 1,
   name: 'any_name',
   description: 'any_description',

@@ -1,11 +1,12 @@
 export interface IUpdateUserRepository {
-  update (id: number, data: UpdateUserRepositoryParams): Promise<void>
+  update (id: number, data: IUpdateUserRepository.Params): Promise<void>
 }
 
-export interface UpdateUserRepositoryParams {
-  name?: string
-  email?: string
-  password?: string
-  accessToken?: string
-  urlImage?: string
+export namespace IUpdateUserRepository {
+  export type Params = {
+    name?: string
+    email?: string
+    accessToken?: string
+    urlImage?: string
+  }
 }

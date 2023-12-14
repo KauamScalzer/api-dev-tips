@@ -1,6 +1,6 @@
 import { UpdateUserModel } from '@/domain/usecases/user'
 import { UpdateUser } from './update-user'
-import { IUpdateUserRepository, UpdateUserRepositoryParams } from '@/data/protocols/db/user'
+import { IUpdateUserRepository } from '@/data/protocols/db/user'
 
 interface SutTypes {
   sut: UpdateUser
@@ -9,7 +9,7 @@ interface SutTypes {
 
 const makeUpdateUserRepositoryStub = (): IUpdateUserRepository => {
   class UpdateUserRepositoryStub implements IUpdateUserRepository {
-    async update (id: number, data: UpdateUserRepositoryParams): Promise<void> {}
+    async update (id: number, data: IUpdateUserRepository.Params): Promise<void> {}
   }
   return new UpdateUserRepositoryStub()
 }

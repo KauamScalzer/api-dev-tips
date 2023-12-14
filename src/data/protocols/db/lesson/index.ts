@@ -1,1 +1,1 @@
-export { ICreateLessonRepository, CreateLessonParams } from './create-lesson-repository'
+export { ICreateLessonRepository } from './create-lesson-repository'

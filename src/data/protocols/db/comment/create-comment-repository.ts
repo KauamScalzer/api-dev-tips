@@ -1,9 +1,11 @@
 export interface ICreateCommentRepository {
-  create (data: CreateCommentParams): Promise<void>
+  create (data: ICreateCommentRepository.Params): Promise<void>
 }
 
-export interface CreateCommentParams {
-  lessonId: number
-  userId: number
-  comment: string
+export namespace ICreateCommentRepository {
+  export type Params = {
+    userId: number
+    lessonId: number
+    comment: string
+  }
 }

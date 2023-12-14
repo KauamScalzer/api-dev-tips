@@ -1,11 +1,12 @@
 export interface IUpdateCourseRepository {
-  update (id: number, data: UpdateCourseParams): Promise<void>
+  update (id: number, data: IUpdateCourseRepository.Params): Promise<void>
 }
 
-export interface UpdateCourseParams {
-  id: number
-  name: string
-  description: string
-  author: string
-  thumb: string
+export namespace IUpdateCourseRepository {
+  export type Params = {
+    name: string
+    description: string
+    author: string
+    thumb: string
+  }
 }
