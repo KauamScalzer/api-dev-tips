@@ -5,8 +5,8 @@ import { EmailInUseError } from '@/presentation/errors'
 
 export class CreateUserController implements Controller {
   constructor (
-    private readonly createUser: ICreateUser,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly createUser: ICreateUser
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {

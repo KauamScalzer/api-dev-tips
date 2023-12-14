@@ -4,8 +4,8 @@ import { ICreateLesson } from '@/domain/usecases/lesson'
 
 export class CreateLessonController implements Controller {
   constructor (
-    private readonly createLesson: ICreateLesson,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly createLesson: ICreateLesson
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {

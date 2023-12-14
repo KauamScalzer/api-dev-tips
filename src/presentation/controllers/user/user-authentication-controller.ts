@@ -4,8 +4,8 @@ import { IUserAuthentication } from '@/domain/usecases/user'
 
 export class UserAuthenticationController implements Controller {
   constructor (
-    private readonly userAuthentication: IUserAuthentication,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly userAuthentication: IUserAuthentication
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {

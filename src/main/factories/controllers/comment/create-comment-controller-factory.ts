@@ -6,7 +6,7 @@ import { makeCreateCommentValidation } from '@/main/factories/validations/commen
 import { makeCreateComment } from '@/main/factories/usecases/comment'
 
 export const makeCreateCommentController = (): Controller => {
-  const createCommentController = new CreateCommentController(makeCreateComment(), makeCreateCommentValidation())
+  const createCommentController = new CreateCommentController(makeCreateCommentValidation(), makeCreateComment())
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(createCommentController, createLogErrorRepository)
 }

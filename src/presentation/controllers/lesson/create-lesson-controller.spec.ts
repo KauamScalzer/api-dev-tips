@@ -38,7 +38,7 @@ interface SutTypes {
 const makeSut = (): SutTypes => {
   const createLessonStub = makeCreateLesson()
   const validationStub = makeValidation()
-  const sut = new CreateLessonController(createLessonStub, validationStub)
+  const sut = new CreateLessonController(validationStub, createLessonStub)
   return {
     sut,
     createLessonStub,

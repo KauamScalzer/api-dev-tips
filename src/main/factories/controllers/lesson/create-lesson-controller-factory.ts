@@ -6,7 +6,7 @@ import { makeCreateLessonValidation } from '@/main/factories/validations/lesson'
 import { makeCreateLesson } from '@/main/factories/usecases/lesson'
 
 export const makeCreateLessonController = (): Controller => {
-  const createLessonController = new CreateLessonController(makeCreateLesson(), makeCreateLessonValidation())
+  const createLessonController = new CreateLessonController(makeCreateLessonValidation(), makeCreateLesson())
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(createLessonController, createLogErrorRepository)
 }

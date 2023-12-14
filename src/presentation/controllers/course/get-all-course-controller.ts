@@ -4,8 +4,8 @@ import { HttpResponse, Controller, HttpRequest, Validation } from '@/presentatio
 
 export class GetAllCourseController implements Controller {
   constructor (
-    private readonly getAllCourse: IGetAllCourse,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly getAllCourse: IGetAllCourse
   ) {}
 
   async handle (request: HttpRequest): Promise<HttpResponse> {

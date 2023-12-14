@@ -51,7 +51,7 @@ interface SutTypes {
 const makeSut = (): SutTypes => {
   const getAllCourseStub = makeGetAllCourse()
   const validationStub = makeValidation()
-  const sut = new GetAllCourseController(getAllCourseStub, validationStub)
+  const sut = new GetAllCourseController(validationStub, getAllCourseStub)
   return {
     sut,
     getAllCourseStub,

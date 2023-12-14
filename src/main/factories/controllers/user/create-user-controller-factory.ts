@@ -6,7 +6,7 @@ import { makeCreateUserValidation } from '@/main/factories/validations/user'
 import { makeCreateUser } from '@/main/factories/usecases/user'
 
 export const makeCreateUserController = (): Controller => {
-  const createUserController = new CreateUserController(makeCreateUser(), makeCreateUserValidation())
+  const createUserController = new CreateUserController(makeCreateUserValidation(), makeCreateUser())
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(createUserController, createLogErrorRepository)
 }

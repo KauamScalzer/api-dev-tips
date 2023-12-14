@@ -6,7 +6,7 @@ import { makeGetAllCourseValidation } from '@/main/factories/validations/course'
 import { makeGetAllCourse } from '@/main/factories/usecases/course'
 
 export const makeGetAllCourseController = (): Controller => {
-  const getAllCourseController = new GetAllCourseController(makeGetAllCourse(), makeGetAllCourseValidation())
+  const getAllCourseController = new GetAllCourseController(makeGetAllCourseValidation(), makeGetAllCourse())
   const createLogErrorRepository = new CreateLogErrorRepository()
   return new LogControllerDecorator(getAllCourseController, createLogErrorRepository)
 }

@@ -37,7 +37,7 @@ interface SutTypes {
 const makeSut = (): SutTypes => {
   const createCommentStub = makeCreateComment()
   const validationStub = makeValidation()
-  const sut = new CreateCommentController(createCommentStub, validationStub)
+  const sut = new CreateCommentController(validationStub, createCommentStub)
   return {
     sut,
     createCommentStub,

@@ -4,8 +4,8 @@ import { ICreateComment } from '@/domain/usecases/comment'
 
 export class CreateCommentController implements Controller {
   constructor (
-    private readonly createComment: ICreateComment,
-    private readonly validation: Validation
+    private readonly validation: Validation,
+    private readonly createComment: ICreateComment
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
