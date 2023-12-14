@@ -37,9 +37,9 @@ describe('GetOneCourseRepository', () => {
     expect(result.thumb).toBe('any_thumb')
   })
 
-  test('Should return undefined if get one fails', async () => {
+  test('Should return null if get one fails', async () => {
     const sut = makeSut()
     const user = await sut.getOne(1)
-    expect(user).toBeUndefined()
+    expect(user).toBeFalsy()
   })
 })

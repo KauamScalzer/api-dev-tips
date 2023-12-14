@@ -1,12 +1,12 @@
 import { TypeormHelper } from '@/infra/db/helpers'
-import { GetOneUserByEmailRepository } from './get-one-user-by-email-repository'
+import { GetOneUserRepository } from './get-one-user-repository'
 import { getRepository } from 'typeorm'
 
-const makeSut = (): GetOneUserByEmailRepository => {
-  return new GetOneUserByEmailRepository()
+const makeSut = (): GetOneUserRepository => {
+  return new GetOneUserRepository()
 }
 
-describe('GetOneUserByEmailRepository Repository', () => {
+describe('GetOneUserRepository', () => {
   beforeAll(async () => {
     await TypeormHelper.connect()
   })
@@ -28,18 +28,18 @@ describe('GetOneUserByEmailRepository Repository', () => {
       email: 'any_email',
       urlImage: 'any_url_image'
     })
-    const user = await sut.getOne('any_email')
+    const user = await sut.getOne(1)
     expect(user).toBeTruthy()
-    expect(user.id).toBe(1)
-    expect(user.name).toBe('any_name')
-    expect(user.email).toBe('any_email')
-    expect(user.password).toBe('any_password')
-    expect(user.urlImage).toBe('any_url_image')
+    expect(user?.id).toBe(1)
+    expect(user?.name).toBe('any_name')
+    expect(user?.email).toBe('any_email')
+    expect(user?.password).toBe('any_password')
+    expect(user?.urlImage).toBe('any_url_image')
   })
 
   test('Should return null if get one fails', async () => {
     const sut = makeSut()
-    const user = await sut.getOne('any_email')
+    const user = await sut.getOne(1)
     expect(user).toBeFalsy()
   })
 })
