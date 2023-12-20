@@ -5,5 +5,7 @@ export interface IGetAllCommentsByLesson {
 export namespace IGetAllCommentsByLesson {
   export type Params = {
     lessonId: number
+    skip: number
+    take: number
   }
 }
