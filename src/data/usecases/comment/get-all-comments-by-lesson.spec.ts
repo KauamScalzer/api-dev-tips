@@ -25,7 +25,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeReturn = (): IGetAllCommentsByLessonRepository.Result => {
+const makeFakeReturn = (): any => {
   return {
     count: 1,
     data: [{
