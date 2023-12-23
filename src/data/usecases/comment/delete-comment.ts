@@ -6,7 +6,7 @@ export class DeleteComment implements IDeleteComment {
     private readonly deleteCommentRepository: IDeleteCommentRepository
   ) {}
 
-  async delete (data: number): Promise<void> {
-    await this.deleteCommentRepository.delete(data)
+  async delete (data: IDeleteComment.Params): Promise<void> {
+    await this.deleteCommentRepository.delete(data.id)
   }
 }
