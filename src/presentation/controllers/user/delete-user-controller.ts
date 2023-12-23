@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
 import { IDeleteUser } from '@/domain/usecases/user'
 
@@ -8,18 +8,23 @@ export class DeleteUserController implements Controller {
     private readonly deleteUser: IDeleteUser
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: DeleteUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.params)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const params = httpRequest.params
-      await this.deleteUser.delete(params.id)
+      await this.deleteUser.delete(httpRequest.id)
       return noContent()
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace DeleteUserController {
+  export type Params = {
+    id: number
   }
 }

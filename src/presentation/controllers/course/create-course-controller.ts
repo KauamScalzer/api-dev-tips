@@ -1,6 +1,6 @@
 import { ICreateCourse } from '@/domain/usecases/course'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class CreateCourseController implements Controller {
   constructor (
@@ -8,22 +8,30 @@ export class CreateCourseController implements Controller {
     private readonly createCourse: ICreateCourse
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: CreateCourseController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { name, description, thumb, author } = httpRequest.body
       await this.createCourse.create({
-        name,
-        description,
-        thumb,
-        author
+        name: httpRequest.name,
+        description: httpRequest.description,
+        thumb: httpRequest.thumb,
+        author: httpRequest.author
       })
       return noContent()
     } catch (error: any) {
       return serverError(error)
     }
+  }
+}
+
+export namespace CreateCourseController {
+  export type Params = {
+    name: string
+    description: string
+    thumb: string
+    author: string
   }
 }

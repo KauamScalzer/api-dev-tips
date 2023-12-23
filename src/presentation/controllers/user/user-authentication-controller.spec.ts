@@ -1,7 +1,7 @@
 import { UserAuthenticationController } from './user-authentication-controller'
 import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers/http'
 import { MissingParamError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { IUserAuthentication } from '@/domain/usecases/user'
 
 const makeUserAuthentication = (): IUserAuthentication => {
@@ -39,11 +39,9 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    password: 'any_password',
-    email: 'any_mail@mail.com'
-  }
+const makeFakeRequest = (): UserAuthenticationController.Params => ({
+  password: 'any_password',
+  email: 'any_mail@mail.com'
 })
 
 describe('UserAuthenticationController', () => {
@@ -84,7 +82,7 @@ describe('UserAuthenticationController', () => {
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 400 if Validation returns an Error', async () => {

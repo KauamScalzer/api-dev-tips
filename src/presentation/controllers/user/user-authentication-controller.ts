@@ -1,4 +1,4 @@
-import { Controller, HttpRequest, HttpResponse, Validation } from '@/presentation/protocols'
+import { Controller, HttpResponse, Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { IUserAuthentication } from '@/domain/usecases/user'
 
@@ -8,16 +8,15 @@ export class UserAuthenticationController implements Controller {
     private readonly userAuthentication: IUserAuthentication
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: UserAuthenticationController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { email, password } = httpRequest.body
       const accessToken = await this.userAuthentication.auth({
-        email,
-        password
+        email: httpRequest.email,
+        password: httpRequest.password
       })
       if (!accessToken) {
         return unauthorized()
@@ -26,5 +25,12 @@ export class UserAuthenticationController implements Controller {
     } catch (error: any) {
       return serverError(error)
     }
+  }
+}
+
+export namespace UserAuthenticationController {
+  export type Params = {
+    email: string
+    password: string
   }
 }

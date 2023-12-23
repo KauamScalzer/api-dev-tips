@@ -1,6 +1,6 @@
 import { CreateCommentController } from './create-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
 import { ICreateComment } from '@/domain/usecases/comment'
 
@@ -11,12 +11,10 @@ const makeCreateComment = (): ICreateComment => {
   return new CreateCommentStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    lessonId: 1,
-    userId: 1,
-    comment: 'any_comment'
-  }
+const makeFakeRequest = (): CreateCommentController.Params => ({
+  lessonId: 1,
+  userId: 1,
+  comment: 'any_comment'
 })
 
 const makeValidation = (): Validation => {
@@ -62,7 +60,7 @@ describe('CreateCommentController', () => {
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 500 if ICreateComment throws', async () => {

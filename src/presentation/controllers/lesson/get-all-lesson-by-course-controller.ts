@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, ok } from '@/presentation/helpers/http'
 import { IGetAllLessonByCourse } from '@/domain/usecases/lesson'
 
@@ -8,23 +8,29 @@ export class GetAllLessonByCourseController implements Controller {
     private readonly getAllLessonByCourse: IGetAllLessonByCourse
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: GetAllLessonByCourseController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate({ ...httpRequest.params, ...httpRequest.query })
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { courseId } = httpRequest.params
-      const { skip, take } = httpRequest.query
       const result = await this.getAllLessonByCourse.getAll({
-        courseId,
-        skip,
-        take
+        courseId: httpRequest.courseId,
+        skip: httpRequest.skip,
+        take: httpRequest.take
       })
       return ok(result)
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace GetAllLessonByCourseController {
+  export type Params = {
+    courseId: number
+    skip: number
+    take: number
   }
 }

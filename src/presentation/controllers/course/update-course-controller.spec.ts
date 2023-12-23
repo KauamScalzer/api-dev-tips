@@ -2,18 +2,14 @@ import { MissingParamError, ServerError } from '@/presentation/errors'
 import { UpdateCourseController } from './update-course-controller'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { IUpdateCourse } from '@/domain/usecases/course'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 'any_id'
-  },
-  body: {
-    name: 'any_name',
-    description: 'any_description',
-    author: 'any_author',
-    thumb: 'any_thumb'
-  }
+const makeFakeRequest = (): UpdateCourseController.Params => ({
+  id: 1,
+  name: 'any_name',
+  description: 'any_description',
+  author: 'any_author',
+  thumb: 'any_thumb'
 })
 
 const makeUpdateCourse = (): IUpdateCourse => {
@@ -54,26 +50,14 @@ describe('UpdateCourseController', () => {
     const { sut, updateCourseStub } = makeSut()
     const createSpy = jest.spyOn(updateCourseStub, 'update')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      author: 'any_author',
-      description: 'any_description',
-      id: 'any_id',
-      name: 'any_name',
-      thumb: 'any_thumb'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const createSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      author: 'any_author',
-      description: 'any_description',
-      id: 'any_id',
-      name: 'any_name',
-      thumb: 'any_thumb'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IUpdateCourse throws', async () => {

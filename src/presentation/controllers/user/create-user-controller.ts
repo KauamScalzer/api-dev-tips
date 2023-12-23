@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, ok, forbidden } from '@/presentation/helpers/http'
 import { ICreateUser } from '@/domain/usecases/user'
 import { EmailInUseError } from '@/presentation/errors'
@@ -9,18 +9,17 @@ export class CreateUserController implements Controller {
     private readonly createUser: ICreateUser
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: CreateUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { name, email, password, urlImage } = httpRequest.body
       const result = await this.createUser.create({
-        name,
-        email,
-        password,
-        urlImage
+        name: httpRequest.name,
+        email: httpRequest.email,
+        password: httpRequest.password,
+        urlImage: httpRequest.urlImage
       })
       if (!result) {
         return forbidden(new EmailInUseError())
@@ -30,5 +29,15 @@ export class CreateUserController implements Controller {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace CreateUserController {
+  export type Params = {
+    name: string
+    email: string
+    password: string
+    passwordConfirmation: string
+    urlImage: string
   }
 }

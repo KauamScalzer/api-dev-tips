@@ -1,6 +1,6 @@
 import { UpdateUserController } from './update-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { IUpdateUser } from '@/domain/usecases/user'
 import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
 
@@ -11,15 +11,11 @@ const makeUpdateUser = (): IUpdateUser => {
   return new UpdateUserStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 'any_id'
-  },
-  body: {
-    name: 'any_name',
-    email: 'any_email',
-    urlImage: 'any_url_image'
-  }
+const makeFakeRequest = (): UpdateUserController.Params => ({
+  id: 1,
+  name: 'any_name',
+  email: 'any_email',
+  urlImage: 'any_url_image'
 })
 
 const makeValidation = (): Validation => {
@@ -53,24 +49,14 @@ describe('UpdateUserController', () => {
     const { sut, updateUserStub } = makeSut()
     const createSpy = jest.spyOn(updateUserStub, 'update')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      id: 'any_id',
-      name: 'any_name',
-      email: 'any_email',
-      urlImage: 'any_url_image'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith({
-      id: 'any_id',
-      name: 'any_name',
-      email: 'any_email',
-      urlImage: 'any_url_image'
-    })
+    expect(validateSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IUpdateUser throws', async () => {

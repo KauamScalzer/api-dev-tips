@@ -1,13 +1,11 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { DeleteCourseController } from './delete-course-controller'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { IDeleteCourse } from '@/domain/usecases/course'
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 'any_id'
-  }
+const makeFakeRequest = (): DeleteCourseController.Params => ({
+  id: 1
 })
 
 const makeValidation = (): Validation => {
@@ -48,9 +46,7 @@ describe('DeleteCourseController', () => {
     const { sut, validationStub } = makeSut()
     const createSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      id: 'any_id'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 400 if Validation returns an Error', async () => {
@@ -64,7 +60,7 @@ describe('DeleteCourseController', () => {
     const { sut, deleteCourseStub } = makeSut()
     const createSpy = jest.spyOn(deleteCourseStub, 'delete')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith('any_id')
+    expect(createSpy).toHaveBeenCalledWith(1)
   })
 
   test('Should return 500 if IDeleteCourse throws', async () => {

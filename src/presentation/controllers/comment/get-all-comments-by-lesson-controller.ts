@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http'
 import { IGetAllCommentsByLesson } from '@/domain/usecases/comment'
 
@@ -8,23 +8,29 @@ export class GetAllCommentsByLessonController implements Controller {
     private readonly getAllCommentsByLesson: IGetAllCommentsByLesson
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: GetAllCommentsByLessonController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate({ ...httpRequest.params, ...httpRequest.query })
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { lessonId } = httpRequest.params
-      const { skip, take } = httpRequest.query
       const result = await this.getAllCommentsByLesson.getAll({
-        lessonId,
-        skip,
-        take
+        lessonId: httpRequest.lessonId,
+        skip: httpRequest.skip,
+        take: httpRequest.skip
       })
       return ok(result)
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace GetAllCommentsByLessonController {
+  export type Params = {
+    lessonId: number
+    skip: number
+    take: number
   }
 }

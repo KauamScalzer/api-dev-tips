@@ -1,6 +1,6 @@
 import { IGetAllCourse } from '@/domain/usecases/course'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http'
-import { HttpResponse, Controller, HttpRequest, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class GetAllCourseController implements Controller {
   constructor (
@@ -8,20 +8,26 @@ export class GetAllCourseController implements Controller {
     private readonly getAllCourse: IGetAllCourse
   ) {}
 
-  async handle (request: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: GetAllCourseController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(request.query)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { take, skip } = request.query
       const courses = await this.getAllCourse.getAll({
-        take,
-        skip
+        take: httpRequest.take,
+        skip: httpRequest.skip
       })
       return ok(courses)
     } catch (error: any) {
       return serverError(error)
     }
+  }
+}
+
+export namespace GetAllCourseController {
+  export type Params = {
+    take: number
+    skip: number
   }
 }

@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
 import { IUpdateUser } from '@/domain/usecases/user'
 
@@ -8,24 +8,31 @@ export class UpdateUserController implements Controller {
     private readonly updateUser: IUpdateUser
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: UpdateUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate({ ...httpRequest.body, ...httpRequest.params })
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { name, email, urlImage } = httpRequest.body
-      const { id } = httpRequest.params
       await this.updateUser.update({
-        id,
-        name,
-        email,
-        urlImage
+        id: httpRequest.id,
+        name: httpRequest.name,
+        email: httpRequest.email,
+        urlImage: httpRequest.urlImage
       })
       return noContent()
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace UpdateUserController {
+  export type Params = {
+    id: number
+    name: string
+    email: string
+    urlImage: string
   }
 }

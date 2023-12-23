@@ -1,6 +1,6 @@
 import { UpdateLessonController } from './update-lesson-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
 import { IUpdateLesson } from '@/domain/usecases/lesson'
 
@@ -11,16 +11,12 @@ const makeUpdateLesson = (): IUpdateLesson => {
   return new UpdateLessonStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 1
-  },
-  body: {
-    courseId: 1,
-    name: 'any_name',
-    description: 'any_description',
-    urlVideo: 'any_url_video'
-  }
+const makeFakeRequest = (): UpdateLessonController.Params => ({
+  id: 1,
+  courseId: 1,
+  name: 'any_name',
+  description: 'any_description',
+  urlVideo: 'any_url_video'
 })
 
 const makeValidation = (): Validation => {

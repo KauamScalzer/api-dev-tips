@@ -1,6 +1,6 @@
 import { DeleteUserController } from './delete-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { IDeleteUser } from '@/domain/usecases/user'
 import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
 
@@ -11,10 +11,8 @@ const makeDeleteUser = (): IDeleteUser => {
   return new DeleteUserStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 'any_id'
-  }
+const makeFakeRequest = (): DeleteUserController.Params => ({
+  id: 1
 })
 
 const makeValidation = (): Validation => {
@@ -48,15 +46,14 @@ describe('DeleteUserController', () => {
     const { sut, deleteUserStub } = makeSut()
     const createSpy = jest.spyOn(deleteUserStub, 'delete')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith('any_id')
+    expect(createSpy).toHaveBeenCalledWith(1)
   })
 
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.params)
+    expect(validateSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IDeleteUser throws', async () => {

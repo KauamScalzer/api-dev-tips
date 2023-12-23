@@ -1,17 +1,13 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCourseByUserController } from './get-all-course-by-user-controller'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http'
 import { IGetAllCourseByUser } from '@/domain/usecases/course'
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    userId: 'any_user_id'
-  },
-  query: {
-    take: 'any_take',
-    skip: 'any_skip'
-  }
+const makeFakeRequest = (): GetAllCourseByUserController.Params => ({
+  userId: 1,
+  take: 1,
+  skip: 1
 })
 
 const makeValidation = (): Validation => {
@@ -56,11 +52,7 @@ describe('GetAllCourseByUserController', () => {
     const { sut, validationStub } = makeSut()
     const createSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      userId: 'any_user_id',
-      take: 'any_take',
-      skip: 'any_skip'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 400 if Validation returns an Error', async () => {
@@ -74,11 +66,7 @@ describe('GetAllCourseByUserController', () => {
     const { sut, getAllCourseByUserStub } = makeSut()
     const createSpy = jest.spyOn(getAllCourseByUserStub, 'getAll')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith({
-      skip: 'any_skip',
-      take: 'any_take',
-      userId: 'any_user_id'
-    })
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IGetAllCourseByUser throws', async () => {

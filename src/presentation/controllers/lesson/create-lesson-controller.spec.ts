@@ -1,6 +1,6 @@
 import { CreateLessonController } from './create-lesson-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
 import { ICreateLesson } from '@/domain/usecases/lesson'
 
@@ -11,13 +11,11 @@ const makeCreateLesson = (): ICreateLesson => {
   return new CreateLessonStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    courseId: 1,
-    name: 'any_name',
-    description: 'any_description',
-    urlVideo: 'any_url_video'
-  }
+const makeFakeRequest = (): CreateLessonController.Params => ({
+  courseId: 1,
+  name: 'any_name',
+  description: 'any_description',
+  urlVideo: 'any_url_video'
 })
 
 const makeValidation = (): Validation => {
@@ -64,7 +62,7 @@ describe('CreateLessonController', () => {
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 500 if ICreateLesson throws', async () => {

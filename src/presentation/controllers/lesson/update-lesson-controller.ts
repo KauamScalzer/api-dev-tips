@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
 import { IUpdateLesson } from '@/domain/usecases/lesson'
 
@@ -8,25 +8,33 @@ export class UpdateLessonController implements Controller {
     private readonly updateLesson: IUpdateLesson
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: UpdateLessonController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate({ ...httpRequest.body, ...httpRequest.params })
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { id } = httpRequest.params
-      const { courseId, name, description, urlVideo } = httpRequest.body
       await this.updateLesson.update({
-        id,
-        courseId,
-        name,
-        description,
-        urlVideo
+        id: httpRequest.id,
+        courseId: httpRequest.courseId,
+        name: httpRequest.name,
+        description: httpRequest.description,
+        urlVideo: httpRequest.urlVideo
       })
       return noContent()
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace UpdateLessonController {
+  export type Params = {
+    id: number
+    courseId: number
+    name: string
+    description: string
+    urlVideo: string
   }
 }

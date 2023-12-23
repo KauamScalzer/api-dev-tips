@@ -1,6 +1,6 @@
 import { CreateUserController } from './create-user-controller'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { ICreateUser } from '@/domain/usecases/user'
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http'
 
@@ -21,14 +21,12 @@ const makeFakeUser = (): ICreateUser.Result => ({
   urlImage: 'valid_url_image'
 })
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password',
-    urlImage: 'any_url_image'
-  }
+const makeFakeRequest = (): CreateUserController.Params => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password',
+  passwordConfirmation: 'any_password',
+  urlImage: 'any_url_image'
 })
 
 const makeValidation = (): Validation => {
@@ -75,7 +73,7 @@ describe('SignUp Controller', () => {
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 500 if ICreateUser throws', async () => {

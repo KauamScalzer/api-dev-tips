@@ -2,7 +2,7 @@ import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCourseController } from './get-all-course-controller'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http'
 import { IGetAllCourse } from '@/domain/usecases/course'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 
 const makeFakeCourse = (): IGetAllCourse.Result => {
   return {
@@ -17,11 +17,9 @@ const makeFakeCourse = (): IGetAllCourse.Result => {
   }
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  query: {
-    take: 1,
-    skip: 5
-  }
+const makeFakeRequest = (): GetAllCourseController.Params => ({
+  take: 1,
+  skip: 5
 })
 
 const makeGetAllCourse = (): IGetAllCourse => {
@@ -65,7 +63,7 @@ describe('GetAllCourseController', () => {
     const createSpy = jest.spyOn(getAllCourseStub, 'getAll')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(httpRequest.query)
+    expect(createSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should call Validation with correct values', async () => {
@@ -73,7 +71,7 @@ describe('GetAllCourseController', () => {
     const createSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(httpRequest.query)
+    expect(createSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 500 if IGetAllCourse throws', async () => {

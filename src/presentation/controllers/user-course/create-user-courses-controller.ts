@@ -1,6 +1,6 @@
 import { ICreateUserCourses } from '@/domain/usecases/user-course'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class CreateUserCoursesController implements Controller {
   constructor (
@@ -8,20 +8,28 @@ export class CreateUserCoursesController implements Controller {
     private readonly createUserCourses: ICreateUserCourses
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: CreateUserCoursesController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { userId, courseIds } = httpRequest.body
       await this.createUserCourses.create({
-        userId,
-        courseIds
+        userId: httpRequest.userId,
+        courseIds: httpRequest.courseIds
       })
       return noContent()
     } catch (error: any) {
       return serverError(error)
     }
+  }
+}
+
+export namespace CreateUserCoursesController {
+  export type Params = {
+    userId: number
+    courseIds: [{
+      id: number
+    }]
   }
 }

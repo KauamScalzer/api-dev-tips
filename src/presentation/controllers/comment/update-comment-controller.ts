@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
 import { IUpdateComment } from '@/domain/usecases/comment'
 
@@ -8,22 +8,27 @@ export class UpdateCommentController implements Controller {
     private readonly updateComment: IUpdateComment
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: UpdateCommentController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate({ ...httpRequest.params, ...httpRequest.body })
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { id } = httpRequest.params
-      const { comment } = httpRequest.body
       await this.updateComment.update({
-        id,
-        comment
+        id: httpRequest.id,
+        comment: httpRequest.comment
       })
       return noContent()
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace UpdateCommentController {
+  export type Params = {
+    id: number
+    comment: string
   }
 }

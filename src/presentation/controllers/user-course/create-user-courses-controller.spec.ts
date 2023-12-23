@@ -1,21 +1,16 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateUserCoursesController } from './create-user-courses-controller'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { ICreateUserCourses, CreateUserCoursesParams } from '@/domain/usecases/user-course'
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    userId: 1,
-    courseIds: [
-      {
-        id: 1
-      },
-      {
-        id: 2
-      }
-    ]
-  }
+const makeFakeRequest = (): CreateUserCoursesController.Params => ({
+  userId: 1,
+  courseIds: [
+    {
+      id: 1
+    }
+  ]
 })
 
 const makeValidation = (): Validation => {
@@ -61,9 +56,6 @@ describe('CreateUserCoursesController', () => {
       courseIds: [
         {
           id: 1
-        },
-        {
-          id: 2
         }
       ]
     })
@@ -81,7 +73,7 @@ describe('CreateUserCoursesController', () => {
     const createSpy = jest.spyOn(createUserCoursesStub, 'create')
     const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(createSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 500 if ICreateCourse throws', async () => {

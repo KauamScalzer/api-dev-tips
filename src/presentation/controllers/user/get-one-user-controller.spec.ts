@@ -1,6 +1,6 @@
 import { GetOneUserController } from './get-one-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
-import { HttpRequest, Validation } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { IGetOneUser } from '@/domain/usecases/user'
 import { serverError, badRequest, ok } from '@/presentation/helpers/http'
 
@@ -16,10 +16,8 @@ const makeGetOneUser = (): IGetOneUser => {
   return new GetOneUserStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: 'any_id'
-  }
+const makeFakeRequest = (): GetOneUserController.Params => ({
+  id: 1
 })
 
 const makeValidation = (): Validation => {
@@ -53,15 +51,14 @@ describe('GetOneUserController', () => {
     const { sut, getOneUserStub } = makeSut()
     const createSpy = jest.spyOn(getOneUserStub, 'getOne')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith('any_id')
+    expect(createSpy).toHaveBeenCalledWith(1)
   })
 
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = makeFakeRequest()
     await sut.handle(makeFakeRequest())
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.params)
+    expect(validateSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IGetOneUser throws', async () => {

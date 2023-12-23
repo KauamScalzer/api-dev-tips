@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, Controller, Validation } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
 import { ICreateLesson } from '@/domain/usecases/lesson'
 
@@ -8,23 +8,31 @@ export class CreateLessonController implements Controller {
     private readonly createLesson: ICreateLesson
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: CreateLessonController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
-      const { courseId, name, description, urlVideo } = httpRequest.body
       await this.createLesson.create({
-        courseId,
-        name,
-        description,
-        urlVideo
+        courseId: httpRequest.courseId,
+        name: httpRequest.name,
+        description: httpRequest.description,
+        urlVideo: httpRequest.urlVideo
       })
       return noContent()
     } catch (error: any) {
       console.log(error)
       return serverError(error)
     }
+  }
+}
+
+export namespace CreateLessonController {
+  export type Params = {
+    courseId: number
+    name: string
+    description: string
+    urlVideo: string
   }
 }
