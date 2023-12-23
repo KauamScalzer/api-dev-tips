@@ -41,7 +41,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('DeleteCourseController', () => {
+describe('DeleteCommentController', () => {
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const createSpy = jest.spyOn(validationStub, 'validate')
