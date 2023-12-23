@@ -6,7 +6,7 @@ export class DeleteCourse implements IDeleteCourse {
     private readonly deleteCourseRepository: IDeleteCourseRepository
   ) {}
 
-  async delete (data: number): Promise<void> {
-    await this.deleteCourseRepository.delete(data)
+  async delete (data: IDeleteCourse.Params): Promise<void> {
+    await this.deleteCourseRepository.delete(data.id)
   }
 }

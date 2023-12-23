@@ -6,7 +6,7 @@ import { serverError, badRequest, ok } from '@/presentation/helpers/http'
 
 const makeGetOneUser = (): IGetOneUser => {
   class GetOneUserStub implements IGetOneUser {
-    async getOne (data: number): Promise<any> {
+    async getOne (data: IGetOneUser.Params): Promise<any> {
       return {
         id: 'any_id',
         name: 'any_name'
@@ -51,7 +51,7 @@ describe('GetOneUserController', () => {
     const { sut, getOneUserStub } = makeSut()
     const createSpy = jest.spyOn(getOneUserStub, 'getOne')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(1)
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should call Validation with correct values', async () => {

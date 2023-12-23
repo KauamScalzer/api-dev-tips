@@ -6,7 +6,7 @@ export class DeleteLesson implements IDeleteLesson {
     private readonly deleteLessonRepository: IDeleteLessonRepository
   ) {}
 
-  async delete (id: number): Promise<void> {
-    await this.deleteLessonRepository.delete(id)
+  async delete (data: IDeleteLesson.Params): Promise<void> {
+    await this.deleteLessonRepository.delete(data.id)
   }
 }

@@ -14,7 +14,9 @@ export class DeleteLessonController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      await this.deleteLesson.delete(httpRequest.id)
+      await this.deleteLesson.delete({
+        id: httpRequest.id
+      })
       return noContent()
     } catch (error: any) {
       console.log(error)

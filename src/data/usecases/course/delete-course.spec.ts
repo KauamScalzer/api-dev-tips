@@ -1,5 +1,6 @@
 import { IDeleteCourseRepository } from '@/data/protocols/db/course'
 import { DeleteCourse } from './delete-course'
+import { IDeleteCourse } from '@/domain/usecases/course'
 
 const makeDeleteCourseRepository = (): IDeleteCourseRepository => {
   class DeleteCourseRepositoryStub implements IDeleteCourseRepository {
@@ -22,14 +23,16 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeCourseData = (): any => (1)
+const makeFakeCourseData = (): IDeleteCourse.Params => ({
+  id: 1
+})
 
 describe('DeleteCourse usecase', () => {
   test('Should call IDeleteCourseRepository with correct values', async () => {
     const { sut, deleteCourseRepositoryStub } = makeSut()
     const encryptSpy = jest.spyOn(deleteCourseRepositoryStub, 'delete')
     await sut.delete(makeFakeCourseData())
-    expect(encryptSpy).toHaveBeenCalledWith(makeFakeCourseData())
+    expect(encryptSpy).toHaveBeenCalledWith(1)
   })
 
   test('Should throw if IDeleteCourseRepository throws', async () => {

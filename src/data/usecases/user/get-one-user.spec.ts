@@ -1,3 +1,4 @@
+import { IGetOneUser } from '@/domain/usecases/user'
 import { GetOneUser } from './get-one-user'
 import { IGetOneUserRepository } from '@/data/protocols/db/user'
 
@@ -21,7 +22,9 @@ const GetOneUserRepositoryStub = (): IGetOneUserRepository => {
   return new GetOneUserRepositoryStub()
 }
 
-const makeFakeUserData = (): number => (1)
+const makeFakeUserData = (): IGetOneUser.Params => ({
+  id: 1
+})
 
 const makeSut = (): SutTypes => {
   const getOneUserRepositoryStub = GetOneUserRepositoryStub()

@@ -6,7 +6,7 @@ export class DeleteUser implements IDeleteUser {
     private readonly deleteUserRepository: IDeleteUserRepository
   ) {}
 
-  async delete (data: number): Promise<void> {
-    await this.deleteUserRepository.delete(data)
+  async delete (data: IDeleteUser.Params): Promise<void> {
+    await this.deleteUserRepository.delete(data.id)
   }
 }

@@ -19,7 +19,7 @@ const makeValidation = (): Validation => {
 
 const makeDeleteCourse = (): IDeleteCourse => {
   class DeleteCourseStub implements IDeleteCourse {
-    async delete (data: number): Promise<void> {}
+    async delete (data: IDeleteCourse.Params): Promise<void> {}
   }
   return new DeleteCourseStub()
 }
@@ -60,7 +60,7 @@ describe('DeleteCourseController', () => {
     const { sut, deleteCourseStub } = makeSut()
     const createSpy = jest.spyOn(deleteCourseStub, 'delete')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(1)
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should return 500 if IDeleteCourse throws', async () => {

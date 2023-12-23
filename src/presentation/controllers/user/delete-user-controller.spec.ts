@@ -6,7 +6,7 @@ import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
 
 const makeDeleteUser = (): IDeleteUser => {
   class DeleteUserStub implements IDeleteUser {
-    async delete (data: number): Promise<void> {}
+    async delete (data: IDeleteUser.Params): Promise<void> {}
   }
   return new DeleteUserStub()
 }
@@ -46,7 +46,7 @@ describe('DeleteUserController', () => {
     const { sut, deleteUserStub } = makeSut()
     const createSpy = jest.spyOn(deleteUserStub, 'delete')
     await sut.handle(makeFakeRequest())
-    expect(createSpy).toHaveBeenCalledWith(1)
+    expect(createSpy).toHaveBeenCalledWith(makeFakeRequest())
   })
 
   test('Should call Validation with correct values', async () => {

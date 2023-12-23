@@ -1,3 +1,4 @@
+import { IDeleteUser } from '@/domain/usecases/user'
 import { DeleteUser } from './delete-user'
 import { IDeleteUserRepository } from '@/data/protocols/db/user'
 
@@ -13,7 +14,9 @@ const makeDeleteUserRepositoryy = (): IDeleteUserRepository => {
   return new DeleteUserRepositoryStub()
 }
 
-const makeFakeUserData = (): number => (1)
+const makeFakeUserData = (): IDeleteUser.Params => ({
+  id: 1
+})
 
 const makeSut = (): SutTypes => {
   const deleteUserRepositoryStub = makeDeleteUserRepositoryy()

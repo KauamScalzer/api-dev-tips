@@ -14,7 +14,9 @@ export class DeleteUserController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      await this.deleteUser.delete(httpRequest.id)
+      await this.deleteUser.delete({
+        id: httpRequest.id
+      })
       return noContent()
     } catch (error: any) {
       console.log(error)

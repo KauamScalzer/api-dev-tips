@@ -1,3 +1,9 @@
 export interface IDeleteLesson {
-  delete (id: number): Promise<void>
+  delete (id: IDeleteLesson.Params): Promise<void>
+}
+
+export namespace IDeleteLesson {
+  export type Params = {
+    id: number
+  }
 }

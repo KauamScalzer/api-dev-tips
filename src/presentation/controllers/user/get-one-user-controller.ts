@@ -14,7 +14,9 @@ export class GetOneUserController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      const result = await this.getOneUser.getOne(httpRequest.id)
+      const result = await this.getOneUser.getOne({
+        id: httpRequest.id
+      })
       return ok(result)
     } catch (error: any) {
       console.log(error)

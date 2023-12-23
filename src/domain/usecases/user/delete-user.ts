@@ -1,3 +1,9 @@
 export interface IDeleteUser {
-  delete (data: number): Promise<void>
+  delete (data: IDeleteUser.Params): Promise<void>
+}
+
+export namespace IDeleteUser {
+  export type Params = {
+    id: number
+  }
 }
