@@ -20,10 +20,10 @@ describe('Course Routes', () => {
     test('Should return 204 on sucess', async () => {
       await request(app).post('/api/course')
         .send({
-          name: 'Javascript completo',
-          description: 'Nesse curso você irá aprender a programar em Javascript',
-          author: 'Kauam Scalzer',
-          thumb: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUdrOIue5OnpMcJgKPLOUppxTBMWsuCGeu5w&usqp=CAU'
+          name: 'any_name',
+          description: 'any_description',
+          author: 'any_author',
+          thumb: 'any_thumb'
         })
         .expect(204)
     })
@@ -32,12 +32,60 @@ describe('Course Routes', () => {
   describe('GET /course', () => {
     test('Should return 200 on sucess', async () => {
       await getRepository('course').save({
-        name: 'Javascript completo',
-        description: 'Nesse curso você irá aprender a programar em Javascript',
-        author: 'Kauam Scalzer',
-        thumb: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUdrOIue5OnpMcJgKPLOUppxTBMWsuCGeu5w&usqp=CAU'
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
       })
       await request(app).get('/api/course?take=1&skip=1')
+        .expect(200)
+    })
+  })
+
+  describe('PUT /course', () => {
+    test('Should return 204 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await request(app).put('/api/course/1')
+        .send({
+          name: 'updated_name',
+          description: 'updated_description',
+          author: 'updated_author',
+          thumb: 'updated_thumb'
+        })
+        .expect(204)
+    })
+  })
+
+  describe('DELETE /course', () => {
+    test('Should return 204 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await request(app).delete('/api/course/1')
+        .expect(204)
+    })
+  })
+
+  describe('GET /course/by-user', () => {
+    test('Should return 200 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await request(app).get('/api/course/by-user/1?take=5&skip=1')
         .expect(200)
     })
   })
