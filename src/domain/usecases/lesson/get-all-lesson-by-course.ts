@@ -5,5 +5,7 @@ export interface IGetAllLessonByCourse {
 export namespace IGetAllLessonByCourse {
   export type Params = {
     courseId: number
+    skip: number
+    take: number
   }
 }

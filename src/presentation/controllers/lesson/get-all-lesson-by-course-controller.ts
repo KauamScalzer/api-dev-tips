@@ -10,13 +10,16 @@ export class GetAllLessonByCourseController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.params)
+      const error = this.validation.validate({ ...httpRequest.params, ...httpRequest.query })
       if (error) {
         return badRequest(error)
       }
       const { courseId } = httpRequest.params
+      const { skip, take } = httpRequest.query
       const result = await this.getAllLessonByCourse.getAll({
-        courseId
+        courseId,
+        skip,
+        take
       })
       return ok(result)
     } catch (error: any) {
