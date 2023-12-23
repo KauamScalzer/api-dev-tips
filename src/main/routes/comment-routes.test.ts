@@ -51,4 +51,91 @@ describe('Comment Routes', () => {
         .expect(204)
     })
   })
+
+  describe('GET /comment', () => {
+    test('Should return 200 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await getRepository('lesson').save({
+        id: 1,
+        courseId: 1,
+        name: 'any_name',
+        description: 'any_description',
+        urlVideo: 'any_url_video'
+      })
+      await getRepository('user').save({
+        id: 1,
+        name: 'any_name',
+        email: 'any_email@gmail.com',
+        password: 'any_password',
+        urlImage: 'any_url_image'
+      })
+      await request(app).get('/api/comment/1?skip=1&take=1')
+        .expect(200)
+    })
+  })
+
+  describe('DELETE /comment', () => {
+    test('Should return 200 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await getRepository('lesson').save({
+        id: 1,
+        courseId: 1,
+        name: 'any_name',
+        description: 'any_description',
+        urlVideo: 'any_url_video'
+      })
+      await getRepository('user').save({
+        id: 1,
+        name: 'any_name',
+        email: 'any_email@gmail.com',
+        password: 'any_password',
+        urlImage: 'any_url_image'
+      })
+      await request(app).delete('/api/comment/1')
+        .expect(204)
+    })
+  })
+
+  describe('PUT /comment', () => {
+    test('Should return 200 on sucess', async () => {
+      await getRepository('course').save({
+        id: 1,
+        name: 'any_name',
+        description: 'any_description',
+        author: 'any_author',
+        thumb: 'any_thumb'
+      })
+      await getRepository('lesson').save({
+        id: 1,
+        courseId: 1,
+        name: 'any_name',
+        description: 'any_description',
+        urlVideo: 'any_url_video'
+      })
+      await getRepository('user').save({
+        id: 1,
+        name: 'any_name',
+        email: 'any_email@gmail.com',
+        password: 'any_password',
+        urlImage: 'any_url_image'
+      })
+      await request(app).put('/api/comment/1')
+        .send({
+          comment: 'updated_comment'
+        })
+        .expect(204)
+    })
+  })
 })
