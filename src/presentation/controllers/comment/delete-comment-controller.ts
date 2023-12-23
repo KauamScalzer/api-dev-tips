@@ -14,7 +14,9 @@ export class DeleteCommentController implements Controller {
       if (error) {
         return badRequest(error)
       }
-      await this.deleteComment.delete(httpRequest.id)
+      await this.deleteComment.delete({
+        id: httpRequest.id
+      })
       return noContent()
     } catch (error: any) {
       console.log(error)
