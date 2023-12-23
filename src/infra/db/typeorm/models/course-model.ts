@@ -47,9 +47,13 @@ export class Course extends BaseEntity {
     })
   updatedAt: Date
 
-  @OneToMany(() => UserCourse, userCourse => userCourse.course, { cascade: true })
+  @OneToMany(() => UserCourse, userCourse => userCourse.course, {
+    cascade: true
+    })
   userCourses?: UserCourse[]
 
-  @OneToMany(() => Lesson, lesson => lesson.course, { cascade: true })
+  @OneToMany(() => Lesson, lesson => lesson.course, {
+    cascade: true
+    })
   lessons?: Lesson[]
 }

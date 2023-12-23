@@ -40,11 +40,15 @@ export class UserCourse extends BaseEntity {
     })
   updatedAt: Date
 
-  @ManyToOne(() => Course, course => course.userCourses, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Course, course => course.userCourses, {
+    onDelete: 'CASCADE'
+    })
   @JoinColumn({ name: 'course_id' })
   course: Course
 
-  @ManyToOne(() => User, user => user.userCourses)
+  @ManyToOne(() => User, user => user.userCourses, {
+    onDelete: 'CASCADE'
+    })
   @JoinColumn({ name: 'user_id' })
   user: User
 }

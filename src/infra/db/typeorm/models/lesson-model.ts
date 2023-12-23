@@ -37,10 +37,14 @@ export class Lesson extends BaseEntity {
     })
   updatedAt: Date
 
-  @ManyToOne(() => Course, course => course.lessons)
+  @ManyToOne(() => Course, course => course.lessons, {
+    onDelete: 'CASCADE'
+    })
   @JoinColumn({ name: 'course_id' })
   course: Course
 
-  @OneToMany(() => Comment, comment => comment.lesson)
+  @OneToMany(() => Comment, comment => comment.lesson, {
+    cascade: true
+    })
   comments: Comment[]
 }
