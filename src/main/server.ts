@@ -10,7 +10,7 @@ const connectionOptions: ConnectionOptions = {
   password: env.dbPassword,
   database: env.dbName,
   host: env.dbHost,
-  port: env.dbPort as number,
+  port: parseInt(env.dbPort),
   synchronize: true,
   logging: false,
   entities: [

@@ -12,7 +12,7 @@ export const TypeormHelper = {
       password: env.dbPassword,
       database: env.dbNameTest,
       host: env.dbHost,
-      port: env.dbPort as number,
+      port: parseInt(env.dbPort),
       synchronize: true,
       logging: false,
       entities: [
