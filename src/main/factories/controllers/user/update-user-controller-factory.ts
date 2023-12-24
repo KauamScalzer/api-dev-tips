@@ -8,6 +8,7 @@ import { User } from '@/infra/db/typeorm/models'
 export const makeUpdateUserController = (): Controller => {
   const requiredFields = ['name', 'email', 'urlImage']
   const fieldValitate = 'email'
-  const createUserController = new UpdateUserController(makeValidations(requiredFields, null, null, 'email', fieldValitate, User), makeUpdateUser())
+  const fieldToValidate = 'id'
+  const createUserController = new UpdateUserController(makeValidations(requiredFields, null, null, 'email', fieldValitate, User, fieldToValidate, User), makeUpdateUser())
   return makeLogControllerDecorator(createUserController)
 }
