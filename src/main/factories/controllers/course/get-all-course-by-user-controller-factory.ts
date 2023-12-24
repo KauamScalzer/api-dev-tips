@@ -1,10 +1,11 @@
 import { GetAllCourseByUserController } from '@/presentation/controllers/course'
 import { Controller } from '@/presentation/protocols'
-import { makeGetAllCourseByUserValidation } from '@/main/factories/validations/course'
+import { makeValidations } from '@/main/factories/validations'
 import { makeGetAllCourseByUser } from '@/main/factories/usecases/course'
 import { makeLogControllerDecorator } from '../../decorators'
 
 export const makeGetAllCourseByUserController = (): Controller => {
-  const getAllCourseByUserController = new GetAllCourseByUserController(makeGetAllCourseByUserValidation(), makeGetAllCourseByUser())
+  const requiredFields = ['take', 'skip', 'userId']
+  const getAllCourseByUserController = new GetAllCourseByUserController(makeValidations(requiredFields), makeGetAllCourseByUser())
   return makeLogControllerDecorator(getAllCourseByUserController)
 }

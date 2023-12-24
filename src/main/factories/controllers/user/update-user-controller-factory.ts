@@ -1,10 +1,11 @@
 import { UpdateUserController } from '@/presentation/controllers/user'
 import { Controller } from '@/presentation/protocols'
-import { makeUpdateUserValidation } from '@/main/factories/validations/user'
+import { makeValidations } from '@/main/factories/validations'
 import { makeUpdateUser } from '@/main/factories/usecases/user'
 import { makeLogControllerDecorator } from '../../decorators'
 
 export const makeUpdateUserController = (): Controller => {
-  const createUserController = new UpdateUserController(makeUpdateUserValidation(), makeUpdateUser())
+  const requiredFields = ['name', 'email', 'urlImage']
+  const createUserController = new UpdateUserController(makeValidations(requiredFields, null, null, 'email'), makeUpdateUser())
   return makeLogControllerDecorator(createUserController)
 }

@@ -12,12 +12,12 @@ export class GetAllCourseByUser implements IGetAllCourseByUser {
     const result = []
     data.skip = (data.skip - 1) * data.take
     const courses = await this.getAllUserCourseByUserRepository.getAll(data)
-    for (const item of courses.data) {
+    for (const item of courses.result) {
       const course = await this.getOneCourseRepository.getOne(item.courseId)
       result.push(course)
     }
     return {
-      data: result,
+      result,
       count: result.length
     }
   }

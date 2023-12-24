@@ -6,7 +6,7 @@ const makeGetAllUserCourseByUserRepository = (): IGetAllUserCourseByUserReposito
   class GetAllUserCourseByUserRepositoryStub implements IGetAllUserCourseByUserRepository {
     async getAll (data: IGetAllUserCourseByUserRepository.Params): Promise<any> {
       return {
-        data: [{
+        result: [{
           courseId: 1
         }]
       }
@@ -86,6 +86,6 @@ describe('GetAllCourseByUser usecase', () => {
   test('Should return on success', async () => {
     const { sut } = makeSut()
     const result = await sut.getAll(makeFakeCourseData())
-    expect(result).toEqual({ count: 1, data: [{ id: 1, name: 'any_name' }] })
+    expect(result).toEqual({ count: 1, result: [{ id: 1, name: 'any_name' }] })
   })
 })

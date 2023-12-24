@@ -9,6 +9,7 @@ const makeSut = (): CreateLogErrorRepository => {
 describe('CreateLogErrorRepository', () => {
   beforeAll(async () => {
     await TypeormHelper.connect()
+    await TypeormHelper.clear('log_error')
   })
 
   afterEach(async () => {

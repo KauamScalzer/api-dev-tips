@@ -1,10 +1,11 @@
 import { UpdateCommentController } from '@/presentation/controllers/comment'
 import { Controller } from '@/presentation/protocols'
-import { makeUpdateCommentValidation } from '@/main/factories/validations/comment'
+import { makeValidations } from '@/main/factories/validations'
 import { makeUpdateComment } from '@/main/factories/usecases/comment'
 import { makeLogControllerDecorator } from '../../decorators'
 
 export const makeUpdateCommentController = (): Controller => {
-  const updateCommentController = new UpdateCommentController(makeUpdateCommentValidation(), makeUpdateComment())
+  const requiredFields = ['id', 'comment']
+  const updateCommentController = new UpdateCommentController(makeValidations(requiredFields), makeUpdateComment())
   return makeLogControllerDecorator(updateCommentController)
 }

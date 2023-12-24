@@ -1,10 +1,11 @@
 import { DeleteCourseController } from '@/presentation/controllers/course'
 import { Controller } from '@/presentation/protocols'
-import { makeDeleteCourseValidation } from '@/main/factories/validations/course'
+import { makeValidations } from '@/main/factories/validations'
 import { makeDeleteCourse } from '@/main/factories/usecases/course'
 import { makeLogControllerDecorator } from '../../decorators'
 
 export const makeDeleteCourseController = (): Controller => {
-  const deleteCourseController = new DeleteCourseController(makeDeleteCourseValidation(), makeDeleteCourse())
+  const requiredFields = ['id']
+  const deleteCourseController = new DeleteCourseController(makeValidations(requiredFields), makeDeleteCourse())
   return makeLogControllerDecorator(deleteCourseController)
 }

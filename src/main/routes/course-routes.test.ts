@@ -10,6 +10,8 @@ describe('Course Routes', () => {
 
   afterEach(async () => {
     await TypeormHelper.clear('course')
+    await TypeormHelper.clear('user')
+    await TypeormHelper.clear('user_course')
   })
 
   afterAll(async () => {
@@ -37,7 +39,7 @@ describe('Course Routes', () => {
         author: 'any_author',
         thumb: 'any_thumb'
       })
-      await request(app).get('/api/course?take=1&skip=1')
+      await request(app).get('/api/course?take=10&skip=1')
         .expect(200)
     })
   })
@@ -84,6 +86,18 @@ describe('Course Routes', () => {
         description: 'any_description',
         author: 'any_author',
         thumb: 'any_thumb'
+      })
+      await getRepository('user').save({
+        id: 1,
+        name: 'any_name',
+        password: 'any_password',
+        email: 'any_email',
+        urlImage: 'any_url_image'
+      })
+      await getRepository('user_course').save({
+        id: 1,
+        userId: 1,
+        courseId: 1
       })
       await request(app).get('/api/course/by-user/1?take=5&skip=1')
         .expect(200)

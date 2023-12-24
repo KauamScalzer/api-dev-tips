@@ -1,10 +1,11 @@
 import { UpdateLessonController } from '@/presentation/controllers/lesson'
 import { Controller } from '@/presentation/protocols'
-import { makeUpdateLessonValidation } from '@/main/factories/validations/lesson'
+import { makeValidations } from '@/main/factories/validations'
 import { makeUpdateLesson } from '@/main/factories/usecases/lesson'
 import { makeLogControllerDecorator } from '../../decorators'
 
 export const makeUpdateLessonController = (): Controller => {
-  const updateLessonController = new UpdateLessonController(makeUpdateLessonValidation(), makeUpdateLesson())
+  const requiredFields = ['id', 'courseId', 'name', 'description', 'urlVideo']
+  const updateLessonController = new UpdateLessonController(makeValidations(requiredFields), makeUpdateLesson())
   return makeLogControllerDecorator(updateLessonController)
 }
