@@ -13,7 +13,7 @@ export class FieldInUseValidation implements Validation {
     const param: any = {}
     param[this.fieldName] = data[this.fieldName]
     const isInUse = await this.getOneCustomRepository.getOne(param, this.model)
-    if (isInUse) {
+    if (isInUse && isInUse.id !== parseInt(data.id)) {
       return new InUseError(this.fieldName)
     }
   }
