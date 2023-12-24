@@ -10,7 +10,7 @@ export class GetOneUserController implements Controller {
 
   async handle (httpRequest: GetOneUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }

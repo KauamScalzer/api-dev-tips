@@ -10,7 +10,7 @@ export class DeleteUserController implements Controller {
 
   async handle (httpRequest: DeleteUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }

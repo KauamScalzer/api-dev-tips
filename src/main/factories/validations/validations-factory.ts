@@ -1,8 +1,9 @@
 import { EmailValidatorAdapter } from '@/main/adapters/validators'
-import { ValidationComposite, RequiredFieldValidation, EmailValidation, CompareFieldValidation } from '@/main/validators'
+import { ValidationComposite, RequiredFieldValidation, EmailValidation, CompareFieldValidation, FieldInUseValidation } from '@/main/validators'
 import { Validation } from '@/presentation/protocols'
+import { GetOneCustomRepository } from '@/infra/db/repositories/validation'
 
-export const makeValidations = (requiredFields: string[], field?: string, fieldToCompare?: string, email?: string): ValidationComposite => {
+export const makeValidations = (requiredFields: string[], field?: string, fieldToCompare?: string, email?: string, validateField?: string, model?: any): ValidationComposite => {
   const validations: Validation[] = []
   for (const field of requiredFields) {
     validations.push(new RequiredFieldValidation(field))
@@ -12,6 +13,9 @@ export const makeValidations = (requiredFields: string[], field?: string, fieldT
   }
   if (email) {
     validations.push(new EmailValidation(email, new EmailValidatorAdapter()))
+  }
+  if (validateField && model) {
+    validations.push(new FieldInUseValidation(validateField, model, new GetOneCustomRepository()))
   }
   return new ValidationComposite(validations)
 }

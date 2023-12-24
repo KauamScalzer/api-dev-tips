@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, serverError, ok, forbidden } from '@/presentation/helpers/http'
+import { serverError, ok, forbidden, returnDecider } from '@/presentation/helpers/http'
 import { ICreateUser } from '@/domain/usecases/user'
 import { EmailInUseError } from '@/presentation/errors'
 
@@ -11,9 +11,9 @@ export class CreateUserController implements Controller {
 
   async handle (httpRequest: CreateUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnDecider(error)
       }
       const result = await this.createUser.create({
         name: httpRequest.name,

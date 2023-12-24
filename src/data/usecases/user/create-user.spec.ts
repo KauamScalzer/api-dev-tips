@@ -1,13 +1,12 @@
 import { Hasher } from '@/data/protocols/criptography'
 import { CreateUser } from './create-user'
-import { ICreateUserRepository, IGetOneUserByEmailRepository } from '@/data/protocols/db/user'
+import { ICreateUserRepository } from '@/data/protocols/db/user'
 import { ICreateUser } from '@/domain/usecases/user'
 
 interface SutTypes {
   sut: CreateUser
   hasherStub: Hasher
   createUserRepositoryStub: ICreateUserRepository
-  getOneUserByEmailRepositoryStub: IGetOneUserByEmailRepository
 }
 
 const makeHasher = (): Hasher => {
@@ -28,16 +27,7 @@ const makeCreateUserRepository = (): ICreateUserRepository => {
   return new CreateUserRepositoryStub()
 }
 
-const makeGetOneUserByEmailRepository = (): IGetOneUserByEmailRepository => {
-  class GetOneUserByEmailRepositoryStub implements IGetOneUserByEmailRepository {
-    async getOne (email: string): Promise<IGetOneUserByEmailRepository.Result> {
-      return null
-    }
-  }
-  return new GetOneUserByEmailRepositoryStub()
-}
-
-const makeFakeUser = (): IGetOneUserByEmailRepository.Result => ({
+const makeFakeUser = (): ICreateUserRepository.Result => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email',
@@ -55,13 +45,11 @@ const makeFakeUserData = (): ICreateUser.Params => ({
 const makeSut = (): SutTypes => {
   const hasherStub = makeHasher()
   const createUserRepositoryStub = makeCreateUserRepository()
-  const getOneUserByEmailRepositoryStub = makeGetOneUserByEmailRepository()
-  const sut = new CreateUser(hasherStub, createUserRepositoryStub, getOneUserByEmailRepositoryStub)
+  const sut = new CreateUser(hasherStub, createUserRepositoryStub)
   return {
     sut,
     hasherStub,
-    createUserRepositoryStub,
-    getOneUserByEmailRepositoryStub
+    createUserRepositoryStub
   }
 }
 
@@ -99,30 +87,9 @@ describe('CreateUser usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should call IGetOneUserByEmailRepository with correct email', async () => {
-    const { sut, getOneUserByEmailRepositoryStub } = makeSut()
-    const getOneSpy = jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne')
-    await sut.create(makeFakeUserData())
-    expect(getOneSpy).toHaveBeenCalledWith('valid_email')
-  })
-
-  test('Should throw if IGetOneUserByEmailRepository throw', async () => {
-    const { sut, getOneUserByEmailRepositoryStub } = makeSut()
-    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-    const promise = sut.create(makeFakeUserData())
-    await expect(promise).rejects.toThrow()
-  })
-
   test('Should return an user on sucess', async () => {
     const { sut } = makeSut()
     const result = await sut.create(makeFakeUserData())
     expect(result).toEqual(makeFakeUser())
-  })
-
-  test('Should return null if IGetOneUserByEmailRepository returns an user', async () => {
-    const { sut, getOneUserByEmailRepositoryStub } = makeSut()
-    jest.spyOn(getOneUserByEmailRepositoryStub, 'getOne').mockReturnValueOnce(new Promise((resolve) => resolve(makeFakeUser())))
-    const result = await sut.create(makeFakeUserData())
-    expect(result).toBeFalsy()
   })
 })

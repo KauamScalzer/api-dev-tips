@@ -10,7 +10,7 @@ export class UpdateUserController implements Controller {
 
   async handle (httpRequest: UpdateUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }

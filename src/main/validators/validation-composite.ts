@@ -5,9 +5,9 @@ export class ValidationComposite implements Validation {
     private readonly validations: Validation[]
   ) {}
 
-  validate (data: any): Error {
+  async validate (data: any): Promise<Error> {
     for (const validation of this.validations) {
-      const error = validation.validate(data)
+      const error = await validation.validate(data)
       if (error) {
         return error
       }

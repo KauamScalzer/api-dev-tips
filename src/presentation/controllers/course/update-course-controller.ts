@@ -10,7 +10,7 @@ export class UpdateCourseController implements Controller {
 
   async handle (httpRequest: UpdateCourseController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }

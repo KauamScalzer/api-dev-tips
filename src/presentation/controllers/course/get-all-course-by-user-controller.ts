@@ -10,7 +10,7 @@ export class GetAllCourseByUserController implements Controller {
 
   async handle (httpRequest: GetAllCourseByUserController.Params): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest)
+      const error = await this.validation.validate(httpRequest)
       if (error) {
         return badRequest(error)
       }
