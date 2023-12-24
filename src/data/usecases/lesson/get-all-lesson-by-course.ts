@@ -8,6 +8,6 @@ export class GetAllLessonByCourse implements IGetAllLessonByCourse {
 
   async getAll (data: IGetAllLessonByCourse.Params): Promise<any> {
     data.skip = (data.skip - 1) * data.take
-    return await this.getAllLessonByCourseRepository.getAll(data.courseId, data)
+    return await this.getAllLessonByCourseRepository.getAll(data)
   }
 }
