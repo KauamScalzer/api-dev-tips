@@ -4,7 +4,7 @@ import { IUpdateComment } from '@/domain/usecases/comment'
 
 const makeUpdateCommentRepository = (): IUpdateCommentRepository => {
   class UpdateCommentRepositoryStub implements IUpdateCommentRepository {
-    async update (id: number, comment: string): Promise<void> {}
+    async update (data: IUpdateCommentRepository.Params): Promise<void> {}
   }
   return new UpdateCommentRepositoryStub()
 }
@@ -33,7 +33,7 @@ describe('UpdateComment usecase', () => {
     const { sut, updateCommentRepositoryStub } = makeSut()
     const encryptSpy = jest.spyOn(updateCommentRepositoryStub, 'update')
     await sut.update(makeFakeData())
-    expect(encryptSpy).toHaveBeenCalledWith(1, 'any_comment')
+    expect(encryptSpy).toHaveBeenCalledWith(makeFakeData())
   })
 
   test('Should throw if IUpdateCommentRepository throws', async () => {

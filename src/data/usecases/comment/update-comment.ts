@@ -7,6 +7,6 @@ export class UpdateComment implements IUpdateComment {
   ) {}
 
   async update (data: IUpdateComment.Params): Promise<void> {
-    await this.updateCommentRepository.update(data.id, data.comment)
+    await this.updateCommentRepository.update(data)
   }
 }

@@ -1,3 +1,10 @@
 export interface IUpdateCommentRepository {
-  update (id: number, comment: string): Promise<void>
+  update (data: IUpdateCommentRepository.Params): Promise<void>
+}
+
+export namespace IUpdateCommentRepository {
+  export type Params = {
+    id: number
+    comment: string
+  }
 }

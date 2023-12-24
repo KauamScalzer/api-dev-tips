@@ -3,10 +3,10 @@ import { Comment } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class UpdateCommentRepository implements IUpdateCommentRepository {
-  async update (id: number, comment: string): Promise<void> {
+  async update (data: IUpdateCommentRepository.Params): Promise<void> {
     const repository = getRepository(Comment)
-    await repository.update(id, {
-      comment: comment
+    await repository.update(data.id, {
+      comment: data.comment
     })
   }
 }
