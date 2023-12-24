@@ -5,13 +5,13 @@ import { getRepository } from 'typeorm'
 export class GetAllCourseRepository implements IGetAllCourseRepository {
   async getAll (params: IGetAllCourseRepository.Params): Promise<IGetAllCourseRepository.Result> {
     const repository = getRepository(Course)
-    const [data, count] = await repository.findAndCount({
+    const [result, count] = await repository.findAndCount({
       order: {
         id: 'ASC'
       },
       take: params.take,
       skip: params.skip
     })
-    return { data, count }
+    return { result, count }
   }
 }

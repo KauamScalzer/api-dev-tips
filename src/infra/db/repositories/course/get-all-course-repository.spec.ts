@@ -34,12 +34,12 @@ describe('GetAllCourseRepository', () => {
     })
     expect(result).toBeTruthy()
     expect(result.count).toBe(1)
-    expect(result.data).toBeTruthy()
-    expect(result.data[0].id).toBeTruthy()
-    expect(result.data[0].name).toBe('any_name')
-    expect(result.data[0].description).toBe('any_description')
-    expect(result.data[0].author).toBe('any_author')
-    expect(result.data[0].thumb).toBe('any_thumb')
+    expect(result.result).toBeTruthy()
+    expect(result.result[0].id).toBeTruthy()
+    expect(result.result[0].name).toBe('any_name')
+    expect(result.result[0].description).toBe('any_description')
+    expect(result.result[0].author).toBe('any_author')
+    expect(result.result[0].thumb).toBe('any_thumb')
   })
 
   test('Should return [] if get all fails', async () => {
@@ -50,7 +50,7 @@ describe('GetAllCourseRepository', () => {
     })
     expect(user).toEqual({
       count: 0,
-      data: []
+      result: []
     })
   })
 })

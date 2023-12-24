@@ -5,7 +5,7 @@ import { getRepository } from 'typeorm'
 export class GetAllCommentsByLessonRepository implements IGetAllCommentsByLessonRepository {
   async getAll (params: IGetAllCommentsByLessonRepository.Params): Promise<any> {
     const repository = getRepository(Comment)
-    const [data, count] = await repository.findAndCount({
+    const [result, count] = await repository.findAndCount({
       where: {
         lessonId: params.lessonId
       },
@@ -15,6 +15,6 @@ export class GetAllCommentsByLessonRepository implements IGetAllCommentsByLesson
       take: params.take,
       skip: params.skip
     })
-    return { data, count }
+    return { result, count }
   }
 }

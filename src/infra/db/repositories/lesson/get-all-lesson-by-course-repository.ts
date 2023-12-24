@@ -5,7 +5,7 @@ import { getRepository } from 'typeorm'
 export class GetAllLessonByCourseRepository implements IGetAllLessonByCourseRepository {
   async getAll (params: IGetAllLessonByCourseRepository.Params): Promise<IGetAllLessonByCourseRepository.Result> {
     const repository = getRepository(Lesson)
-    const [data, count] = await repository.findAndCount({
+    const [result, count] = await repository.findAndCount({
       where: {
         courseId: params.courseId
       },
@@ -15,6 +15,6 @@ export class GetAllLessonByCourseRepository implements IGetAllLessonByCourseRepo
       take: params.take,
       skip: params.skip
     })
-    return { data, count }
+    return { result, count }
   }
 }

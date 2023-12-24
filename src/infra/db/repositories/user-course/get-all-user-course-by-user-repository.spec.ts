@@ -47,10 +47,10 @@ describe('GetAllUserCourseByUserRepository', () => {
     })
     expect(result).toBeTruthy()
     expect(result.count).toBe(1)
-    expect(result.data).toBeTruthy()
-    expect(result.data[0].id).toBeTruthy()
-    expect(result.data[0].userId).toBe(1)
-    expect(result.data[0].courseId).toBe(1)
+    expect(result.result).toBeTruthy()
+    expect(result.result[0].id).toBeTruthy()
+    expect(result.result[0].userId).toBe(1)
+    expect(result.result[0].courseId).toBe(1)
   })
 
   test('Should return [] if get all fails', async () => {
@@ -62,7 +62,7 @@ describe('GetAllUserCourseByUserRepository', () => {
     })
     expect(user).toEqual({
       count: 0,
-      data: []
+      result: []
     })
   })
 })
