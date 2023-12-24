@@ -1,14 +1,20 @@
 import { UpdateUserController } from '@/presentation/controllers/user'
 import { Controller } from '@/presentation/protocols'
-import { makeValidations } from '@/main/factories/validations'
+import { ExistFieldValitation, NotExistFieldValitation, makeValidations } from '@/main/factories/validations'
 import { makeUpdateUser } from '@/main/factories/usecases/user'
 import { makeLogControllerDecorator } from '../../decorators'
 import { User } from '@/infra/db/typeorm/models'
 
 export const makeUpdateUserController = (): Controller => {
-  const requiredFields = ['name', 'email', 'urlImage']
-  const fieldValitate = 'email'
-  const fieldToValidate = 'id'
-  const createUserController = new UpdateUserController(makeValidations(requiredFields, null, null, 'email', fieldValitate, User, fieldToValidate, User), makeUpdateUser())
+  const requiredFields: string[] = ['name', 'email', 'urlImage']
+  const existFieldValitation: ExistFieldValitation = {
+    field: 'email',
+    model: User
+  }
+  const notExistFieldValitation: NotExistFieldValitation = {
+    field: 'id',
+    model: User
+  }
+  const createUserController = new UpdateUserController(makeValidations(requiredFields, null, 'email', existFieldValitation, notExistFieldValitation), makeUpdateUser())
   return makeLogControllerDecorator(createUserController)
 }

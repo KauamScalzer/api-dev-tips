@@ -18,15 +18,14 @@ const makeEmailValidator = (): EmailValidator => {
 describe('makeValidations factory', () => {
   const requiredFields = ['name', 'email', 'password', 'passwordConfirmation', 'urlImage']
   const email = 'email'
-  const field = 'password'
-  const fieldToCompare = 'passwordConfirmation'
+  const field = { field: 'password', fieldToCompare: 'passwordConfirmation' }
   test('Should call ValidationComposite with all validations', () => {
-    makeValidations(requiredFields, field, fieldToCompare, email)
+    makeValidations(requiredFields, field, email)
     const validations: Validation[] = []
     for (const field of requiredFields) {
       validations.push(new RequiredFieldValidation(field))
     }
-    validations.push(new CompareFieldValidation(field, fieldToCompare))
+    validations.push(new CompareFieldValidation(field.field, field.fieldToCompare))
     validations.push(new EmailValidation(email, makeEmailValidator()))
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
   })
