@@ -2,7 +2,7 @@ import { HttpResponse } from '@/presentation/protocols'
 import { conflict } from './conflict'
 import { badRequest } from './bad-request'
 
-export const returnDecider = (error: Error): HttpResponse => {
+export const returnErrorDecider = (error: Error): HttpResponse => {
   switch (error.name) {
     case 'InUseError':
       return conflict(error)

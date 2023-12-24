@@ -1,5 +1,5 @@
 import { IGetAllCourseByUser } from '@/domain/usecases/course'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { returnErrorDecider, ok, serverError } from '@/presentation/helpers/http'
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class GetAllCourseByUserController implements Controller {
@@ -12,7 +12,7 @@ export class GetAllCourseByUserController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnErrorDecider(error)
       }
       const courses = await this.getAllCourseByUser.getAll({
         userId: httpRequest.userId,

@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { returnErrorDecider, ok, serverError } from '@/presentation/helpers/http'
 import { IGetAllCommentsByLesson } from '@/domain/usecases/comment'
 
 export class GetAllCommentsByLessonController implements Controller {
@@ -12,7 +12,7 @@ export class GetAllCommentsByLessonController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnErrorDecider(error)
       }
       const result = await this.getAllCommentsByLesson.getAll({
         lessonId: httpRequest.lessonId,

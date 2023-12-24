@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, serverError, ok } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, ok } from '@/presentation/helpers/http'
 import { IGetOneUser } from '@/domain/usecases/user'
 
 export class GetOneUserController implements Controller {
@@ -12,7 +12,7 @@ export class GetOneUserController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnErrorDecider(error)
       }
       const result = await this.getOneUser.getOne({
         id: httpRequest.id

@@ -1,5 +1,5 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/protocols'
-import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
+import { returnErrorDecider, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { IUserAuthentication } from '@/domain/usecases/user'
 
 export class UserAuthenticationController implements Controller {
@@ -12,7 +12,7 @@ export class UserAuthenticationController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnErrorDecider(error)
       }
       const accessToken = await this.userAuthentication.auth({
         email: httpRequest.email,

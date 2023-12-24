@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { badRequest, serverError, noContent } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, noContent } from '@/presentation/helpers/http'
 import { IUpdateCourse } from '@/domain/usecases/course'
 
 export class UpdateCourseController implements Controller {
@@ -12,7 +12,7 @@ export class UpdateCourseController implements Controller {
     try {
       const error = await this.validation.validate(httpRequest)
       if (error) {
-        return badRequest(error)
+        return returnErrorDecider(error)
       }
       await this.updateCourse.update({
         id: httpRequest.id,
