@@ -7,5 +7,16 @@ export namespace IGetAllCourseRepository {
     skip: number
     take: number
   }
-  export type Result = any
+  export type Result = {
+    result: Array<{
+      id: number
+      name: string
+      description: string
+      author: string
+      thumb: string
+      createdAt: Date
+      updatedAt: Date
+    }>
+    count: number
+  }
 }

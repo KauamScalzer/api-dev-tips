@@ -8,5 +8,16 @@ export namespace IGetAllLessonByCourseRepository {
     skip: number
     take: number
   }
-  export type Result = any
+  export type Result = {
+    result: Array<{
+      id: number
+      courseId: number
+      name: string
+      description: string
+      urlVideo: string
+      createdAt: Date
+      updatedAt: Date
+    }>
+    count: number
+  }
 }

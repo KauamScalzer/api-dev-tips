@@ -13,7 +13,6 @@ export namespace ICreateUser {
     id: number
     name: string
     email: string
-    password: string
     urlImage: string
   }
 }

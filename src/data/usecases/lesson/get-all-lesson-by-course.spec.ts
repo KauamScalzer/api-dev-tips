@@ -4,7 +4,20 @@ import { IGetAllLessonByCourse } from '@/domain/usecases/lesson'
 
 const makeGetAllLessonByCourseRepository = (): IGetAllLessonByCourseRepository => {
   class GetAllLessonByCourseRepositoryStub implements IGetAllLessonByCourseRepository {
-    async getAll (data: IGetAllLessonByCourseRepository.Params): Promise<any> {}
+    async getAll (data: IGetAllLessonByCourseRepository.Params): Promise<IGetAllLessonByCourseRepository.Result> {
+      return {
+        result: [{
+          id: 1,
+          courseId: 1,
+          name: 'any_name',
+          description: 'any_description',
+          urlVideo: 'any_url_video',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }],
+        count: 1
+      }
+    }
   }
   return new GetAllLessonByCourseRepositoryStub()
 }

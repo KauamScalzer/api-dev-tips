@@ -28,12 +28,14 @@ const makeSut = (): SutTypes => {
 const makeFakeCourse = (): IGetAllCourse.Result => {
   return {
     count: 1,
-    data: [{
+    result: [{
       id: 1,
       name: 'any_name',
       description: 'any_description',
       author: 'any_author',
-      thumb: 'any_thumb'
+      thumb: 'any_thumb',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]
   }
 }

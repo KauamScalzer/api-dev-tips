@@ -6,6 +6,10 @@ export class GetOneUserRepository implements IGetOneUserRepository {
   async getOne (data: number): Promise<IGetOneUserRepository.Result> {
     const repository = getRepository(User)
     const result = await repository.findOne({ where: { id: data } })
-    return result
+    if (result) {
+      delete result.accessToken
+      delete result.password
+      return result
+    }
   }
 }

@@ -6,7 +6,7 @@ export class GetAllCommentsByLesson implements IGetAllCommentsByLesson {
     private readonly getAllCommentsByLessonRepository: IGetAllCommentsByLessonRepository
   ) {}
 
-  async getAll (data: IGetAllCommentsByLesson.Params): Promise<any> {
+  async getAll (data: IGetAllCommentsByLesson.Params): Promise<IGetAllCommentsByLesson.Result> {
     data.skip = (data.skip - 1) * data.take
     return await this.getAllCommentsByLessonRepository.getAll(data)
   }

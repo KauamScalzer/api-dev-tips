@@ -4,7 +4,7 @@ import { IGetAllCommentsByLesson } from '@/domain/usecases/comment'
 
 const makeGetAllCommentsByLessonRepository = (): IGetAllCommentsByLessonRepository => {
   class GetAllCommentsByLessonRepositoryStub implements IGetAllCommentsByLessonRepository {
-    async getAll (data: IGetAllCommentsByLessonRepository.Params): Promise<any> {
+    async getAll (data: IGetAllCommentsByLessonRepository.Params): Promise<IGetAllCommentsByLessonRepository.Result> {
       return makeFakeReturn()
     }
   }
@@ -25,10 +25,10 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeReturn = (): any => {
+const makeFakeReturn = (): IGetAllCommentsByLesson.Result => {
   return {
     count: 1,
-    data: [{
+    result: [{
       id: 1,
       userId: 1,
       lessonId: 1,

@@ -3,7 +3,7 @@ import { Comment } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class GetAllCommentsByLessonRepository implements IGetAllCommentsByLessonRepository {
-  async getAll (params: IGetAllCommentsByLessonRepository.Params): Promise<any> {
+  async getAll (params: IGetAllCommentsByLessonRepository.Params): Promise<IGetAllCommentsByLessonRepository.Result> {
     const repository = getRepository(Comment)
     const [result, count] = await repository.findAndCount({
       where: {

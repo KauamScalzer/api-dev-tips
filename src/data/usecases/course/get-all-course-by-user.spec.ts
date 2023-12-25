@@ -1,14 +1,20 @@
 import { IGetAllUserCourseByUserRepository } from '@/data/protocols/db/user-course'
 import { GetAllCourseByUser } from './get-all-course-by-user'
 import { IGetOneCourseRepository } from '@/data/protocols/db/course'
+import { IGetAllCourseByUser } from '@/domain/usecases/course'
 
 const makeGetAllUserCourseByUserRepository = (): IGetAllUserCourseByUserRepository => {
   class GetAllUserCourseByUserRepositoryStub implements IGetAllUserCourseByUserRepository {
-    async getAll (data: IGetAllUserCourseByUserRepository.Params): Promise<any> {
+    async getAll (data: IGetAllUserCourseByUserRepository.Params): Promise<IGetAllUserCourseByUserRepository.Result> {
       return {
         result: [{
-          courseId: 1
-        }]
+          id: 1,
+          userId: 1,
+          courseId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }],
+        count: 1
       }
     }
   }
@@ -17,15 +23,22 @@ const makeGetAllUserCourseByUserRepository = (): IGetAllUserCourseByUserReposito
 
 const makeGetOneCourseRepository = (): IGetOneCourseRepository => {
   class GetOneCourseRepositoryRepositoryStub implements IGetOneCourseRepository {
-    async getOne (id: number): Promise<any> {
-      return {
-        id: 1,
-        name: 'any_name'
-      }
+    async getOne (id: number): Promise<IGetOneCourseRepository.Result> {
+      return makeFakeCourse()
     }
   }
   return new GetOneCourseRepositoryRepositoryStub()
 }
+
+const makeFakeCourse = (): IGetOneCourseRepository.Result => ({
+  id: 1,
+  name: 'any_name',
+  description: 'any_description',
+  author: 'any_author',
+  thumb: 'any_thumb',
+  createdAt: new Date(),
+  updatedAt: new Date()
+})
 
 interface SutTypes {
   sut: GetAllCourseByUser
@@ -44,7 +57,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeCourseData = (): any => ({
+const makeFakeCourseData = (): IGetAllCourseByUser.Params => ({
   userId: 1,
   skip: 1,
   take: 10
@@ -86,6 +99,6 @@ describe('GetAllCourseByUser usecase', () => {
   test('Should return on success', async () => {
     const { sut } = makeSut()
     const result = await sut.getAll(makeFakeCourseData())
-    expect(result).toEqual({ count: 1, result: [{ id: 1, name: 'any_name' }] })
+    expect(result).toEqual({ count: 1, result: [makeFakeCourse()] })
   })
 })

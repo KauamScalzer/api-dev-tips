@@ -6,7 +6,7 @@ export class GetOneUser implements IGetOneUser {
     private readonly getOneUserRepository: IGetOneUserRepository
   ) {}
 
-  async getOne (data: IGetOneUser.Params): Promise<any> {
+  async getOne (data: IGetOneUser.Params): Promise<IGetOneUser.Result> {
     return await this.getOneUserRepository.getOne(data.id)
   }
 }

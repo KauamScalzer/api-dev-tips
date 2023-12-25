@@ -8,7 +8,7 @@ export class GetAllCourseByUser implements IGetAllCourseByUser {
     private readonly getOneCourseRepository: IGetOneCourseRepository
   ) {}
 
-  async getAll (data: IGetAllCourseByUser.Params): Promise<any> {
+  async getAll (data: IGetAllCourseByUser.Params): Promise<IGetAllCourseByUser.Result> {
     const result = []
     data.skip = (data.skip - 1) * data.take
     const courses = await this.getAllUserCourseByUserRepository.getAll(data)

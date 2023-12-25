@@ -1,6 +1,6 @@
 import { ICreateUserCourseRepository } from '@/data/protocols/db/user-course'
 import { CreateUserCourses } from './create-user-courses'
-import { CreateUserCoursesParams } from '@/domain/usecases/user-course'
+import { ICreateUserCourses } from '@/domain/usecases/user-course'
 
 const makeCreateUserCourseRepository = (): ICreateUserCourseRepository => {
   class CreateUserCourseRepositoryStub implements ICreateUserCourseRepository {
@@ -23,7 +23,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeData = (): CreateUserCoursesParams => ({
+const makeFakeData = (): ICreateUserCourses.Params => ({
   userId: 1,
   courseIds: [{
     id: 1

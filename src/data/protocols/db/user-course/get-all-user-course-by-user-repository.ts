@@ -1,5 +1,5 @@
 export interface IGetAllUserCourseByUserRepository {
-  getAll (data: IGetAllUserCourseByUserRepository.Params): Promise<any>
+  getAll (data: IGetAllUserCourseByUserRepository.Params): Promise<IGetAllUserCourseByUserRepository.Result>
 }
 
 export namespace IGetAllUserCourseByUserRepository {
@@ -7,5 +7,15 @@ export namespace IGetAllUserCourseByUserRepository {
     userId: number
     take: number
     skip: number
+  }
+  export type Result = {
+    result: Array<{
+      id: number
+      userId: number
+      courseId: number
+      createdAt: Date
+      updatedAt: Date
+    }>
+    count: number
   }
 }

@@ -6,7 +6,7 @@ export class GetAllLessonByCourse implements IGetAllLessonByCourse {
     private readonly getAllLessonByCourseRepository: IGetAllLessonByCourseRepository
   ) {}
 
-  async getAll (data: IGetAllLessonByCourse.Params): Promise<any> {
+  async getAll (data: IGetAllLessonByCourse.Params): Promise<IGetAllLessonByCourse.Result> {
     data.skip = (data.skip - 1) * data.take
     return await this.getAllLessonByCourseRepository.getAll(data)
   }

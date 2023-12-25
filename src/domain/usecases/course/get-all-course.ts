@@ -8,13 +8,15 @@ export namespace IGetAllCourse {
     take: number
   }
   export type Result = {
-    count: number
-    data: [{
+    result: Array<{
       id: number
       name: string
       description: string
       author: string
       thumb: string
-    }]
+      createdAt: Date
+      updatedAt: Date
+    }>
+    count: number
   }
 }

@@ -3,7 +3,7 @@ import { UserCourse } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class GetAllUserCourseByUserRepository implements IGetAllUserCourseByUserRepository {
-  async getAll (params: IGetAllUserCourseByUserRepository.Params): Promise<any> {
+  async getAll (params: IGetAllUserCourseByUserRepository.Params): Promise<IGetAllUserCourseByUserRepository.Result> {
     const repository = getRepository(UserCourse)
     const [result, count] = await repository.findAndCount({
       where: {

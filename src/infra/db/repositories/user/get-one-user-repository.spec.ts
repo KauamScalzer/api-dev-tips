@@ -33,7 +33,6 @@ describe('GetOneUserRepository', () => {
     expect(user?.id).toBe(1)
     expect(user?.name).toBe('any_name')
     expect(user?.email).toBe('any_email')
-    expect(user?.password).toBe('any_password')
     expect(user?.urlImage).toBe('any_url_image')
   })
 

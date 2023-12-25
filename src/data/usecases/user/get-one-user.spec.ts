@@ -14,7 +14,6 @@ const GetOneUserRepositoryStub = (): IGetOneUserRepository => {
         id: 1,
         name: 'any_name',
         email: 'any_email',
-        password: 'any_password',
         urlImage: 'any_url_image'
       }
     }

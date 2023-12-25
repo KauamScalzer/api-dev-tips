@@ -30,6 +30,5 @@ describe('CreateUserRepository', () => {
     expect(result.id).toBeTruthy()
     expect(result.name).toBe('any_name')
     expect(result.email).toBe('any_email@gmail.com')
-    expect(result.password).toBe('any_password')
   })
 })

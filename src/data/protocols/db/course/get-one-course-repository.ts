@@ -3,5 +3,13 @@ export interface IGetOneCourseRepository {
 }
 
 export namespace IGetOneCourseRepository {
-  export type Result = any
+  export type Result = {
+    id: number
+    name: string
+    description: string
+    author: string
+    thumb: string
+    createdAt: Date
+    updatedAt: Date
+  }
 }

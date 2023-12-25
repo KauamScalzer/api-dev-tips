@@ -20,7 +20,7 @@ const makeEmailValidator = (): EmailValidator => {
 
 const makeGetOneCustomRepository = (): IGetOneCustomRepository => {
   class GetOneCustomRepositoryStub implements IGetOneCustomRepository {
-    getOne (data: IGetOneCustomRepository.Params, model: any): any {}
+    async getOne (data: IGetOneCustomRepository.Params, model: any): Promise<IGetOneCustomRepository.Result> {}
   }
   return new GetOneCustomRepositoryStub()
 }

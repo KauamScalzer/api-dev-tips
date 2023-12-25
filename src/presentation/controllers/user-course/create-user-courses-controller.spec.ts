@@ -2,7 +2,7 @@ import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateUserCoursesController } from './create-user-courses-controller'
 import { Validation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
-import { ICreateUserCourses, CreateUserCoursesParams } from '@/domain/usecases/user-course'
+import { ICreateUserCourses } from '@/domain/usecases/user-course'
 
 const makeFakeRequest = (): CreateUserCoursesController.Params => ({
   userId: 1,
@@ -24,7 +24,7 @@ const makeValidation = (): Validation => {
 
 const makeCreateUserCourses = (): ICreateUserCourses => {
   class CreateUserCoursesStub implements ICreateUserCourses {
-    async create (data: CreateUserCoursesParams): Promise<void> {}
+    async create (data: ICreateUserCourses.Params): Promise<void> {}
   }
   return new CreateUserCoursesStub()
 }

@@ -13,7 +13,6 @@ export namespace ICreateUserRepository {
     id: number
     name: string
     email: string
-    password: string
     urlImage: string
   }
 }

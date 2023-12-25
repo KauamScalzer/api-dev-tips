@@ -17,7 +17,6 @@ const makeFakeUser = (): ICreateUser.Result => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email@mail.com',
-  password: 'valid_password',
   urlImage: 'valid_url_image'
 })
 

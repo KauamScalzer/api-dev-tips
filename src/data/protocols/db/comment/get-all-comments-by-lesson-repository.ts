@@ -1,5 +1,5 @@
 export interface IGetAllCommentsByLessonRepository {
-  getAll (data: IGetAllCommentsByLessonRepository.Params): Promise<any>
+  getAll (data: IGetAllCommentsByLessonRepository.Params): Promise<IGetAllCommentsByLessonRepository.Result>
 }
 
 export namespace IGetAllCommentsByLessonRepository {
@@ -7,5 +7,16 @@ export namespace IGetAllCommentsByLessonRepository {
     lessonId: number
     take: number
     skip: number
+  }
+  export type Result = {
+    result: Array<{
+      id: number
+      userId: number
+      lessonId: number
+      comment: string
+      createdAt: Date
+      updatedAt: Date
+    }>
+    count: number
   }
 }

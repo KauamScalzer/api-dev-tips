@@ -6,15 +6,19 @@ import { serverError, badRequest, ok } from '@/presentation/helpers/http'
 
 const makeGetOneUser = (): IGetOneUser => {
   class GetOneUserStub implements IGetOneUser {
-    async getOne (data: IGetOneUser.Params): Promise<any> {
-      return {
-        id: 'any_id',
-        name: 'any_name'
-      }
+    async getOne (data: IGetOneUser.Params): Promise<IGetOneUser.Result> {
+      return makeUser()
     }
   }
   return new GetOneUserStub()
 }
+
+const makeUser = (): IGetOneUser.Result => ({
+  id: 1,
+  name: 'any_name',
+  email: 'any_email',
+  urlImage: 'any_url_image'
+})
 
 const makeFakeRequest = (): GetOneUserController.Params => ({
   id: 1
@@ -73,10 +77,7 @@ describe('GetOneUserController', () => {
   test('Should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok({
-      id: 'any_id',
-      name: 'any_name'
-    }))
+    expect(httpResponse).toEqual(ok(makeUser()))
   })
 
   test('Should return 400 if Validation returns an Error', async () => {

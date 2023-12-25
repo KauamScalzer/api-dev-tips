@@ -1,5 +1,6 @@
 import { IUpdateLessonRepository } from '@/data/protocols/db/lesson'
 import { UpdateLesson } from './update-lesson'
+import { IUpdateLesson } from '@/domain/usecases/lesson'
 
 const makeUpdateLessonRepository = (): IUpdateLessonRepository => {
   class UpdateLessonRepositoryStub implements IUpdateLessonRepository {
@@ -22,7 +23,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-const makeFakeData = (): any => ({
+const makeFakeData = (): IUpdateLesson.Params => ({
   id: 1,
   courseId: 1,
   name: 'any_name',

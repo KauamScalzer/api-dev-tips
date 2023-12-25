@@ -21,15 +21,25 @@ const makeValidation = (): Validation => {
 
 const makeGetAllLessonByCourse = (): IGetAllLessonByCourse => {
   class GetAllLessonByCourseStub implements IGetAllLessonByCourse {
-    async getAll (data: IGetAllLessonByCourse.Params): Promise<any> {
-      return {
-        id: 1,
-        name: 'any_lesson'
-      }
+    async getAll (data: IGetAllLessonByCourse.Params): Promise<IGetAllLessonByCourse.Result> {
+      return makeLesson()
     }
   }
   return new GetAllLessonByCourseStub()
 }
+
+const makeLesson = (): IGetAllLessonByCourse.Result => ({
+  result: [{
+    id: 1,
+    courseId: 1,
+    name: 'any_name',
+    description: 'any_description',
+    urlVideo: 'any_url_video',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }],
+  count: 1
+})
 
 interface SutTypes {
   sut: GetAllLessonByCourseController
@@ -82,9 +92,6 @@ describe('GetAllLessonByCourseController', () => {
   test('Should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok({
-      id: 1,
-      name: 'any_lesson'
-    }))
+    expect(httpResponse).toEqual(ok(makeLesson()))
   })
 })

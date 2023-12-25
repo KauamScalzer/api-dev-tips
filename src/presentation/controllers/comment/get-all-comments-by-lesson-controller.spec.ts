@@ -21,15 +21,24 @@ const makeValidation = (): Validation => {
 
 const makeGetAllCommentsByLesson = (): IGetAllCommentsByLesson => {
   class GetAllCommentsByLessonStub implements IGetAllCommentsByLesson {
-    async getAll (data: IGetAllCommentsByLesson.Params): Promise<any> {
-      return {
-        id: 'any',
-        comment: 'any_comment'
-      }
+    async getAll (data: IGetAllCommentsByLesson.Params): Promise<IGetAllCommentsByLesson.Result> {
+      return makeComments()
     }
   }
   return new GetAllCommentsByLessonStub()
 }
+
+const makeComments = (): IGetAllCommentsByLesson.Result => ({
+  result: [{
+    id: 1,
+    userId: 1,
+    lessonId: 1,
+    comment: 'any_comment',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }],
+  count: 1
+})
 
 interface SutTypes {
   sut: GetAllCommentsByLessonController
@@ -82,9 +91,6 @@ describe('GetAllCommentsByLessonController', () => {
   test('Should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok({
-      id: 'any',
-      comment: 'any_comment'
-    }))
+    expect(httpResponse).toEqual(ok(makeComments()))
   })
 })

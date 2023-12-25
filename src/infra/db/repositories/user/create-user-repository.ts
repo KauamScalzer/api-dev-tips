@@ -8,6 +8,7 @@ export class CreateUserRepository implements ICreateUserRepository {
     Object.assign(entity, data)
     const repository = getRepository(User)
     const result = await repository.save(entity)
+    delete result.password
     return result
   }
 }

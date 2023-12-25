@@ -1,1 +1,1 @@
-export { ICreateUserCourses, CreateUserCoursesParams } from './create-user-courses'
+export { ICreateUserCourses } from './create-user-courses'

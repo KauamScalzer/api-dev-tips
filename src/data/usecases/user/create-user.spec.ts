@@ -31,7 +31,6 @@ const makeFakeUser = (): ICreateUserRepository.Result => ({
   id: 1,
   name: 'valid_name',
   email: 'valid_email',
-  password: 'hashed_password',
   urlImage: 'valid_url_image'
 })
 
