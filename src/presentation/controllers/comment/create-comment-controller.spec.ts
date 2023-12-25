@@ -1,8 +1,10 @@
 import { CreateCommentController } from './create-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
+import { serverError, noContent, badRequest, returnErrorDecider } from '@/presentation/helpers/http'
 import { ICreateComment } from '@/domain/usecases/comment'
+
+jest.mock('@/presentation/helpers/http')
 
 const makeCreateComment = (): ICreateComment => {
   class CreateCommentStub implements ICreateComment {
@@ -77,6 +79,13 @@ describe('CreateCommentController', () => {
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should call returnErrorDecider if Validation returns an Error', async () => {
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    await sut.handle(makeFakeRequest())
+    expect(returnErrorDecider).toHaveBeenLastCalledWith(new MissingParamError('any_field'))
   })
 
   test('Should return 204 if valid data is provided', async () => {

@@ -26,4 +26,10 @@ describe('returnErrorDecider', () => {
     const result: HttpResponse = returnErrorDecider(error)
     expect(result.statusCode).toBe(404)
   })
+
+  test('Should not return if no parameterized error is provided', async () => {
+    const error = new Error('unknown_error')
+    const result: HttpResponse = returnErrorDecider(error)
+    expect(result).toBe(undefined)
+  })
 })
