@@ -1,5 +1,5 @@
 import { Lesson, User } from '@/infra/db/typeorm/models'
-import { Validators } from '@/presentation/protocols'
+import { Validators } from '@/presentation/protocols/validators'
 
 export const makeCreateCommentRules = (): Validators => ({
   requiredFields: ['lessonId', 'userId', 'comment'],

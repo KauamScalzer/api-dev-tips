@@ -1,5 +1,5 @@
 import { Course, Lesson } from '@/infra/db/typeorm/models'
-import { Validators } from '@/presentation/protocols'
+import { Validators } from '@/presentation/protocols/validators'
 
 export const makeUpdateLessonRules = (): Validators => ({
   requiredFields: ['id', 'courseId', 'name', 'description', 'urlVideo'],

@@ -1,5 +1,5 @@
 import { User } from '@/infra/db/typeorm/models'
-import { Validators } from '@/presentation/protocols'
+import { Validators } from '@/presentation/protocols/validators'
 
 export const makeCreateUserRules = (): Validators => ({
   requiredFields: ['name', 'email'],

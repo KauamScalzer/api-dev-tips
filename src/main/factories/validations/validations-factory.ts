@@ -1,7 +1,8 @@
 import { EmailValidatorAdapter } from '@/main/adapters/validators'
 import { ValidationComposite, RequiredFieldValidation, EmailValidation, CompareFieldValidation, FieldInUseValidation, FieldNotFoundValidation } from '@/main/validators'
-import { Validation, Validators } from '@/presentation/protocols'
+import { Validation } from '@/presentation/protocols'
 import { GetOneCustomRepository } from '@/infra/db/repositories/validation'
+import { Validators } from '@/presentation/protocols/validators'
 
 export const makeValidations = (data: Validators): ValidationComposite => {
   const validations: Validation[] = []

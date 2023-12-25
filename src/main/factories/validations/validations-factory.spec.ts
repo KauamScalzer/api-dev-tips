@@ -1,10 +1,11 @@
 import { CompareFieldValidation, FieldInUseValidation, FieldNotFoundValidation, RequiredFieldValidation } from '@/main/validators'
-import { Validation, EmailValidator, Validators } from '@/presentation/protocols'
+import { Validation, EmailValidator } from '@/presentation/protocols'
 import { makeValidations } from './validations-factory'
 import { ValidationComposite } from '@/main/validators/validation-composite'
 import { EmailValidation } from '@/main/validators/email-validation'
 import { Lesson, User } from '@/infra/db/typeorm/models'
 import { IGetOneCustomRepository } from '@/data/protocols/db/validations'
+import { Validators } from '@/presentation/protocols/validators'
 
 jest.mock('@/main/validators/validation-composite')
 
