@@ -1,1 +1,1 @@
-export { makeValidations, FieldComparison, ExistFieldValitation, NotExistFieldValitation } from './validations-factory'
+export { makeValidations } from './validations-factory'

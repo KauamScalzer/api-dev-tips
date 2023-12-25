@@ -3,9 +3,9 @@ import { Controller } from '@/presentation/protocols'
 import { makeValidations } from '@/main/factories/validations'
 import { makeDeleteLesson } from '@/main/factories/usecases/lesson'
 import { makeLogControllerDecorator } from '../../decorators'
+import { makeDeleteLessonRules } from '../../rules/lesson'
 
 export const makeDeleteLessonController = (): Controller => {
-  const requiredFields = ['id']
-  const deleteLessonController = new DeleteLessonController(makeValidations(requiredFields), makeDeleteLesson())
+  const deleteLessonController = new DeleteLessonController(makeValidations(makeDeleteLessonRules()), makeDeleteLesson())
   return makeLogControllerDecorator(deleteLessonController)
 }

@@ -1,8 +1,10 @@
-import { CompareFieldValidation, RequiredFieldValidation } from '@/main/validators'
-import { Validation, EmailValidator } from '@/presentation/protocols'
+import { CompareFieldValidation, FieldInUseValidation, FieldNotFoundValidation, RequiredFieldValidation } from '@/main/validators'
+import { Validation, EmailValidator, Validators } from '@/presentation/protocols'
 import { makeValidations } from './validations-factory'
 import { ValidationComposite } from '@/main/validators/validation-composite'
 import { EmailValidation } from '@/main/validators/email-validation'
+import { Lesson, User } from '@/infra/db/typeorm/models'
+import { IGetOneCustomRepository } from '@/data/protocols/db/validations'
 
 jest.mock('@/main/validators/validation-composite')
 
@@ -15,18 +17,39 @@ const makeEmailValidator = (): EmailValidator => {
   return new EmailValidatorStub()
 }
 
+const makeGetOneCustomRepository = (): IGetOneCustomRepository => {
+  class GetOneCustomRepositoryStub implements IGetOneCustomRepository {
+    getOne (data: IGetOneCustomRepository.Params, model: any): any {}
+  }
+  return new GetOneCustomRepositoryStub()
+}
+
 describe('makeValidations factory', () => {
-  const requiredFields = ['name', 'email', 'password', 'passwordConfirmation', 'urlImage']
-  const email = 'email'
-  const field = { field: 'password', fieldToCompare: 'passwordConfirmation' }
   test('Should call ValidationComposite with all validations', () => {
-    makeValidations(requiredFields, field, email)
+    const validators: Validators = {
+      requiredFields: ['name', 'email'],
+      compareFields: { field: 'password', fieldToCompare: 'confirmPassword' },
+      email: 'email',
+      cantExist: [{ fieldName: 'email', model: User }],
+      haveToExist: [{ fieldName: 'userId', model: User }, { fieldName: 'lessonId', model: Lesson }]
+    }
+    makeValidations(validators)
     const validations: Validation[] = []
-    for (const field of requiredFields) {
+    for (const field of validators.requiredFields) {
       validations.push(new RequiredFieldValidation(field))
     }
-    validations.push(new CompareFieldValidation(field.field, field.fieldToCompare))
-    validations.push(new EmailValidation(email, makeEmailValidator()))
+    validations.push(new CompareFieldValidation(validators.compareFields.field, validators.compareFields.fieldToCompare))
+    validations.push(new EmailValidation(validators.email, makeEmailValidator()))
+    if (validators.cantExist) {
+      for (const item of validators.cantExist) {
+        validations.push(new FieldInUseValidation(item.fieldName, item.model, makeGetOneCustomRepository()))
+      }
+    }
+    if (validators.haveToExist) {
+      for (const item of validators.haveToExist) {
+        validations.push(new FieldNotFoundValidation(item.fieldName, item.model, makeGetOneCustomRepository()))
+      }
+    }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
   })
 })

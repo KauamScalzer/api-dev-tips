@@ -75,6 +75,12 @@ describe('Comment Routes', () => {
         password: 'any_password',
         urlImage: 'any_url_image'
       })
+      await getRepository('comment').save({
+        id: 1,
+        lessonId: 1,
+        userId: 1,
+        comment: 'any_comment'
+      })
       await request(app).get('/api/comment/1?skip=1&take=1')
         .expect(200)
     })
@@ -130,6 +136,12 @@ describe('Comment Routes', () => {
         email: 'any_email@gmail.com',
         password: 'any_password',
         urlImage: 'any_url_image'
+      })
+      await getRepository('comment').save({
+        id: 1,
+        lessonId: 1,
+        userId: 1,
+        comment: 'any_comment'
       })
       await request(app).put('/api/comment/1')
         .send({
