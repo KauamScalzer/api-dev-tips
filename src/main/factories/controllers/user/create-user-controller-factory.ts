@@ -12,10 +12,10 @@ export const makeCreateUserController = (): Controller => {
     field: 'password',
     fieldToCompare: 'passwordConfirmation'
   }
-  const existFieldValitation: ExistFieldValitation = {
+  const existFieldValitation: ExistFieldValitation[] = [{
     field: 'email',
     model: User
-  }
+  }]
   const createUserController = new CreateUserController(makeValidations(requiredFields, compareFields, email, existFieldValitation, null), makeCreateUser())
   return makeLogControllerDecorator(createUserController)
 }

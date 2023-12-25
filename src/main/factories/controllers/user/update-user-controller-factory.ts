@@ -7,14 +7,14 @@ import { User } from '@/infra/db/typeorm/models'
 
 export const makeUpdateUserController = (): Controller => {
   const requiredFields: string[] = ['name', 'email', 'urlImage']
-  const existFieldValitation: ExistFieldValitation = {
+  const existFieldValitation: ExistFieldValitation[] = [{
     field: 'email',
     model: User
-  }
-  const notExistFieldValitation: NotExistFieldValitation = {
+  }]
+  const notExistFieldValitation: NotExistFieldValitation[] = [{
     field: 'id',
     model: User
-  }
+  }]
   const createUserController = new UpdateUserController(makeValidations(requiredFields, null, 'email', existFieldValitation, notExistFieldValitation), makeUpdateUser())
   return makeLogControllerDecorator(createUserController)
 }

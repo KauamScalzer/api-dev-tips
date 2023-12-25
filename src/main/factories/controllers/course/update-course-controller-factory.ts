@@ -1,11 +1,16 @@
 import { UpdateCourseController } from '@/presentation/controllers/course'
 import { Controller } from '@/presentation/protocols'
-import { makeValidations } from '@/main/factories/validations'
+import { NotExistFieldValitation, makeValidations } from '@/main/factories/validations'
 import { makeUpdateCourse } from '@/main/factories/usecases/course'
 import { makeLogControllerDecorator } from '../../decorators'
+import { Course } from '@/infra/db/typeorm/models'
 
 export const makeUpdateCourseController = (): Controller => {
   const requiredFields = ['name', 'description', 'author', 'thumb', 'id']
-  const updateCourseController = new UpdateCourseController(makeValidations(requiredFields), makeUpdateCourse())
+  const notExistFieldValitation: NotExistFieldValitation[] = [{
+    field: 'id',
+    model: Course
+  }]
+  const updateCourseController = new UpdateCourseController(makeValidations(requiredFields, null, null, null, notExistFieldValitation), makeUpdateCourse())
   return makeLogControllerDecorator(updateCourseController)
 }

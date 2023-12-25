@@ -11,7 +11,8 @@ export class FieldNotFoundValidation implements Validation {
 
   async validate (data: any): Promise<Error> {
     const param: any = {}
-    param[this.fieldName] = data[this.fieldName]
+    const fieldToCheck = this.fieldName.includes('Id') ? 'id' : this.fieldName
+    param[fieldToCheck] = data[this.fieldName]
     const isInUse = await this.getOneCustomRepository.getOne(param, this.model)
     if (!isInUse) {
       return new NotFoundError(this.fieldName)

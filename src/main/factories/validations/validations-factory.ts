@@ -18,7 +18,7 @@ export interface NotExistFieldValitation {
   model: any
 }
 
-export const makeValidations = (requiredFields: string[], compareFields?: FieldComparison, email?: string, notExistField?: NotExistFieldValitation, existField?: ExistFieldValitation): ValidationComposite => {
+export const makeValidations = (requiredFields: string[], compareFields?: FieldComparison, email?: string, notExistField?: NotExistFieldValitation[], existField?: ExistFieldValitation[]): ValidationComposite => {
   const validations: Validation[] = []
   for (const field of requiredFields) {
     validations.push(new RequiredFieldValidation(field))
@@ -30,10 +30,14 @@ export const makeValidations = (requiredFields: string[], compareFields?: FieldC
     validations.push(new EmailValidation(email, new EmailValidatorAdapter()))
   }
   if (notExistField) {
-    validations.push(new FieldInUseValidation(notExistField.field, notExistField.model, new GetOneCustomRepository()))
+    for (const item of notExistField) {
+      validations.push(new FieldInUseValidation(item.field, item.model, new GetOneCustomRepository()))
+    }
   }
   if (existField) {
-    validations.push(new FieldNotFoundValidation(existField.field, existField.model, new GetOneCustomRepository()))
+    for (const item of existField) {
+      validations.push(new FieldNotFoundValidation(item.field, item.model, new GetOneCustomRepository()))
+    }
   }
   return new ValidationComposite(validations)
 }
