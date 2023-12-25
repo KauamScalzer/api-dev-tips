@@ -6,19 +6,14 @@ import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/h
 
 const makeCreateUser = (): ICreateUser => {
   class CreateUserStub implements ICreateUser {
-    async create (data: ICreateUser.Params): Promise<ICreateUser.Result> {
-      return await new Promise(resolve => resolve(makeFakeUser()))
+    async create (data: ICreateUser.Params): Promise<string> {
+      return await new Promise(resolve => resolve(makeFakeUserReturn()))
     }
   }
   return new CreateUserStub()
 }
 
-const makeFakeUser = (): ICreateUser.Result => ({
-  id: 1,
-  name: 'valid_name',
-  email: 'valid_email@mail.com',
-  urlImage: 'valid_url_image'
-})
+const makeFakeUserReturn = (): string => ('any_token')
 
 const makeFakeRequest = (): CreateUserController.Params => ({
   name: 'any_name',
@@ -87,7 +82,7 @@ describe('SignUp Controller', () => {
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok(makeFakeUser()))
+    expect(httpResponse).toEqual(ok(makeFakeUserReturn()))
   })
 
   test('Should return 400 if Validation returns an Error', async () => {

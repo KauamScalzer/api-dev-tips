@@ -1,5 +1,5 @@
 export interface ICreateUser {
-  create (data: ICreateUser.Params): Promise<ICreateUser.Result>
+  create (data: ICreateUser.Params): Promise<string>
 }
 
 export namespace ICreateUser {
@@ -7,12 +7,6 @@ export namespace ICreateUser {
     name: string
     email: string
     password: string
-    urlImage: string
-  }
-  export type Result = {
-    id: number
-    name: string
-    email: string
     urlImage: string
   }
 }

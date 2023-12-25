@@ -1,12 +1,13 @@
 import { Hasher } from '@/data/protocols/criptography'
 import { CreateUser } from './create-user'
 import { ICreateUserRepository } from '@/data/protocols/db/user'
-import { ICreateUser } from '@/domain/usecases/user'
+import { ICreateUser, IUserAuthentication } from '@/domain/usecases/user'
 
 interface SutTypes {
   sut: CreateUser
   hasherStub: Hasher
   createUserRepositoryStub: ICreateUserRepository
+  userAuthenticationStub: IUserAuthentication
 }
 
 const makeHasher = (): Hasher => {
@@ -16,6 +17,15 @@ const makeHasher = (): Hasher => {
     }
   }
   return new HasherStub()
+}
+
+const makeUserAuthentication = (): IUserAuthentication => {
+  class UserAuthenticationStub implements IUserAuthentication {
+    async auth (data: IUserAuthentication.Params): Promise<string> {
+      return 'any_token'
+    }
+  }
+  return new UserAuthenticationStub()
 }
 
 const makeCreateUserRepository = (): ICreateUserRepository => {
@@ -44,11 +54,13 @@ const makeFakeUserData = (): ICreateUser.Params => ({
 const makeSut = (): SutTypes => {
   const hasherStub = makeHasher()
   const createUserRepositoryStub = makeCreateUserRepository()
-  const sut = new CreateUser(hasherStub, createUserRepositoryStub)
+  const userAuthenticationStub = makeUserAuthentication()
+  const sut = new CreateUser(hasherStub, createUserRepositoryStub, userAuthenticationStub)
   return {
     sut,
     hasherStub,
-    createUserRepositoryStub
+    createUserRepositoryStub,
+    userAuthenticationStub
   }
 }
 
@@ -86,9 +98,26 @@ describe('CreateUser usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return an user on sucess', async () => {
+  test('Should call IUserAuthentication with correct values', async () => {
+    const { sut, userAuthenticationStub } = makeSut()
+    const createSpy = jest.spyOn(userAuthenticationStub, 'auth')
+    await sut.create(makeFakeUserData())
+    expect(createSpy).toHaveBeenCalledWith({
+      email: 'valid_email',
+      password: 'valid_password'
+    })
+  })
+
+  test('Should throw if IUserAuthentication throws', async () => {
+    const { sut, userAuthenticationStub } = makeSut()
+    jest.spyOn(userAuthenticationStub, 'auth').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.create(makeFakeUserData())
+    await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return an token on sucess', async () => {
     const { sut } = makeSut()
     const result = await sut.create(makeFakeUserData())
-    expect(result).toEqual(makeFakeUser())
+    expect(result).toEqual('any_token')
   })
 })

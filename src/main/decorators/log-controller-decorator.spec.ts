@@ -2,12 +2,11 @@ import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { serverError, ok } from '@/presentation/helpers/http'
 import { ICreateLogErrorRepository } from '@/data/protocols/db/log-error'
-import { ICreateUser } from '@/domain/usecases/user'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return await new Promise(resolve => resolve(ok(makeFakeUser())))
+      return await new Promise(resolve => resolve(ok(makeFakeUserReturn())))
     }
   }
   return new ControllerStub()
@@ -45,12 +44,7 @@ const makeFakeServerError = (): HttpResponse => {
   return serverError(fakeError)
 }
 
-const makeFakeUser = (): ICreateUser.Result => ({
-  id: 1,
-  name: 'valid_name',
-  email: 'valid_email@mail.com',
-  urlImage: 'valid_url_image'
-})
+const makeFakeUserReturn = (): string => ('any_token')
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
@@ -73,7 +67,7 @@ describe('LogControllerDecorator', () => {
   test('Should return the same result of the controller', async () => {
     const { sut } = makeSut()
     const result = await sut.handle(makeFakeRequest())
-    expect(result).toEqual(ok(makeFakeUser()))
+    expect(result).toEqual(ok(makeFakeUserReturn()))
   })
 
   test('Should call ICreateLogErrorRepository with correct error if controller returns a server error', async () => {
