@@ -18,7 +18,7 @@ describe('User Routes', () => {
   })
 
   describe('POST /user', () => {
-    test('Should return 200 on sucess', async () => {
+    test('Should return 201 on sucess', async () => {
       await request(app).post('/api/user')
         .send({
           name: 'Kauam',
@@ -27,7 +27,7 @@ describe('User Routes', () => {
           passwordConfirmation: '123',
           urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
         })
-        .expect(200)
+        .expect(201)
     })
   })
 

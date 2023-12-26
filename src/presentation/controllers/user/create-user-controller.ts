@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { serverError, ok, returnErrorDecider } from '@/presentation/helpers/http'
+import { serverError, created, returnErrorDecider } from '@/presentation/helpers/http'
 import { ICreateUser } from '@/domain/usecases/user'
 
 export class CreateUserController implements Controller {
@@ -20,7 +20,7 @@ export class CreateUserController implements Controller {
         password: httpRequest.password,
         urlImage: httpRequest.urlImage
       })
-      return ok({ accessToken })
+      return created({ accessToken })
     } catch (error: any) {
       console.log(error)
       return serverError(error)

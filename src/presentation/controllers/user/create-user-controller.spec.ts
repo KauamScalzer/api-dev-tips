@@ -2,7 +2,7 @@ import { CreateUserController } from './create-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { ICreateUser } from '@/domain/usecases/user'
-import { ok, serverError, badRequest } from '@/presentation/helpers/http'
+import { serverError, badRequest, created } from '@/presentation/helpers/http'
 
 const makeCreateUser = (): ICreateUser => {
   class CreateUserStub implements ICreateUser {
@@ -79,10 +79,10 @@ describe('SignUp Controller', () => {
     expect(httpResponse).toEqual(serverError(new ServerError('any_error')))
   })
 
-  test('Should return 200 if valid data is provided', async () => {
+  test('Should return 201 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok({ accessToken: makeFakeUserReturn() }))
+    expect(httpResponse).toEqual(created({ accessToken: makeFakeUserReturn() }))
   })
 
   test('Should return 400 if Validation returns an Error', async () => {
