@@ -1,8 +1,8 @@
 import { CreateUserController } from './create-user-controller'
-import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
+import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { ICreateUser } from '@/domain/usecases/user'
-import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http'
+import { ok, serverError, badRequest } from '@/presentation/helpers/http'
 
 const makeCreateUser = (): ICreateUser => {
   class CreateUserStub implements ICreateUser {
@@ -82,7 +82,7 @@ describe('SignUp Controller', () => {
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok(makeFakeUserReturn()))
+    expect(httpResponse).toEqual(ok({ accessToken: makeFakeUserReturn() }))
   })
 
   test('Should return 400 if Validation returns an Error', async () => {
@@ -90,12 +90,5 @@ describe('SignUp Controller', () => {
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
-  })
-
-  test('Should return 403 if ICreateUser returns false', async () => {
-    const { sut, createUserStub } = makeSut()
-    jest.spyOn(createUserStub, 'create').mockReturnValueOnce(null)
-    const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 })

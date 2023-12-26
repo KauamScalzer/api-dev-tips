@@ -1,7 +1,6 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { serverError, ok, forbidden, returnErrorDecider } from '@/presentation/helpers/http'
+import { serverError, ok, returnErrorDecider } from '@/presentation/helpers/http'
 import { ICreateUser } from '@/domain/usecases/user'
-import { EmailInUseError } from '@/presentation/errors'
 
 export class CreateUserController implements Controller {
   constructor (
@@ -15,16 +14,13 @@ export class CreateUserController implements Controller {
       if (error) {
         return returnErrorDecider(error)
       }
-      const result = await this.createUser.create({
+      const accessToken = await this.createUser.create({
         name: httpRequest.name,
         email: httpRequest.email,
         password: httpRequest.password,
         urlImage: httpRequest.urlImage
       })
-      if (!result) {
-        return forbidden(new EmailInUseError())
-      }
-      return ok(result)
+      return ok({ accessToken })
     } catch (error: any) {
       console.log(error)
       return serverError(error)
