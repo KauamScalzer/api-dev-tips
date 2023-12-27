@@ -1,7 +1,7 @@
 import { CreateLessonController } from './create-lesson-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, badRequest, created } from '@/presentation/helpers/http'
+import { serverError, badRequest, created } from '@/presentation/helpers'
 import { ICreateLesson } from '@/domain/usecases/lesson'
 
 const makeCreateLesson = (): ICreateLesson => {

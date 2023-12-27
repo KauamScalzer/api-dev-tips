@@ -2,7 +2,7 @@ import { CreateUserController } from './create-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { ICreateUser } from '@/domain/usecases/user'
-import { serverError, badRequest, created } from '@/presentation/helpers/http'
+import { serverError, badRequest, created } from '@/presentation/helpers'
 
 const makeCreateUser = (): ICreateUser => {
   class CreateUserStub implements ICreateUser {

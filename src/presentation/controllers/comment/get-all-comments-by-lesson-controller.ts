@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { returnErrorDecider, ok, serverError } from '@/presentation/helpers/http'
+import { returnErrorDecider, ok, serverError } from '@/presentation/helpers'
 import { IGetAllCommentsByLesson } from '@/domain/usecases/comment'
 
 export class GetAllCommentsByLessonController implements Controller {

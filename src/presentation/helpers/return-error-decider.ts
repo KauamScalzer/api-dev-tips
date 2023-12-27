@@ -1,7 +1,5 @@
 import { HttpResponse } from '@/presentation/protocols'
-import { conflict } from './conflict'
-import { badRequest } from './bad-request'
-import { notFound } from './not-found'
+import { conflict, badRequest, notFound } from './http-helpers'
 
 export const returnErrorDecider = (error: Error): HttpResponse => {
   switch (error.name) {

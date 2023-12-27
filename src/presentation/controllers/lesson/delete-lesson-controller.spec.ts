@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { DeleteLessonController } from './delete-lesson-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import { IDeleteLesson } from '@/domain/usecases/lesson'
 
 const makeFakeRequest = (): DeleteLessonController.Params => ({

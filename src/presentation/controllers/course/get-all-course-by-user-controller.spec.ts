@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCourseByUserController } from './get-all-course-by-user-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { IGetAllCourseByUser } from '@/domain/usecases/course'
 
 const makeFakeRequest = (): GetAllCourseByUserController.Params => ({

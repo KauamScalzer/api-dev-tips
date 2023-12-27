@@ -1,7 +1,7 @@
 import { UpdateCommentController } from './update-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
+import { serverError, noContent, badRequest } from '@/presentation/helpers'
 import { IUpdateComment } from '@/domain/usecases/comment'
 
 const makeUpdateComment = (): IUpdateComment => {

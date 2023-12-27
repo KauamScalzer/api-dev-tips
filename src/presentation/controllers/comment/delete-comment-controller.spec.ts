@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { DeleteCommentController } from './delete-comment-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import { IDeleteComment } from '@/domain/usecases/comment'
 
 const makeFakeRequest = (): DeleteCommentController.Params => ({

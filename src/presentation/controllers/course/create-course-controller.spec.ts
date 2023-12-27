@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateCourseController } from './create-course-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, created, serverError } from '@/presentation/helpers/http'
+import { badRequest, created, serverError } from '@/presentation/helpers'
 import { ICreateCourse } from '@/domain/usecases/course'
 
 const makeFakeRequest = (): CreateCourseController.Params => ({

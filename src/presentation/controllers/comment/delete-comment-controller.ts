@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { returnErrorDecider, serverError, noContent } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, noContent } from '@/presentation/helpers'
 import { IDeleteComment } from '@/domain/usecases/comment'
 
 export class DeleteCommentController implements Controller {

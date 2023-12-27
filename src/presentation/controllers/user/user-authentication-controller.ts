@@ -1,5 +1,5 @@
 import { Controller, HttpResponse, Validation } from '@/presentation/protocols'
-import { returnErrorDecider, ok, serverError, unauthorized } from '@/presentation/helpers/http'
+import { returnErrorDecider, ok, serverError, unauthorized } from '@/presentation/helpers'
 import { IUserAuthentication } from '@/domain/usecases/user'
 
 export class UserAuthenticationController implements Controller {

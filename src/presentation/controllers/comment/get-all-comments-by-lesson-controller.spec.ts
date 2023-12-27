@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCommentsByLessonController } from './get-all-comments-by-lesson-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { IGetAllCommentsByLesson } from '@/domain/usecases/comment'
 
 const makeFakeRequest = (): GetAllCommentsByLessonController.Params => ({

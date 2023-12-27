@@ -1,10 +1,10 @@
 import { CreateCommentController } from './create-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, badRequest, returnErrorDecider, created } from '@/presentation/helpers/http'
+import { serverError, badRequest, returnErrorDecider, created } from '@/presentation/helpers'
 import { ICreateComment } from '@/domain/usecases/comment'
 
-jest.mock('@/presentation/helpers/http')
+jest.mock('@/presentation/helpers')
 
 const makeCreateComment = (): ICreateComment => {
   class CreateCommentStub implements ICreateComment {

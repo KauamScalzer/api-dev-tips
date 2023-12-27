@@ -1,6 +1,6 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { UpdateCourseController } from './update-course-controller'
-import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import { IUpdateCourse } from '@/domain/usecases/course'
 import { Validation } from '@/presentation/protocols'
 

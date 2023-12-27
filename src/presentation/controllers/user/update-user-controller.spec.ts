@@ -2,7 +2,7 @@ import { UpdateUserController } from './update-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { IUpdateUser } from '@/domain/usecases/user'
-import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
+import { serverError, badRequest, noContent } from '@/presentation/helpers'
 
 const makeUpdateUser = (): IUpdateUser => {
   class UpdateUserStub implements IUpdateUser {

@@ -1,6 +1,6 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { GetAllCourseController } from './get-all-course-controller'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { IGetAllCourse } from '@/domain/usecases/course'
 import { Validation } from '@/presentation/protocols'
 

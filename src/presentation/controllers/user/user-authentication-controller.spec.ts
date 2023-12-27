@@ -1,5 +1,5 @@
 import { UserAuthenticationController } from './user-authentication-controller'
-import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers/http'
+import { badRequest, serverError, unauthorized, ok } from '@/presentation/helpers'
 import { MissingParamError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { IUserAuthentication } from '@/domain/usecases/user'

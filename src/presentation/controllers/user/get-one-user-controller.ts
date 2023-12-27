@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { returnErrorDecider, serverError, ok } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, ok } from '@/presentation/helpers'
 import { IGetOneUser } from '@/domain/usecases/user'
 
 export class GetOneUserController implements Controller {

@@ -1,5 +1,5 @@
 import { ICreateUserCourses } from '@/domain/usecases/user-course'
-import { returnErrorDecider, created, serverError } from '@/presentation/helpers/http'
+import { returnErrorDecider, created, serverError } from '@/presentation/helpers'
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class CreateUserCoursesController implements Controller {

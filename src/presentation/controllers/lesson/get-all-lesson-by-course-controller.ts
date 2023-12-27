@@ -1,5 +1,5 @@
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
-import { returnErrorDecider, serverError, ok } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, ok } from '@/presentation/helpers'
 import { IGetAllLessonByCourse } from '@/domain/usecases/lesson'
 
 export class GetAllLessonByCourseController implements Controller {

@@ -2,7 +2,7 @@ import { GetOneUserController } from './get-one-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { IGetOneUser } from '@/domain/usecases/user'
-import { serverError, badRequest, ok } from '@/presentation/helpers/http'
+import { serverError, badRequest, ok } from '@/presentation/helpers'
 
 const makeGetOneUser = (): IGetOneUser => {
   class GetOneUserStub implements IGetOneUser {

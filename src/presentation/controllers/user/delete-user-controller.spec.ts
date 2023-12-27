@@ -2,7 +2,7 @@ import { DeleteUserController } from './delete-user-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 import { IDeleteUser } from '@/domain/usecases/user'
-import { serverError, badRequest, noContent } from '@/presentation/helpers/http'
+import { serverError, badRequest, noContent } from '@/presentation/helpers'
 
 const makeDeleteUser = (): IDeleteUser => {
   class DeleteUserStub implements IDeleteUser {
