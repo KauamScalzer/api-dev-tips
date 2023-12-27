@@ -19,7 +19,7 @@ describe('Course Routes', () => {
   })
 
   describe('POST /course', () => {
-    test('Should return 204 on sucess', async () => {
+    test('Should return 201 on sucess', async () => {
       await request(app).post('/api/course')
         .send({
           name: 'any_name',
@@ -27,7 +27,7 @@ describe('Course Routes', () => {
           author: 'any_author',
           thumb: 'any_thumb'
         })
-        .expect(204)
+        .expect(201)
     })
   })
 

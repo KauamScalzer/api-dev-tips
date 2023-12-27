@@ -19,7 +19,7 @@ describe('UserCourse Routes', () => {
   })
 
   describe('POST /user-course', () => {
-    test('Should return 204 on sucess', async () => {
+    test('Should return 201 on sucess', async () => {
       await getRepository('course').save({
         id: 1,
         name: 'any_name',
@@ -42,7 +42,7 @@ describe('UserCourse Routes', () => {
             }
           ]
         })
-        .expect(204)
+        .expect(201)
     })
   })
 })

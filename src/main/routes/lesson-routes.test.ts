@@ -18,7 +18,7 @@ describe('Lesson Routes', () => {
   })
 
   describe('POST /lesson', () => {
-    test('Should return 204 on sucess', async () => {
+    test('Should return 201 on sucess', async () => {
       await getRepository('course').save({
         id: 1,
         name: 'any_name',
@@ -33,7 +33,7 @@ describe('Lesson Routes', () => {
           description: 'any_description',
           urlVideo: 'any_url_video'
         })
-        .expect(204)
+        .expect(201)
     })
   })
 

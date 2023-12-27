@@ -20,7 +20,7 @@ describe('Comment Routes', () => {
   })
 
   describe('POST /comment', () => {
-    test('Should return 204 on sucess', async () => {
+    test('Should return 201 on sucess', async () => {
       await getRepository('course').save({
         id: 1,
         name: 'any_name',
@@ -47,7 +47,7 @@ describe('Comment Routes', () => {
           userId: 1,
           comment: 'any_comment'
         })
-        .expect(204)
+        .expect(201)
     })
   })
 
