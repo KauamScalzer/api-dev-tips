@@ -14,8 +14,7 @@ describe('UpdateUserRepository', () => {
       id: 1,
       name: 'any_name',
       password: 'any_password',
-      email: 'any_email',
-      urlImage: 'any_url_image'
+      email: 'any_email'
     })
   })
 
@@ -32,8 +31,7 @@ describe('UpdateUserRepository', () => {
     await sut.update(1, {
       name: 'updated_name',
       email: 'updated_email@gmail.com',
-      accessToken: 'updated_token',
-      urlImage: 'updated_url_image'
+      accessToken: 'updated_token'
     })
     const user = await getRepository(User).findOne({ where: { id: 1 } })
     expect(user).toBeTruthy()
@@ -41,6 +39,5 @@ describe('UpdateUserRepository', () => {
     expect(user?.name).toBe('updated_name')
     expect(user?.email).toBe('updated_email@gmail.com')
     expect(user?.accessToken).toBe('updated_token')
-    expect(user?.urlImage).toBe('updated_url_image')
   })
 })

@@ -32,8 +32,7 @@ describe('GetAllUserCourseByUserRepository', () => {
       id: 1,
       name: 'any_name',
       password: 'any_password',
-      email: 'any_email',
-      urlImage: 'any_url_image'
+      email: 'any_email'
     })
     await getRepository('user_course').save({
       id: 1,

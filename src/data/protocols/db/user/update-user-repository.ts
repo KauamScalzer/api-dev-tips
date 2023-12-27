@@ -7,6 +7,5 @@ export namespace IUpdateUserRepository {
     name?: string
     email?: string
     accessToken?: string
-    urlImage?: string
   }
 }

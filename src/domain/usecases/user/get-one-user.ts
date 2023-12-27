@@ -10,6 +10,5 @@ export namespace IGetOneUser {
     id: number
     name: string
     email: string
-    urlImage: string
   }
 }

@@ -24,8 +24,7 @@ describe('User Routes', () => {
           name: 'Kauam',
           email: 'kauam@gmail.com',
           password: '123',
-          passwordConfirmation: '123',
-          urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
+          passwordConfirmation: '123'
         })
         .expect(201)
     })
@@ -37,8 +36,7 @@ describe('User Routes', () => {
       await getRepository('user').save({
         name: 'kauam',
         password,
-        email: 'kauam@gmail.com',
-        urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
+        email: 'kauam@gmail.com'
       })
       await request(app).post('/api/user/authentication')
         .send({
@@ -64,14 +62,12 @@ describe('User Routes', () => {
         id: 1,
         name: 'kauam',
         password: 'any_password',
-        email: 'kauam@gmail.com',
-        urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
+        email: 'kauam@gmail.com'
       })
       await request(app).put('/api/user/1')
         .send({
           name: 'updated_name',
-          email: 'updated_email@gmail.com',
-          urlImage: 'updated_url_image'
+          email: 'updated_email@gmail.com'
         })
         .expect(204)
     })
@@ -83,8 +79,7 @@ describe('User Routes', () => {
         id: 1,
         name: 'kauam',
         password: 'any_password',
-        email: 'kauam@gmail.com',
-        urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
+        email: 'kauam@gmail.com'
       })
       await request(app).delete('/api/user/1')
         .expect(204)
@@ -97,8 +92,7 @@ describe('User Routes', () => {
         id: 1,
         name: 'kauam',
         password: 'any_password',
-        email: 'kauam@gmail.com',
-        urlImage: 'https://sm.ign.com/ign_br/screenshot/default/avatar-3-jake-sully-out-as-narrator-replaced-by-son-loak-q8g_qny6.jpg'
+        email: 'kauam@gmail.com'
       })
       await request(app).get('/api/user/1')
         .expect(200)

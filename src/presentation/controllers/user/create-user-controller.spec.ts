@@ -19,8 +19,7 @@ const makeFakeRequest = (): CreateUserController.Params => ({
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'any_password',
-  passwordConfirmation: 'any_password',
-  urlImage: 'any_url_image'
+  passwordConfirmation: 'any_password'
 })
 
 const makeValidation = (): Validation => {
@@ -57,8 +56,7 @@ describe('SignUp Controller', () => {
     expect(createSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@mail.com',
-      password: 'any_password',
-      urlImage: 'any_url_image'
+      password: 'any_password'
     })
   })
 

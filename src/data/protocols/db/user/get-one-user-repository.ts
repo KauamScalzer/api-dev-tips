@@ -7,6 +7,5 @@ export namespace IGetOneUserRepository {
     id: number
     name: string
     email: string
-    urlImage: string
   }
 }

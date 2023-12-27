@@ -8,6 +8,5 @@ export namespace IGetOneUserByEmailRepository {
     name: string
     email: string
     password: string
-    urlImage: string
   }
 }

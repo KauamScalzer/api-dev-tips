@@ -17,8 +17,7 @@ const makeUpdateUserRepositoryStub = (): IUpdateUserRepository => {
 const makeFakeUserData = (): IUpdateUser.Params => ({
   id: 1,
   name: 'any_name',
-  email: 'any_email',
-  urlImage: 'any_url_image'
+  email: 'any_email'
 })
 
 const makeSut = (): SutTypes => {
@@ -35,7 +34,7 @@ describe('UpdateUser usecase', () => {
     const { sut, updateUserRepository } = makeSut()
     const createSpy = jest.spyOn(updateUserRepository, 'update')
     await sut.update(makeFakeUserData())
-    expect(createSpy).toHaveBeenCalledWith(1, { email: 'any_email', id: 1, name: 'any_name', urlImage: 'any_url_image' })
+    expect(createSpy).toHaveBeenCalledWith(1, { email: 'any_email', id: 1, name: 'any_name' })
   })
 
   test('Should throw if IUpdateUserRepository throws', async () => {

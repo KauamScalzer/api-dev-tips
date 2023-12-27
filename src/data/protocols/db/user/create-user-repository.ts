@@ -7,12 +7,10 @@ export namespace ICreateUserRepository {
     name: string
     email: string
     password: string
-    urlImage: string
   }
   export type Result = {
     id: number
     name: string
     email: string
-    urlImage: string
   }
 }

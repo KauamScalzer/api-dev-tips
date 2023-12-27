@@ -25,8 +25,7 @@ describe('GetOneUserByEmailRepository Repository', () => {
       id: 1,
       name: 'any_name',
       password: 'any_password',
-      email: 'any_email',
-      urlImage: 'any_url_image'
+      email: 'any_email'
     })
     const user = await sut.getOne('any_email')
     expect(user).toBeTruthy()
@@ -34,7 +33,6 @@ describe('GetOneUserByEmailRepository Repository', () => {
     expect(user.name).toBe('any_name')
     expect(user.email).toBe('any_email')
     expect(user.password).toBe('any_password')
-    expect(user.urlImage).toBe('any_url_image')
   })
 
   test('Should return null if get one fails', async () => {

@@ -41,8 +41,7 @@ describe('CreateCommentRepository', () => {
       id: 1,
       name: 'any_name',
       email: 'any_email@gmail.com',
-      password: 'any_password',
-      urlImage: 'any_url_image'
+      password: 'any_password'
     })
     const sut = makeSut()
     await sut.create({

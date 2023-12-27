@@ -7,6 +7,5 @@ export namespace ICreateUser {
     name: string
     email: string
     password: string
-    urlImage: string
   }
 }

@@ -7,6 +7,5 @@ export namespace IUpdateUser {
     id: number
     name?: string
     email?: string
-    urlImage?: string
   }
 }

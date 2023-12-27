@@ -13,8 +13,7 @@ const GetOneUserRepositoryStub = (): IGetOneUserRepository => {
       return {
         id: 1,
         name: 'any_name',
-        email: 'any_email',
-        urlImage: 'any_url_image'
+        email: 'any_email'
       }
     }
   }

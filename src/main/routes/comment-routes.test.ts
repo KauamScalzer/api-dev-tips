@@ -39,8 +39,7 @@ describe('Comment Routes', () => {
         id: 1,
         name: 'any_name',
         email: 'any_email@gmail.com',
-        password: 'any_password',
-        urlImage: 'any_url_image'
+        password: 'any_password'
       })
       await request(app).post('/api/comment')
         .send({
@@ -72,8 +71,7 @@ describe('Comment Routes', () => {
         id: 1,
         name: 'any_name',
         email: 'any_email@gmail.com',
-        password: 'any_password',
-        urlImage: 'any_url_image'
+        password: 'any_password'
       })
       await getRepository('comment').save({
         id: 1,
@@ -106,8 +104,7 @@ describe('Comment Routes', () => {
         id: 1,
         name: 'any_name',
         email: 'any_email@gmail.com',
-        password: 'any_password',
-        urlImage: 'any_url_image'
+        password: 'any_password'
       })
       await request(app).delete('/api/comment/1')
         .expect(204)
@@ -134,8 +131,7 @@ describe('Comment Routes', () => {
         id: 1,
         name: 'any_name',
         email: 'any_email@gmail.com',
-        password: 'any_password',
-        urlImage: 'any_url_image'
+        password: 'any_password'
       })
       await getRepository('comment').save({
         id: 1,

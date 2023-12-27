@@ -17,8 +17,7 @@ export class UpdateUserController implements Controller {
       await this.updateUser.update({
         id: httpRequest.id,
         name: httpRequest.name,
-        email: httpRequest.email,
-        urlImage: httpRequest.urlImage
+        email: httpRequest.email
       })
       return noContent()
     } catch (error: any) {
@@ -33,6 +32,5 @@ export namespace UpdateUserController {
     id: number
     name: string
     email: string
-    urlImage: string
   }
 }

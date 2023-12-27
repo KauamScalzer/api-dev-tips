@@ -40,15 +40,13 @@ const makeCreateUserRepository = (): ICreateUserRepository => {
 const makeFakeUser = (): ICreateUserRepository.Result => ({
   id: 1,
   name: 'valid_name',
-  email: 'valid_email',
-  urlImage: 'valid_url_image'
+  email: 'valid_email'
 })
 
 const makeFakeUserData = (): ICreateUser.Params => ({
   name: 'valid_name',
   email: 'valid_email',
-  password: 'valid_password',
-  urlImage: 'valid_url_image'
+  password: 'valid_password'
 })
 
 const makeSut = (): SutTypes => {
@@ -86,8 +84,7 @@ describe('CreateUser usecase', () => {
     expect(createSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password',
-      urlImage: 'valid_url_image'
+      password: 'hashed_password'
     })
   })
 

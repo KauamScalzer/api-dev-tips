@@ -33,8 +33,7 @@ describe('CreateUserCourseRepository', () => {
       id: 1,
       name: 'any_name',
       password: 'any_password',
-      email: 'any_email',
-      urlImage: 'any_url_image'
+      email: 'any_email'
     })
     const sut = makeSut()
     await sut.create({

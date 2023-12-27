@@ -17,8 +17,7 @@ export class CreateUserController implements Controller {
       const accessToken = await this.createUser.create({
         name: httpRequest.name,
         email: httpRequest.email,
-        password: httpRequest.password,
-        urlImage: httpRequest.urlImage
+        password: httpRequest.password
       })
       return created({ accessToken })
     } catch (error: any) {
@@ -34,6 +33,5 @@ export namespace CreateUserController {
     email: string
     password: string
     passwordConfirmation: string
-    urlImage: string
   }
 }
