@@ -1,5 +1,5 @@
 import { ICreateCourse } from '@/domain/usecases/course'
-import { returnErrorDecider, noContent, serverError } from '@/presentation/helpers/http'
+import { returnErrorDecider, serverError, created } from '@/presentation/helpers/http'
 import { HttpResponse, Controller, Validation } from '@/presentation/protocols'
 
 export class CreateCourseController implements Controller {
@@ -14,13 +14,13 @@ export class CreateCourseController implements Controller {
       if (error) {
         return returnErrorDecider(error)
       }
-      await this.createCourse.create({
+      const result = await this.createCourse.create({
         name: httpRequest.name,
         description: httpRequest.description,
         thumb: httpRequest.thumb,
         author: httpRequest.author
       })
-      return noContent()
+      return created(result)
     } catch (error: any) {
       return serverError(error)
     }

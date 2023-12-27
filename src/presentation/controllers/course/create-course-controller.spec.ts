@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateCourseController } from './create-course-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
+import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { ICreateCourse } from '@/domain/usecases/course'
 
 const makeFakeRequest = (): CreateCourseController.Params => ({
@@ -22,10 +22,22 @@ const makeValidation = (): Validation => {
 
 const makeCreateCourse = (): ICreateCourse => {
   class CreateCourseStub implements ICreateCourse {
-    async create (data: ICreateCourse.Params): Promise<void> {}
+    async create (data: ICreateCourse.Params): Promise<ICreateCourse.Result> {
+      return makeFakeCourse()
+    }
   }
   return new CreateCourseStub()
 }
+
+const makeFakeCourse = (): ICreateCourse.Result => ({
+  id: 1,
+  name: 'any_name',
+  description: 'any_description',
+  thumb: 'any_thumb',
+  author: 'any_author',
+  createdAt: new Date(),
+  updatedAt: new Date()
+})
 
 interface SutTypes {
   sut: CreateCourseController
@@ -75,9 +87,9 @@ describe('CreateCourseController', () => {
     expect(httpResponse).toEqual(serverError(new ServerError('any_error')))
   })
 
-  test('Should return 204 on success', async () => {
+  test('Should return 201 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(noContent())
+    expect(httpResponse).toEqual(created(makeFakeCourse()))
   })
 })

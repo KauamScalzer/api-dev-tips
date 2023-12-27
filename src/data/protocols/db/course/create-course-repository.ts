@@ -1,5 +1,5 @@
 export interface ICreateCourseRepository {
-  create (data: ICreateCourseRepository.Params): Promise<void>
+  create (data: ICreateCourseRepository.Params): Promise<ICreateCourseRepository.Result>
 }
 
 export namespace ICreateCourseRepository {
@@ -8,5 +8,14 @@ export namespace ICreateCourseRepository {
     description: string
     author: string
     thumb: string
+  }
+  export type Result = {
+    id: number
+    name: string
+    description: string
+    thumb: string
+    author: string
+    createdAt: Date
+    updatedAt: Date
   }
 }

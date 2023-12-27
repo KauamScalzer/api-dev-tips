@@ -6,7 +6,7 @@ export class CreateCourse implements ICreateCourse {
     private readonly createCourseRepository: ICreateCourseRepository
   ) {}
 
-  async create (data: ICreateCourse.Params): Promise<void> {
-    await this.createCourseRepository.create(data)
+  async create (data: ICreateCourse.Params): Promise<ICreateCourse.Result> {
+    return await this.createCourseRepository.create(data)
   }
 }
