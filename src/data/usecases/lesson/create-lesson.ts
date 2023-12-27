@@ -6,7 +6,7 @@ export class CreateLesson implements ICreateLesson {
     private readonly createLessonepository: ICreateLessonRepository
   ) {}
 
-  async create (data: ICreateLesson.Params): Promise<void> {
-    await this.createLessonepository.create(data)
+  async create (data: ICreateLesson.Params): Promise<ICreateLesson.Result> {
+    return await this.createLessonepository.create(data)
   }
 }

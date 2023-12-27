@@ -1,15 +1,27 @@
 import { CreateLessonController } from './create-lesson-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, noContent, badRequest } from '@/presentation/helpers/http'
+import { serverError, badRequest, created } from '@/presentation/helpers/http'
 import { ICreateLesson } from '@/domain/usecases/lesson'
 
 const makeCreateLesson = (): ICreateLesson => {
   class CreateLessonStub implements ICreateLesson {
-    async create (data: ICreateLesson.Params): Promise<void> {}
+    async create (data: ICreateLesson.Params): Promise<ICreateLesson.Result> {
+      return makeFakeLesson()
+    }
   }
   return new CreateLessonStub()
 }
+
+const makeFakeLesson = (): ICreateLesson.Result => ({
+  id: 1,
+  courseId: 1,
+  name: 'any_name',
+  description: 'any_description',
+  urlVideo: 'any_url_video',
+  createdAt: new Date(),
+  updatedAt: new Date()
+})
 
 const makeFakeRequest = (): CreateLessonController.Params => ({
   courseId: 1,
@@ -81,9 +93,9 @@ describe('CreateLessonController', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 
-  test('Should return 204 if valid data is provided', async () => {
+  test('Should return 201 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(noContent())
+    expect(httpResponse).toEqual(created(makeFakeLesson()))
   })
 })

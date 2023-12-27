@@ -3,8 +3,8 @@ import { Lesson } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class CreateLessonRepository implements ICreateLessonRepository {
-  async create (data: ICreateLessonRepository.Params): Promise<void> {
+  async create (data: ICreateLessonRepository.Params): Promise<ICreateLessonRepository.Result> {
     const repository = getRepository(Lesson)
-    await repository.save(data)
+    return await repository.save(data)
   }
 }

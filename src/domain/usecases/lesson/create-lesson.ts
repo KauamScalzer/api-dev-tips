@@ -1,5 +1,5 @@
 export interface ICreateLesson {
-  create (data: ICreateLesson.Params): Promise<void>
+  create (data: ICreateLesson.Params): Promise<ICreateLesson.Result>
 }
 
 export namespace ICreateLesson {
@@ -8,5 +8,14 @@ export namespace ICreateLesson {
     name: string
     description: string
     urlVideo: string
+  }
+  export type Result = {
+    id: number
+    courseId: number
+    name: string
+    description: string
+    urlVideo: string
+    createdAt: Date
+    updatedAt: Date
   }
 }
