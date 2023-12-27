@@ -1,7 +1,7 @@
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { CreateUserCoursesController } from './create-user-courses-controller'
 import { Validation } from '@/presentation/protocols'
-import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
+import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { ICreateUserCourses } from '@/domain/usecases/user-course'
 
 const makeFakeRequest = (): CreateUserCoursesController.Params => ({
@@ -85,9 +85,9 @@ describe('CreateUserCoursesController', () => {
     expect(httpResponse).toEqual(serverError(new ServerError('any_error')))
   })
 
-  test('Should return 204 on success', async () => {
+  test('Should return 201 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(noContent())
+    expect(httpResponse).toEqual(created(''))
   })
 })
