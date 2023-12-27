@@ -1,5 +1,5 @@
 export interface ICreateComment {
-  create (data: ICreateComment.Params): Promise<void>
+  create (data: ICreateComment.Params): Promise<ICreateComment.Result>
 }
 
 export namespace ICreateComment {
@@ -7,5 +7,13 @@ export namespace ICreateComment {
     lessonId: number
     userId: number
     comment: string
+  }
+  export type Result = {
+    id: number
+    lessonId: number
+    userId: number
+    comment: string
+    createdAt: Date
+    updatedAt: Date
   }
 }

@@ -6,7 +6,7 @@ export class CreateComment implements ICreateComment {
     private readonly createCommentRepository: ICreateCommentRepository
   ) {}
 
-  async create (data: ICreateComment.Params): Promise<void> {
-    await this.createCommentRepository.create(data)
+  async create (data: ICreateComment.Params): Promise<ICreateComment.Result> {
+    return await this.createCommentRepository.create(data)
   }
 }

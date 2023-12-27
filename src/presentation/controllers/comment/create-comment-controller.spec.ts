@@ -1,17 +1,28 @@
 import { CreateCommentController } from './create-comment-controller'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
-import { serverError, noContent, badRequest, returnErrorDecider } from '@/presentation/helpers/http'
+import { serverError, badRequest, returnErrorDecider, created } from '@/presentation/helpers/http'
 import { ICreateComment } from '@/domain/usecases/comment'
 
 jest.mock('@/presentation/helpers/http')
 
 const makeCreateComment = (): ICreateComment => {
   class CreateCommentStub implements ICreateComment {
-    async create (data: ICreateComment.Params): Promise<void> {}
+    async create (data: ICreateComment.Params): Promise<ICreateComment.Result> {
+      return makeFakeComment()
+    }
   }
   return new CreateCommentStub()
 }
+
+const makeFakeComment = (): ICreateComment.Result => ({
+  id: 1,
+  lessonId: 1,
+  userId: 1,
+  comment: 'any_comment',
+  createdAt: new Date(),
+  updatedAt: new Date()
+})
 
 const makeFakeRequest = (): CreateCommentController.Params => ({
   lessonId: 1,
@@ -88,9 +99,9 @@ describe('CreateCommentController', () => {
     expect(returnErrorDecider).toHaveBeenLastCalledWith(new MissingParamError('any_field'))
   })
 
-  test('Should return 204 if valid data is provided', async () => {
+  test('Should return 201 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(noContent())
+    expect(httpResponse).toEqual(created(makeFakeComment()))
   })
 })

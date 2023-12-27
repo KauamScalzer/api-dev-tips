@@ -3,8 +3,8 @@ import { Comment } from '@/infra/db/typeorm/models'
 import { getRepository } from 'typeorm'
 
 export class CreateCommentRepository implements ICreateCommentRepository {
-  async create (data: ICreateCommentRepository.Params): Promise<void> {
+  async create (data: ICreateCommentRepository.Params): Promise<ICreateCommentRepository.Result> {
     const repository = getRepository(Comment)
-    await repository.save(data)
+    return await repository.save(data)
   }
 }
