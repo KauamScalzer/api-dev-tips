@@ -1,4 +1,4 @@
-export const userSchema = {
+export const createUserResultSchema = {
   type: 'object',
   properties: {
     accessToken: {

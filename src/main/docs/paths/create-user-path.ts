@@ -1,4 +1,4 @@
-export const userPath = {
+export const createUserPath = {
   post: {
     tags: ['User'],
     summary: 'API para criar usuário',
@@ -17,13 +17,25 @@ export const userPath = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/user'
+              $ref: '#/schemas/createUserResult'
             }
           }
         }
       },
       400: {
-        description: 'Bad '
+        $ref: '#/components/badRequest'
+      },
+      401: {
+        $ref: '#/components/unauthorized'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      409: {
+        $ref: '#/components/conflict'
+      },
+      500: {
+        $ref: '#/components/serverError'
       }
     }
   }

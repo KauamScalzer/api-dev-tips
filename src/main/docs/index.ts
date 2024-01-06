@@ -1,6 +1,6 @@
-import { userPath } from './paths/user-path'
-import { userSchema } from './schemas/user-schema'
-import { createUserParamsSchema } from './schemas/create-user-params-schema'
+import { createUserPath } from './paths'
+import { createUserResultSchema, createUserParamsSchema, errorSchema } from './schemas'
+import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
 
 export default {
   openapi: '3.0.0',
@@ -16,10 +16,18 @@ export default {
     name: 'User'
   }],
   paths: {
-    '/user': userPath
+    '/user': createUserPath
   },
   schemas: {
-    user: userSchema,
-    createUserParams: createUserParamsSchema
+    createUserResult: createUserResultSchema,
+    createUserParams: createUserParamsSchema,
+    error: errorSchema
+  },
+  components: {
+    badRequest,
+    conflict,
+    serverError,
+    notFound,
+    unauthorized
   }
 }
