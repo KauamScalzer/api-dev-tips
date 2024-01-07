@@ -1,4 +1,4 @@
-import { createUserPath, updateUserPath, userAuthenticationPath } from './paths'
+import { createUserPath, userPaths, userAuthenticationPath } from './paths'
 import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema } from './schemas'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
 
@@ -18,7 +18,7 @@ export default {
   paths: {
     '/user': createUserPath,
     '/user/authentication': userAuthenticationPath,
-    '/user/{id}': updateUserPath
+    '/user/{id}': userPaths
   },
   schemas: {
     createUserResult: createUserResultSchema,
