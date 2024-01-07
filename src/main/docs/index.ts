@@ -1,6 +1,8 @@
 import { createUserPath, userPaths, userAuthenticationPath } from './paths/user'
 import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas/user'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
+import { createCoursePath } from './paths/course/create-course-path'
+import { createCourseParamsSchema } from './schemas/course'
 
 export default {
   openapi: '3.0.0',
@@ -12,13 +14,18 @@ export default {
   servers: [{
     url: '/api'
   }],
-  tags: [{
-    name: 'User'
-  }],
+  tags: [
+    {
+      name: 'User'
+    },
+    {
+      name: 'Course'
+    }],
   paths: {
     '/user': createUserPath,
     '/user/authentication': userAuthenticationPath,
-    '/user/{id}': userPaths
+    '/user/{id}': userPaths,
+    '/course': createCoursePath
   },
   schemas: {
     createUserResult: createUserResultSchema,
@@ -26,7 +33,8 @@ export default {
     error: errorSchema,
     userAuthenticationParams: userAuthenticationParamsSchema,
     updateUserParams: updateUserParamsSchema,
-    getOneUserResult: getOneUserResultSchema
+    getOneUserResult: getOneUserResultSchema,
+    createCourseParams: createCourseParamsSchema
   },
   components: {
     badRequest,
