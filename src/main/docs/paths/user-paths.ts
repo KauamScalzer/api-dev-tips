@@ -62,5 +62,38 @@ export const userPaths = {
         $ref: '#/components/serverError'
       }
     }
+  },
+  get: {
+    tags: ['User'],
+    summary: 'API para trazer dados de um usuário',
+    parameters: [{
+      in: 'path',
+      name: 'id',
+      required: true,
+      schema: {
+        type: 'number'
+      }
+    }],
+    responses: {
+      200: {
+        description: 'Sucesso',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/schemas/getOneUserResult'
+            }
+          }
+        }
+      },
+      400: {
+        $ref: '#/components/badRequest'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
+      }
+    }
   }
 }
