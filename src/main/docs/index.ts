@@ -1,5 +1,5 @@
-import { createUserPath, userAuthenticationPath } from './paths'
-import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema } from './schemas'
+import { createUserPath, updateUserPath, userAuthenticationPath } from './paths'
+import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema } from './schemas'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
 
 export default {
@@ -17,13 +17,15 @@ export default {
   }],
   paths: {
     '/user': createUserPath,
-    '/user/authentication': userAuthenticationPath
+    '/user/authentication': userAuthenticationPath,
+    '/user/{id}': updateUserPath
   },
   schemas: {
     createUserResult: createUserResultSchema,
     createUserParams: createUserParamsSchema,
     error: errorSchema,
-    userAuthenticationParams: userAuthenticationParamsSchema
+    userAuthenticationParams: userAuthenticationParamsSchema,
+    updateUserParams: updateUserParamsSchema
   },
   components: {
     badRequest,
