@@ -1,8 +1,9 @@
 import { createUserPath, userPaths, userAuthenticationPath } from './paths/user'
-import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas/user'
+import { createUserResultSchema, createUserParamsSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas/user'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
-import { createCoursePath } from './paths/course/create-course-path'
+import { createCoursePath } from './paths/course'
 import { createCourseParamsSchema } from './schemas/course'
+import { errorSchema } from './schemas/error'
 
 export default {
   openapi: '3.0.0',
