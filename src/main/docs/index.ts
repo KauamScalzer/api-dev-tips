@@ -1,5 +1,5 @@
-import { createUserPath, userPaths, userAuthenticationPath } from './paths'
-import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas'
+import { createUserPath, userPaths, userAuthenticationPath } from './paths/user'
+import { createUserResultSchema, createUserParamsSchema, errorSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas/user'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
 
 export default {

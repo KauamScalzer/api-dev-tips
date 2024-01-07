@@ -9,6 +9,12 @@ export const getOneUserResultSchema = {
     },
     email: {
       type: 'string'
+    },
+    createdAt: {
+      type: 'string'
+    },
+    updatedAt: {
+      type: 'string'
     }
   }
 }
