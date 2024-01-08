@@ -13,7 +13,14 @@ export const createCoursePath = {
     },
     responses: {
       201: {
-        description: 'Criado'
+        description: 'Criado',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/schemas/createCourseResult'
+            }
+          }
+        }
       },
       400: {
         $ref: '#/components/badRequest'

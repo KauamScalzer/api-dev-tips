@@ -1,8 +1,8 @@
 import { createUserPath, userPaths, userAuthenticationPath } from './paths/user'
 import { createUserResultSchema, createUserParamsSchema, userAuthenticationParamsSchema, updateUserParamsSchema, getOneUserResultSchema } from './schemas/user'
 import { badRequest, conflict, serverError, notFound, unauthorized } from './components'
-import { createCoursePath } from './paths/course'
-import { createCourseParamsSchema } from './schemas/course'
+import { createCoursePath, getAllCoursePath } from './paths/course'
+import { createCourseParamsSchema, createCourseResultSchema, getAllCourseResultSchema } from './schemas/course'
 import { errorSchema } from './schemas/error'
 
 export default {
@@ -26,7 +26,8 @@ export default {
     '/user': createUserPath,
     '/user/authentication': userAuthenticationPath,
     '/user/{id}': userPaths,
-    '/course': createCoursePath
+    '/course': createCoursePath,
+    '/course?skip=1&take=10': getAllCoursePath
   },
   schemas: {
     createUserResult: createUserResultSchema,
@@ -35,7 +36,9 @@ export default {
     userAuthenticationParams: userAuthenticationParamsSchema,
     updateUserParams: updateUserParamsSchema,
     getOneUserResult: getOneUserResultSchema,
-    createCourseParams: createCourseParamsSchema
+    createCourseParams: createCourseParamsSchema,
+    createCourseResult: createCourseResultSchema,
+    getAllCourseResult: getAllCourseResultSchema
   },
   components: {
     badRequest,
