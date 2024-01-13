@@ -1,5 +1,5 @@
 import { Validators } from '@/presentation/protocols/validators'
 
 export const makeGetAllCommentsByLessonRules = (): Validators => ({
-  requiredFields: ['lessonId']
+  requiredFields: ['lessonId', 'skip', 'take']
 })

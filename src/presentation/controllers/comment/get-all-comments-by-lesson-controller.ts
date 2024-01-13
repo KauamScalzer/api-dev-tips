@@ -17,7 +17,7 @@ export class GetAllCommentsByLessonController implements Controller {
       const result = await this.getAllCommentsByLesson.getAll({
         lessonId: httpRequest.lessonId,
         skip: httpRequest.skip,
-        take: httpRequest.skip
+        take: httpRequest.take
       })
       return ok(result)
     } catch (error: any) {
