@@ -4,6 +4,8 @@ import { badRequest, conflict, serverError, notFound, unauthorized } from './com
 import { coursePaths, createCoursePath, getAllCourseByUserPath, getAllCoursePath } from './paths/course'
 import { createCourseParamsSchema, createCourseResultSchema, getAllCourseResultSchema } from './schemas/course'
 import { errorSchema } from './schemas/error'
+import { createCommentPath } from './paths/comment'
+import { createCommentParamsSchema, createCommentResultSchema } from './schemas/comment'
 
 export default {
   openapi: '3.0.0',
@@ -21,7 +23,11 @@ export default {
     },
     {
       name: 'Course'
-    }],
+    },
+    {
+      name: 'Comment'
+    }
+  ],
   paths: {
     '/user': createUserPath,
     '/user/authentication': userAuthenticationPath,
@@ -29,7 +35,8 @@ export default {
     '/course': createCoursePath,
     '/course?skip=1&take=10': getAllCoursePath,
     '/course/by-user/{id}?skip=1&take=10': getAllCourseByUserPath,
-    '/course/{id}': coursePaths
+    '/course/{id}': coursePaths,
+    '/comment': createCommentPath
   },
   schemas: {
     createUserResult: createUserResultSchema,
@@ -40,7 +47,9 @@ export default {
     getOneUserResult: getOneUserResultSchema,
     createCourseParams: createCourseParamsSchema,
     createCourseResult: createCourseResultSchema,
-    getAllCourseResult: getAllCourseResultSchema
+    getAllCourseResult: getAllCourseResultSchema,
+    createCommentParams: createCommentParamsSchema,
+    createCommentResult: createCommentResultSchema
   },
   components: {
     badRequest,
