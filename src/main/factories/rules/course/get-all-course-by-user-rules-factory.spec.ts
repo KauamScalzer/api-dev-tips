@@ -4,6 +4,8 @@ import { Validators } from '@/presentation/protocols/validators'
 describe('makeGetAllCourseByUserRules', () => {
   test('should return correct get all course by user rules', () => {
     const result: Validators = makeGetAllCourseByUserRules()
-    expect(result.requiredFields).toEqual(['take', 'skip', 'userId'])
+    expect(result).toEqual({
+      requiredFields: ['take', 'skip', 'userId']
+    })
   })
 })

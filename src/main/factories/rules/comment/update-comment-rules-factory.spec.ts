@@ -5,7 +5,9 @@ import { Validators } from '@/presentation/protocols/validators'
 describe('makeUpdateCommentRules', () => {
   test('should return correct update comment rules', () => {
     const result: Validators = makeUpdateCommentRules()
-    expect(result.requiredFields).toEqual(['id', 'comment'])
-    expect(result.haveToExist).toEqual([{ fieldName: 'id', model: Comment }])
+    expect(result).toEqual({
+      requiredFields: ['id', 'comment'],
+      haveToExist: [{ fieldName: 'id', model: Comment }]
+    })
   })
 })

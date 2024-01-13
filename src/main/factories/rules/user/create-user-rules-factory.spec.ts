@@ -5,9 +5,11 @@ import { Validators } from '@/presentation/protocols/validators'
 describe('makeCreateUserRules', () => {
   test('should return correct create user rules', () => {
     const result: Validators = makeCreateUserRules()
-    expect(result.requiredFields).toEqual(['name', 'email', 'password', 'passwordConfirmation'])
-    expect(result.compareFields).toEqual({ field: 'password', fieldToCompare: 'passwordConfirmation' })
-    expect(result.email).toEqual('email')
-    expect(result.cantExist).toEqual([{ fieldName: 'email', model: User }])
+    expect(result).toEqual({
+      requiredFields: ['name', 'email', 'password', 'passwordConfirmation'],
+      compareFields: { field: 'password', fieldToCompare: 'passwordConfirmation' },
+      email: 'email',
+      cantExist: [{ fieldName: 'email', model: User }]
+    })
   })
 })

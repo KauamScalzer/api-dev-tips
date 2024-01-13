@@ -7,5 +7,9 @@ describe('makeDeleteUserRules', () => {
     const result: Validators = makeDeleteUserRules()
     expect(result.requiredFields).toEqual(['id'])
     expect(result.haveToExist).toEqual([{ fieldName: 'id', model: User }])
+    expect(result).toEqual({
+      requiredFields: ['id'],
+      haveToExist: [{ fieldName: 'id', model: User }]
+    })
   })
 })

@@ -4,6 +4,8 @@ import { Validators } from '@/presentation/protocols/validators'
 describe('makeDeleteCommentRules', () => {
   test('should return correct delete comment rules', () => {
     const result: Validators = makeDeleteCommentRules()
-    expect(result.requiredFields).toEqual(['id'])
+    expect(result).toEqual({
+      requiredFields: ['id']
+    })
   })
 })

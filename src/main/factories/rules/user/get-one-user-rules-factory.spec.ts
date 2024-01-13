@@ -5,7 +5,9 @@ import { Validators } from '@/presentation/protocols/validators'
 describe('makeGetOneUserRules', () => {
   test('should return correct get one user rules', () => {
     const result: Validators = makeGetOneUserRules()
-    expect(result.requiredFields).toEqual(['id'])
-    expect(result.haveToExist).toEqual([{ fieldName: 'id', model: User }])
+    expect(result).toEqual({
+      requiredFields: ['id'],
+      haveToExist: [{ fieldName: 'id', model: User }]
+    })
   })
 })
