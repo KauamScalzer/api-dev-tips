@@ -33,5 +33,31 @@ export const coursePaths = {
         $ref: '#/components/serverError'
       }
     }
+  },
+  delete: {
+    tags: ['Course'],
+    summary: 'API para deletar curso',
+    parameters: [{
+      in: 'path',
+      name: 'id',
+      required: true,
+      schema: {
+        type: 'number'
+      }
+    }],
+    responses: {
+      204: {
+        description: 'Sucesso'
+      },
+      400: {
+        $ref: '#/components/badRequest'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
+      }
+    }
   }
 }
