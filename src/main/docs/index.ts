@@ -6,8 +6,8 @@ import { createCourseParamsSchema, createCourseResultSchema, getAllCourseResultS
 import { errorSchema } from './schemas/error'
 import { commentPaths, createCommentPath, getAllCommentByLessonPath } from './paths/comment'
 import { createCommentParamsSchema, createCommentResultSchema, getAllCommentByLessonResultSchema, updateCommentParamsSchema } from './schemas/comment'
-import { createLessonPath, lessonPaths } from './paths/lesson'
-import { createLessonParamsSchema, createLessonResultSchema } from './schemas/lesson'
+import { createLessonPath, getAllLessonByCoursePath, lessonPaths } from './paths/lesson'
+import { createLessonParamsSchema, createLessonResultSchema, getAllLessonByCourseResultSchema } from './schemas/lesson'
 
 export default {
   openapi: '3.0.0',
@@ -45,7 +45,8 @@ export default {
     '/comment/{id}?skip=1&take=10': getAllCommentByLessonPath,
     '/comment/{id}': commentPaths,
     '/lesson': createLessonPath,
-    '/lesson/{id}': lessonPaths
+    '/lesson/{id}': lessonPaths,
+    '/lesson/{id}?skip=1&take=10': getAllLessonByCoursePath
   },
   schemas: {
     createUserResult: createUserResultSchema,
@@ -62,7 +63,8 @@ export default {
     getAllCommentByLessonResult: getAllCommentByLessonResultSchema,
     updateCommentParams: updateCommentParamsSchema,
     createLessonParams: createLessonParamsSchema,
-    createLessonResult: createLessonResultSchema
+    createLessonResult: createLessonResultSchema,
+    getAllLessonByCourseResult: getAllLessonByCourseResultSchema
   },
   components: {
     badRequest,
