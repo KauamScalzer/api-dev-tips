@@ -6,7 +6,7 @@ import { createCourseParamsSchema, createCourseResultSchema, getAllCourseResultS
 import { errorSchema } from './schemas/error'
 import { commentPaths, createCommentPath, getAllCommentByLessonPath } from './paths/comment'
 import { createCommentParamsSchema, createCommentResultSchema, getAllCommentByLessonResultSchema, updateCommentParamsSchema } from './schemas/comment'
-import { createLessonPath } from './paths/lesson'
+import { createLessonPath, lessonPaths } from './paths/lesson'
 import { createLessonParamsSchema, createLessonResultSchema } from './schemas/lesson'
 
 export default {
@@ -44,7 +44,8 @@ export default {
     '/comment': createCommentPath,
     '/comment/{id}?skip=1&take=10': getAllCommentByLessonPath,
     '/comment/{id}': commentPaths,
-    '/lesson': createLessonPath
+    '/lesson': createLessonPath,
+    '/lesson/{id}': lessonPaths
   },
   schemas: {
     createUserResult: createUserResultSchema,
